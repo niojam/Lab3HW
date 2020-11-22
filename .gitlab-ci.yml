@@ -4,9 +4,6 @@ stages:
   - deploy
   - .post
 
-variables:
-  DOCKER_DRIVER: overlay2
-
 test_front-end:
   stage:
     test
@@ -24,7 +21,7 @@ build_front-end:
       - master
   script:
     - ls
-    - docker build -t kahoot-backoffice-front --rm=false .
+    - docker build -t kahoot-backoffice-front .
 
 deploy_front-end:
   stage:
