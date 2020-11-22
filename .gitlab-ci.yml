@@ -1,0 +1,41 @@
+stages:
+  - test
+  - build
+  - deploy
+  - .post
+
+
+test_front-end:
+  stage:
+    test
+  only:
+    refs:
+      - master
+  script:
+    - echo "SKIPPED"
+
+build_front-end:
+  stage:
+    build
+  only:
+    refs:
+      - master
+  script:
+    - ls
+    - docker build -t kahoot-backoffice-front --rm=false .
+
+deploy_front-end:
+  stage:
+    deploy
+  only:
+    refs:
+      - master
+  script:
+    - docker-compose up --no-deps -d kahoot-backoffice-front
+    - docker container ls
+
+cleanup:
+  stage: .post
+  script:
+    - docker rmi $(docker images -f 'dangling=true' -q) -f || true
+    - docker images
