@@ -11,6 +11,4 @@ RUN yarn build
 # Stage 2
 FROM nginx:1.17.1-alpine
 COPY nginx/local-default.conf /usr/share/nginx/conf.d/default.conf
-
-# remove /back-office-front quick fix
-COPY --from=build-step /app/build /usr/share/nginx/html/back-office-front
+COPY --from=build-step /app/build /usr/share/nginx/html
