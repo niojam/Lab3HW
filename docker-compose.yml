@@ -1,6 +1,7 @@
 version: '3'
 services:
   postgres:
+    container_name: postgres
     image: postgres:12
     ports:
       - 5432:5432
@@ -10,6 +11,7 @@ services:
       - POSTGRES_PASSWORD=kahoot_password
 
   kahoot-public-app:
+    container_name: kahoot-public-app
     image: kahoot-public-app:latest
     ports:
       - 8080:8080
@@ -20,10 +22,12 @@ services:
       - spring.datasource.url=jdbc:postgresql://postgres/kahoot_db
       - spring.r2dbc.url=r2dbc:postgresql://postgres/kahoot_db
       - spring.liquibase.url=jdbc:postgresql://postgres/kahoot_db
+      - spring.profiles.active=prd
     depends_on:
       - "postgres"
 
   kahoot-backoffice-front:
+    container_name: kahoot-backoffice-front
     image: kahoot-backoffice-front:latest
     ports:
       - 8060:80
@@ -32,6 +36,7 @@ services:
       - "kahoot-backoffice"
 
   kahoot-backoffice:
+    container_name: kahoot-backoffice
     image: kahoot-backoffice:latest
     ports:
       - 8090:8090
@@ -39,10 +44,12 @@ services:
       - "postgres"
     environment:
       - spring.datasource.url=jdbc:postgresql://postgres/kahoot_db
+      - spring.profiles.active=prd
     depends_on:
       - "postgres"
 
   kahoot-front:
+    container_name: kahoot-front
     image: kahoot-front:latest
     ports:
       - 8070:80
