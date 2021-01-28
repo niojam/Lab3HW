@@ -7,27 +7,14 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import PageLayout from "./containers/Headerr";
 
 const App = () => {
   const { Content } = Layout;
 
   return (
     <Router>
-      <Layout className="layout">
-        <Row>
-          <Col span={24}>
-            <Header />
-          </Col>
-        </Row>
-        <Row className={"layout__content-row"}>
-          <Col span={20} sm={15} className="layout__content-col">
-            <Content>
-              <Login />
-            </Content>
-          </Col>
-        </Row>
-      </Layout>
-      ,
+      <PageLayout />
     </Router>
   );
 };
