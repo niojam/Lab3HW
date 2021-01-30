@@ -11,12 +11,17 @@ interface IconProps {
   style?: string;
 }
 
-const Icon: FunctionComponent<IconProps> = (props) => {
+const Icon: FunctionComponent<IconProps> = ({
+  src,
+  size,
+  color,
+  style,
+}: IconProps) => {
   return (
     <img
-      src={props.src}
+      src={src}
       alt="React Logo"
-      className={`icon-size__${props.size} icon-color__${props.color} ${props.style}`}
+      className={`icon-size__${size} icon-color__${color} ${style}`}
     />
   );
 };
