@@ -1,10 +1,10 @@
 import React from "react";
 import { Layout, Row, Col } from "antd";
-import { Icon } from "../../components/index";
-import TalTechLogo from "../../assets/images/talTech.svg";
+import { Icon } from "components";
+import TalTechLogo from "assets/images/talTech.svg";
 import "./Header.scss";
 
-const Header = () => {
+const LoginHeader = () => {
   const { Header } = Layout;
 
   return (
@@ -22,4 +22,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default LoginHeader;
