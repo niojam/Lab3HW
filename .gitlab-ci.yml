@@ -30,6 +30,8 @@ deploy_front-end:
     refs:
       - master
   script:
+    - docker stop kahoot-backoffice-front
+    - docker container rm kahoot-backoffice-front
     - docker-compose up --no-deps -d kahoot-backoffice-front
     - docker container ls
 
