@@ -1,56 +1,33 @@
-import React, { useState } from "react";
-import styled from "@emotion/styled";
-import Login from "./features/login";
-import Home from "./features/home";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import React from "react";
+import "antd/dist/antd.css";
+import "./index.css";
+import { Layout, Row, Col } from "antd";
+import { Header, Login } from "./containers";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const Container = styled.div`
-  text-align: center;
-`;
-
-const Header = styled.header`
-  background-color: #342b60;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #040729;
-`;
-
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { Content } = Layout;
 
   return (
     <Router>
-      <Container>
-        <Header>
-          <Switch>
-            <Route exact path="/home" component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route
-              exact
-              path="/"
-              render={() => {
-                return isAuthenticated ? (
-                  <Redirect to="/home" />
-                ) : (
-                  <Redirect to="/login" />
-                );
-              }}
-            />
-          </Switch>
-        </Header>
-      </Container>
+      <Layout className="layout">
+        <Row>
+          <Col span={24}>
+            <Header />
+          </Col>
+        </Row>
+        <Row className="layout__content-row">
+          <Col span={20} sm={15} className="layout__content-col">
+            <Content>
+              <Login />
+            </Content>
+          </Col>
+        </Row>
+      </Layout>
+      ,
     </Router>
   );
 };
