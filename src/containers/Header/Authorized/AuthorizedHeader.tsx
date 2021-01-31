@@ -5,7 +5,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 interface HeaderProps {
   mobile: boolean;
   collapsed: boolean;
-  toggle: any;
+  toggle: () => void;
 }
 
 const AuthorizedHeader: FunctionComponent<HeaderProps> = ({
