@@ -7,7 +7,6 @@ import { routes } from "./router/config";
 import CustomRouter from "./router/CustomRouter";
 
 const App = () => {
-  const { Content } = Layout;
   const [collapsed, setCollapsed] = useState(false);
 
   const [mobile, setMobile] = useState(false);
@@ -36,7 +35,6 @@ const App = () => {
           toggle={toggle}
         />
         <CustomRouter routes={routes} isAuthenticated={false} />
-        <Content />
       </Layout>
     </Layout>
   );

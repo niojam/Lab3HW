@@ -11,18 +11,11 @@ const CustomRouter = ({ routes, isAuthenticated }: RouterProps) => {
   return (
     <Switch>
       {routes?.map((route: RouteType) => (
-        // <RouteWithSubRoutes
-        //   key={route.path}
-        //   authenticated={true}
-        //   route={route}
-        // />
         <Route
           key={route.path}
           path={route.path}
           render={(props) =>
-            route.redirect ? (
-              <Redirect to={route.redirect} />
-            ) : route.private ? (
+            route.private ? (
               isAuthenticated ? (
                 route.component && <route.component {...props} />
               ) : (
