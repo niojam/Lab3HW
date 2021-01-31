@@ -5,10 +5,15 @@ import "./index.scss";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </Provider>,
   document.getElementById("root")
 );
