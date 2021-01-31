@@ -1,34 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
-import "./index.css";
-import { Layout, Row, Col } from "antd";
-import { Header, Login } from "./containers";
+import "./index.scss";
+import { Layout } from "antd";
+import { KahootSider, AuthorizedHeader } from "containers";
 import { BrowserRouter as Router } from "react-router-dom";
-
-import "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   const { Content } = Layout;
+  const [collapsed, setCollapsed] = useState(false);
+
+  const [mobile, setMobile] = useState(false);
+
+  const toggle = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const handleClick = () => {
+    if (mobile && !collapsed) {
+      setCollapsed(true);
+    }
+  };
 
   return (
-    <Router>
-      <Layout className="layout">
-        <Row>
-          <Col span={24}>
-            <Header />
-          </Col>
-        </Row>
-        <Row className="layout__content-row">
-          <Col span={20} sm={15} className="layout__content-col">
-            <Content>
-              <Login />
-            </Content>
-          </Col>
-        </Row>
+    <Layout>
+      <KahootSider
+        collapsed={collapsed}
+        mobile={mobile}
+        setMobile={setMobile}
+        toggle={toggle}
+      />
+      <Layout className="site-layout" onClick={handleClick}>
+        <AuthorizedHeader
+          mobile={mobile}
+          collapsed={collapsed}
+          toggle={toggle}
+        />
+        <Router>TODO</Router>
+        <Content />
       </Layout>
-      ,
-    </Router>
+    </Layout>
   );
 };
 
