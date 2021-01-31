@@ -3,7 +3,8 @@ import "antd/dist/antd.css";
 import "./index.scss";
 import { Layout } from "antd";
 import { KahootSider, AuthorizedHeader } from "containers";
-import { BrowserRouter as Router } from "react-router-dom";
+import { routes } from "./router/config";
+import CustomRouter from "./router/CustomRouter";
 
 const App = () => {
   const { Content } = Layout;
@@ -34,7 +35,7 @@ const App = () => {
           collapsed={collapsed}
           toggle={toggle}
         />
-        <Router>TODO</Router>
+        <CustomRouter routes={routes} isAuthenticated={false} />
         <Content />
       </Layout>
     </Layout>

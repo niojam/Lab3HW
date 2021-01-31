@@ -1,0 +1,26 @@
+import Home from "../features/home/Home";
+import Login from "../features/login";
+
+export interface RouteType {
+  path: string;
+  exact: boolean;
+  component?: any;
+  routes?: RouteType[];
+  redirect?: string;
+  private?: boolean;
+}
+
+export const routes: RouteType[] = [
+  {
+    path: "/home",
+    component: Home,
+    exact: true,
+    private: true,
+  },
+  {
+    path: "/login",
+    component: Login,
+    exact: true,
+    private: false,
+  },
+];
