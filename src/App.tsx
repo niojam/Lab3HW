@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import "./index.scss";
 import { Layout } from "antd";
 import { KahootSider, AuthorizedHeader } from "containers";
-import { BrowserRouter as Router } from "react-router-dom";
+import { CreateQuiz } from "views";
 
 const App = () => {
   const { Content } = Layout;
@@ -34,8 +34,9 @@ const App = () => {
           collapsed={collapsed}
           toggle={toggle}
         />
-        <Router>TODO</Router>
-        <Content />
+        <Content className="site-layout__content">
+          <CreateQuiz />
+        </Content>
       </Layout>
     </Layout>
   );

@@ -32,12 +32,22 @@ body {
 }
 
 .site-layout {
+  background: #f0f2f5;
+
   .ant-layout-header {
     background: #ffffff;
     height: 65px;
   }
+
 }
 
 .ant-menu-inline-collapsed {
   width: 90px;
+}
+
+.site-layout__content {
+  min-height: 280px;
+  margin: 50px;
+  padding: 24px;
+  background: #fff;
 }
