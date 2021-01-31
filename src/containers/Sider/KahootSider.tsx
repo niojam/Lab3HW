@@ -12,7 +12,7 @@ interface SiderProps {
   mobile: boolean;
   collapsed: boolean;
   setMobile: any;
-  toggle: any;
+  toggle: () => void;
 }
 
 const KahootSider: FunctionComponent<SiderProps> = ({
@@ -26,7 +26,7 @@ const KahootSider: FunctionComponent<SiderProps> = ({
       collapsible
       style={mobile ? { position: "absolute" } : {}}
       collapsedWidth={mobile ? 0 : 90}
-      onCollapse={() => toggle()}
+      onCollapse={toggle}
       breakpoint={"md"}
       trigger={
         mobile ? null : collapsed ? (
