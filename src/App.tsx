@@ -4,10 +4,15 @@ import "./index.scss";
 import { Layout } from "antd";
 import { KahootSider, AuthorizedHeader } from "containers";
 import { BrowserRouter as Router } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getQuizzes } from "./common/client/BackOfficeApplicationClient";
 
 const App = () => {
   const { Content } = Layout;
   const [collapsed, setCollapsed] = useState(false);
+  const result = useQuery("getQuizzes", getQuizzes);
+
+  console.log(result.data);
 
   const [mobile, setMobile] = useState(false);
 
