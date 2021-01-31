@@ -20,7 +20,6 @@ const App = () => {
       setCollapsed(true);
     }
   };
-
   return (
     <Layout>
       <KahootSider
