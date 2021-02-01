@@ -3,3 +3,4 @@ export { default as AuthorizedHeader } from "./Header/Authorized/AuthorizedHeade
 export { default as Login } from "./Login/Login";
 export { default as SiderMenu } from "./SiderMenu/SiderMenu";
 export { default as KahootSider } from "./Sider/KahootSider";
+export { default as Answer } from "./CreateQuiz/Answer";

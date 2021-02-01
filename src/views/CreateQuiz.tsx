@@ -1,6 +1,10 @@
 import React from "react";
-import { Form, Input, Button, Row, Col } from "antd";
+import { Form, Input, Button, Row, Col, Select } from "antd";
 import "antd/dist/antd.css";
+import { QUESTION_SCORE, QUESTION_TIMER, QUESTION_TYPE } from "../constants";
+import { Answer } from "containers";
+import { ImageDragger } from "components";
+import { Heart, Lego, Star, Coin } from "assets/images/index";
 
 const formItemLayout = {
   labelCol: {
@@ -37,11 +41,11 @@ const CreateQuiz = () => {
         <Col xs={24}>
           <Form.Item
             {...fullWidthCol}
-            name="nameYourQuiz"
+            name="quizName"
             rules={[
               {
                 required: true,
-                message: "Required field",
+                message: "VALIDATION.REQUIRED",
               },
             ]}
           >
@@ -54,11 +58,11 @@ const CreateQuiz = () => {
         <Col xs={24}>
           <Form.Item
             {...fullWidthCol}
-            name="question"
+            name="questionText"
             rules={[
               {
                 required: true,
-                message: "Click to start typing your question",
+                message: "VALIDATION.REQUIRED",
               },
             ]}
           >
@@ -67,127 +71,142 @@ const CreateQuiz = () => {
         </Col>
       </Row>
 
-      <Row>
+      <Row gutter={24}>
         <Col xs={24} md={8}>
           <Form.Item
             {...fullWidthCol}
-            name="nameYourQuiz"
+            name="time"
             rules={[
               {
                 required: true,
-                message: "Please input name of the quiz!",
+                message: "VALIDATION.REQUIRED",
               },
             ]}
           >
-            <Input placeholder="Time limit" />
+            <Select
+              defaultValue={QUESTION_TIMER.T_15.value}
+              placeholder="Time limit"
+            >
+              <Select.Option value={QUESTION_TIMER.T_15.value}>
+                {QUESTION_TIMER.T_15.text}
+              </Select.Option>
+              <Select.Option value={QUESTION_TIMER.T_30.value}>
+                {QUESTION_TIMER.T_30.text}
+              </Select.Option>
+              <Select.Option value={QUESTION_TIMER.T_45.value}>
+                {QUESTION_TIMER.T_45.text}
+              </Select.Option>
+              <Select.Option value={QUESTION_TIMER.T_60.value}>
+                {QUESTION_TIMER.T_60.text}
+              </Select.Option>
+            </Select>
           </Form.Item>
         </Col>
         <Col xs={24} md={8}>
           <Form.Item
             {...fullWidthCol}
-            name="nameYourQuiz"
+            name="points"
             rules={[
               {
                 required: true,
-                message: "Please input name of the quiz!",
+                message: "VALIDATION.REQUIRED",
               },
             ]}
           >
-            <Input placeholder="Points" />
+            <Select
+              defaultValue={QUESTION_SCORE.P_100.value}
+              placeholder="Points"
+            >
+              <Select.Option value={QUESTION_SCORE.P_100.value}>
+                {QUESTION_SCORE.P_100.text}
+              </Select.Option>
+              <Select.Option value={QUESTION_SCORE.P_150.value}>
+                {QUESTION_SCORE.P_150.text}
+              </Select.Option>
+              <Select.Option value={QUESTION_SCORE.P_200.value}>
+                {QUESTION_SCORE.P_200.text}
+              </Select.Option>
+              <Select.Option value={QUESTION_SCORE.P_250.value}>
+                {QUESTION_SCORE.P_250.text}
+              </Select.Option>
+            </Select>
           </Form.Item>
         </Col>
         <Col xs={24} md={8}>
           <Form.Item
             {...fullWidthCol}
-            name="nameYourQuiz"
+            name="questionType"
             rules={[
               {
                 required: true,
-                message: "Please input name of the quiz!",
+                message: "VALIDATION.REQUIRED",
               },
             ]}
           >
-            <Input placeholder="Type" />
+            <Select
+              defaultValue={QUESTION_TYPE.SINGLE_MATCH.value}
+              placeholder="Type"
+            >
+              <Select.Option value={QUESTION_TYPE.SINGLE_MATCH.value}>
+                {QUESTION_TYPE.SINGLE_MATCH.text}
+              </Select.Option>
+              <Select.Option value={QUESTION_TYPE.SINGLE_ANY.value}>
+                {QUESTION_TYPE.SINGLE_ANY.text}
+              </Select.Option>
+              <Select.Option value={QUESTION_TYPE.MULTIPLE_MATCH.value}>
+                {QUESTION_TYPE.MULTIPLE_MATCH.text}
+              </Select.Option>
+              <Select.Option value={QUESTION_TYPE.MULTIPLE_ANY.value}>
+                {QUESTION_TYPE.MULTIPLE_ANY.text}
+              </Select.Option>
+            </Select>
           </Form.Item>
         </Col>
       </Row>
 
       <Row>
         <Col xs={24} md={24}>
-          <Form.Item
-            {...fullWidthCol}
-            name="nameYourQuiz"
-            rules={[
-              {
-                required: true,
-                message: "Please input name of the quiz!",
-              },
-            ]}
-          >
-            <Input placeholder="Drag and drop image" />
+          <Form.Item {...fullWidthCol} name="questionType">
+            <ImageDragger />
           </Form.Item>
         </Col>
       </Row>
 
-      <Row>
+      <Row gutter={24}>
         <Col xs={24} md={12}>
-          <Form.Item
-            {...fullWidthCol}
-            name="nameYourQuiz"
-            rules={[
-              {
-                required: true,
-                message: "Please input name of the quiz!",
-              },
-            ]}
-          >
-            <Input placeholder="Add answer 1" />
-          </Form.Item>
+          <Answer
+            name="answer1"
+            iconSrc={Lego}
+            placeholder="Add answer 1"
+            color="blue"
+          />
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item
-            {...fullWidthCol}
-            name="nameYourQuiz"
-            rules={[
-              {
-                required: true,
-                message: "Please input name of the quiz!",
-              },
-            ]}
-          >
-            <Input placeholder="Add answer 2" />
-          </Form.Item>
+          <Answer
+            name="answer2"
+            iconSrc={Heart}
+            placeholder="Add answer 2"
+            color="red"
+          />
         </Col>
       </Row>
 
-      <Row>
+      <Row gutter={24}>
         <Col xs={24} md={12}>
-          <Form.Item
-            {...fullWidthCol}
-            name="nameYourQuiz"
-            rules={[
-              {
-                required: true,
-                message: "Please input name of the quiz!",
-              },
-            ]}
-          >
-            <Input placeholder="Add answer 3" />
-          </Form.Item>
+          <Answer
+            name="answer3"
+            iconSrc={Coin}
+            placeholder="Add answer 3"
+            color="green"
+          />
         </Col>
         <Col xs={24} md={12}>
-          <Form.Item
-            {...fullWidthCol}
-            name="nameYourQuiz"
-            rules={[
-              {
-                required: true,
-                message: "Please input name of the quiz!",
-              },
-            ]}
-          >
-            <Input placeholder="Add answer 4" />
-          </Form.Item>
+          <Answer
+            name="answer4"
+            iconSrc={Star}
+            placeholder="Add answer 4"
+            color="violet"
+          />
         </Col>
       </Row>
 
