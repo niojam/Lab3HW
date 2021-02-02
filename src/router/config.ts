@@ -1,5 +1,4 @@
-import Home from "../features/home/Home";
-import Login from "../features/login";
+import { lazy } from "react";
 
 export interface RouteType {
   path: string;
@@ -11,31 +10,31 @@ export interface RouteType {
 export const routes: RouteType[] = [
   {
     path: "/home",
-    component: Home,
+    component: lazy(() => import("features/home")),
     exact: true,
     private: false,
   },
   {
     path: "/my-quizzes",
-    component: Home,
+    component: lazy(() => import("features/home")),
     exact: true,
     private: true,
   },
   {
     path: "/statistics",
-    component: Home,
+    component: lazy(() => import("features/home")),
     exact: true,
     private: false,
   },
   {
     path: "/",
-    component: Login,
+    component: lazy(() => import("features/login")),
     exact: true,
     private: false,
   },
   {
     path: "/login",
-    component: Login,
+    component: lazy(() => import("features/login")),
     exact: true,
     private: false,
   },
