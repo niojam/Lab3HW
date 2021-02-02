@@ -1,40 +1,34 @@
 import React, { FunctionComponent } from "react";
 import "antd/dist/antd.css";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Icon } from "components";
-import TalTechLogo from "assets/images/talTech.svg";
+import { Icon, SiderMenu } from "components/index";
+import { TalTechLogo } from "assets/images/index";
 import { Layout } from "antd";
-import { SiderMenu } from "containers";
+import "./KahootSider.scss";
 
 const { Sider } = Layout;
 
 interface SiderProps {
-  mobile: boolean;
   collapsed: boolean;
-  setMobile: any;
-  toggle: () => void;
+  mobile: boolean;
+  setMobile: (isMobile: boolean) => void;
+  setCollapsed: (isCollapsed: boolean) => void;
 }
 
 const KahootSider: FunctionComponent<SiderProps> = ({
-  mobile,
   collapsed,
+  mobile,
   setMobile,
-  toggle,
+  setCollapsed,
 }: SiderProps) => {
   return (
     <Sider
+      style={mobile ? { display: "none" } : {}}
       collapsible
-      style={mobile ? { position: "absolute" } : {}}
-      collapsedWidth={mobile ? 0 : 90}
-      onCollapse={toggle}
+      collapsedWidth={90}
+      onCollapse={() => setCollapsed(!collapsed)}
       breakpoint={"md"}
-      trigger={
-        mobile ? null : collapsed ? (
-          <MenuUnfoldOutlined />
-        ) : (
-          <MenuFoldOutlined />
-        )
-      }
+      trigger={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       onBreakpoint={(isMobile) => setMobile(isMobile)}
       collapsed={collapsed}
     >

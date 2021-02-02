@@ -20,7 +20,7 @@ const Icon: FunctionComponent<IconProps> = ({
   return (
     <img
       src={src}
-      alt="React Logo"
+      alt="Icon"
       className={`icon-size__${size} icon-color__${color} ${style}`}
     />
   );
