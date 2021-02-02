@@ -1,3 +1,5 @@
+@import "styles/_functions.scss";
+
 body {
   margin: 0;
   font-family: "Inter", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
@@ -23,14 +25,6 @@ body {
   margin: 15px 5px 10px 15px;
 }
 
-.ant-layout {
-  height: 100%;
-}
-
-.ant-layout-sider {
-  height: 100%;
-}
-
 .site-layout {
   background: #f0f2f5;
 
@@ -41,13 +35,13 @@ body {
 
 }
 
-.ant-menu-inline-collapsed {
-  width: 90px;
-}
-
 .site-layout__content {
-  min-height: 280px;
-  margin: 50px;
+  margin: 0;
   padding: 24px;
   background: #fff;
+  height: 100%;
+
+  @include min-width(sm) {
+    margin: 50px;
+  }
 }
