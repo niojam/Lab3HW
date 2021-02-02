@@ -3,10 +3,10 @@ import "antd/dist/antd.css";
 import "./index.scss";
 import { Layout } from "antd";
 import { AuthorizedHeader, KahootNavigation } from "containers";
-import { CreateQuiz } from "views";
+import { routes } from "./router/config";
+import CustomRouter from "./router/CustomRouter";
 
 const App = () => {
-  const { Content } = Layout;
   const [collapsed, setCollapsed] = useState(false);
 
   const [mobile, setMobile] = useState(false);
@@ -25,9 +25,7 @@ const App = () => {
           collapsed={collapsed}
           setCollapsed={setCollapsed}
         />
-        <Content className="site-layout__content">
-          <CreateQuiz />
-        </Content>
+        <CustomRouter routes={routes} isAuthenticated={false} />
       </Layout>
     </Layout>
   );
