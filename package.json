@@ -40,7 +40,7 @@
     "typescript": "~3.9.7"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "REACT_APP_STAGE=dev craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
@@ -79,6 +79,5 @@
     "@types/rsocket-websocket-client": "^0.0.3",
     "husky": "^4.3.0",
     "lint-staged": "^10.3.0"
-  },
-  "proxy": "http://localhost:8090"
+  }
 }
