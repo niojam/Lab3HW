@@ -9,7 +9,7 @@ const App = () => {
   const { Content } = Layout;
   const [collapsed, setCollapsed] = useState(false);
 
-  const [mobile, setMobile] = useState(true);
+  const [mobile, setMobile] = useState(false);
 
   return (
     <Layout>
