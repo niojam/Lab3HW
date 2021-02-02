@@ -26,10 +26,17 @@ const KahootSider: FunctionComponent<SiderProps> = ({
       style={mobile ? { display: "none" } : {}}
       collapsible
       collapsedWidth={90}
-      onCollapse={() => setCollapsed(!collapsed)}
+      onCollapse={() => {
+        setCollapsed(!collapsed);
+      }}
       breakpoint={"md"}
       trigger={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      onBreakpoint={(isMobile) => setMobile(isMobile)}
+      onBreakpoint={(isMobile) => {
+        setMobile(isMobile);
+        if (isMobile) {
+          setCollapsed(true);
+        }
+      }}
       collapsed={collapsed}
     >
       <div className="logo">

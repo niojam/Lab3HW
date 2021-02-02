@@ -17,8 +17,8 @@ const KahootDrawer = ({ mobile, collapsed, setCollapsed }: DrawerProps) => {
       closable={false}
       title={<Icon src={TalTechLogo} size="medium" />}
       placement="left"
-      onClose={() => setCollapsed(false)}
-      visible={collapsed}
+      onClose={() => setCollapsed(true)}
+      visible={!collapsed}
     >
       <SiderMenu />
     </Drawer>
