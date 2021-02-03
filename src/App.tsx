@@ -3,12 +3,12 @@ import "antd/dist/antd.css";
 import "./index.scss";
 import { Layout } from "antd";
 import { KahootSider, AuthorizedHeader } from "containers";
-import { BrowserRouter as Router } from "react-router-dom";
+import { routes } from "./router/config";
+import CustomRouter from "./router/CustomRouter";
 import { useQuery } from "react-query";
 import { getQuizzes } from "./common/client/BackOfficeApplicationClient";
 
 const App = () => {
-  const { Content } = Layout;
   const [collapsed, setCollapsed] = useState(false);
   const result = useQuery("getQuizzes", getQuizzes);
 
@@ -39,8 +39,7 @@ const App = () => {
           collapsed={collapsed}
           toggle={toggle}
         />
-        <Router>TODO</Router>
-        <Content />
+        <CustomRouter routes={routes} isAuthenticated={false} />
       </Layout>
     </Layout>
   );
