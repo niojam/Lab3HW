@@ -40,7 +40,7 @@
     "typescript": "~3.9.7"
   },
   "scripts": {
-    "start": "REACT_APP_STAGE=dev craco start",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",

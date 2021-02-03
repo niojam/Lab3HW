@@ -1,8 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 
-const baseUrl =
-  process.env.REACT_APP_STAGE === "dev" ? "" : process.env.REACT_APP_BASE_URL;
-
-export const getQuizzes = async (): Promise<AxiosResponse> => {
-  return await axios.get(`/quiz/quizzes`);
+export const getQuizzes = (): Promise<AxiosResponse> => {
+  return axios.get(`/oauth2/authorization/azure`).then((response) => {
+    console.log(response);
+    return response;
+  });
 };

@@ -1,13 +1,7 @@
-const devProxy = {
+module.exports = {
   devServer: {
     proxy: {
-      "*": "http://localhost:8090",
+      "/oauth2/authorization/azure": "http://localhost:8090",
     },
   },
-};
-
-const config = process.env.REACT_APP_STAGE === "dev" ? devProxy : {};
-
-module.exports = {
-  ...config,
 };
