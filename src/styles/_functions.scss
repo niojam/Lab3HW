@@ -26,6 +26,10 @@
 @include margin-helper(2, 1rem);
 @include margin-helper(3, 1.5rem);
 @include margin-helper(4, 2rem);
+@include margin-helper(5, 2.5rem);
+@include margin-helper(6, 3rem);
+@include margin-helper(auto, auto);
+
 
 @mixin padding-helper($level, $spacing) {
   .p-#{$level} {padding: #{$spacing}!important;}

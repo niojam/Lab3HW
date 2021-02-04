@@ -1,8 +1,7 @@
 import React, { Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { RouteType } from "./config";
-import MainLayout from "../containers/Layout/MainLayout";
-import { Login } from "../containers";
+import { LoginPageLayout, MainLayout } from "../containers";
 
 interface RouterProps {
   routes: RouteType[];
@@ -14,7 +13,7 @@ const CustomRouter = ({ routes, isAuthenticated }: RouterProps) => {
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
         <Route path="/" exact={true} render={() => <Redirect to="/home" />} />
-        <Route path="/login" component={Login} />
+        <Route path="/login" component={LoginPageLayout} />
         <MainLayout>
           {routes?.map((route: RouteType) => (
             <Route

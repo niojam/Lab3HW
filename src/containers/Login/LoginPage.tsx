@@ -1,12 +1,18 @@
 import React from "react";
 import { Col, Row, Button } from "antd";
 import MicrosoftIcon from "../../assets/images/microsoft.svg";
-import { Icon } from "../../components";
+import { Icon } from "components";
+import LoginIllustration from "../../assets/images/login_illustration.png";
 
-const Login = () => {
+const LoginPage = () => {
   return (
     <Row>
-      <Col span={24} className={"d-flex"}>
+      <Col span={24} className="mt-6">
+        <div className="mt-2 text-centre">
+          <img src={LoginIllustration} alt="LoginIllustration" />
+        </div>
+      </Col>
+      <Col span={24} className="mt-2 text-centre">
         <Button
           type="default"
           size="large"
@@ -27,4 +33,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

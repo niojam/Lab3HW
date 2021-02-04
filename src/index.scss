@@ -22,7 +22,6 @@ body {
 
 .logo {
   display: flex;
-  margin: 15px 5px 10px 15px;
 }
 
 .ant-layout {
@@ -48,4 +47,8 @@ body {
   @include min-width(sm) {
     margin: 50px;
   }
+}
+
+.text-centre {
+  text-align: center;
 }
