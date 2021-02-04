@@ -19,15 +19,13 @@ const AuthenticationSlice = createSlice({
       prevState: Draft<AuthenticationSliceState>,
       action: PayloadAction<boolean>
     ) => {
-      console.log(prevState);
-      console.log(action);
       return { ...prevState, ...{ isAuthenticated: action.payload } };
     },
   },
 });
 
 export const isUserAuthenticated = createSelector(
-  (state: AuthenticationSliceState) => state.isAuthenticated,
+  (state: any) => state.quiz.isAuthenticated,
   (data) => data
 );
 
