@@ -1,6 +1,6 @@
 import React from "react";
 import { Drawer } from "antd";
-import "./KahootDrawer.css";
+import "./KahootDrawer.scss";
 import { TalTechLogo } from "assets/images";
 import { Icon, SiderMenu } from "components";
 
