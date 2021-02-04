@@ -16,7 +16,7 @@ const AuthorizedHeader: FunctionComponent<HeaderProps> = ({
   const { Header } = Layout;
 
   return (
-    <Header style={{ padding: 0 }}>
+    <Header className={"p-0"}>
       {mobile
         ? React.createElement(
             collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,

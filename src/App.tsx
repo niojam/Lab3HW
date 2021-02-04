@@ -6,9 +6,9 @@ import CustomRouter from "./router/CustomRouter";
 
 const App = () => {
   return (
-    <div>
+    <>
       <CustomRouter routes={routes} isAuthenticated={false} />
-    </div>
+    </>
   );
 };
 
