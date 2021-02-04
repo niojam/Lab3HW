@@ -10,9 +10,6 @@ import { getQuizzes } from "./common/client/BackOfficeApplicationClient";
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const result = useQuery("getQuizzes", getQuizzes);
-
-  console.log(result.data);
 
   const [mobile, setMobile] = useState(false);
 
@@ -40,6 +37,9 @@ const App = () => {
           toggle={toggle}
         />
         <CustomRouter routes={routes} isAuthenticated={false} />
+        <Button href="https://quiz-bo.cs.taltech.ee/api/login/oauth2/code/azure">
+          Login
+        </Button>
       </Layout>
     </Layout>
   );
