@@ -13,28 +13,19 @@ const App = () => {
 
   const [mobile, setMobile] = useState(false);
 
-  const toggle = () => {
-    setCollapsed(!collapsed);
-  };
-
-  const handleClick = () => {
-    if (mobile && !collapsed) {
-      setCollapsed(true);
-    }
-  };
   return (
     <Layout>
-      <KahootSider
-        collapsed={collapsed}
+      <KahootNavigation
         mobile={mobile}
         setMobile={setMobile}
-        toggle={toggle}
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
       />
-      <Layout className="site-layout" onClick={handleClick}>
+      <Layout className="site-layout">
         <AuthorizedHeader
           mobile={mobile}
           collapsed={collapsed}
-          toggle={toggle}
+          setCollapsed={setCollapsed}
         />
         <CustomRouter routes={routes} isAuthenticated={false} />
         <Button href="https://quiz-bo.cs.taltech.ee/api/login/oauth2/code/azure">
