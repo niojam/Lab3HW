@@ -5,12 +5,17 @@ import "./index.scss";
 import App from "./App";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")
