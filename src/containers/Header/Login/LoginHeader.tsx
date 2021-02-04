@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "antd";
 import { Icon } from "components";
-import TalTechLogo from "assets/images/talTech.svg";
+import { TalTechLogo } from "assets/images";
 import "./Header.scss";
 
 const LoginHeader = () => {

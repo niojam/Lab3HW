@@ -2,7 +2,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import { Layout, Menu } from "antd";
 import { Icon } from "components";
-import { TalTechLogo } from "../../assets/images";
+import { TalTechLogo } from "assets/images";
 import { LoginPage } from "containers";
 
 const LoginPageLayout = () => {
