@@ -1,10 +1,10 @@
-import { lazy } from "react";
+import { ComponentType, lazy, LazyExoticComponent } from "react";
 
 export interface RouteType {
   path: string;
   exact: boolean;
-  component?: any;
-  layout?: any;
+  component?: LazyExoticComponent<ComponentType<any>>;
+  redirect?: string;
   private?: boolean;
 }
 

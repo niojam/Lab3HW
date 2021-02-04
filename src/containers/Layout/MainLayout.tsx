@@ -1,8 +1,7 @@
-import React, { lazy, useState } from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
 import { Layout } from "antd";
-import { KahootSider, AuthorizedHeader, Login } from "containers";
-import { Route } from "react-router-dom";
+import { AuthorizedHeader, KahootNavigation } from "containers";
 
 interface MyProps {
   children?: React.ReactNode;
@@ -13,29 +12,19 @@ const MainLayout = (props: React.PropsWithChildren<MyProps>) => {
 
   const [mobile, setMobile] = useState(false);
 
-  const toggle = () => {
-    setCollapsed(!collapsed);
-  };
-
-  const handleClick = () => {
-    if (mobile && !collapsed) {
-      setCollapsed(true);
-    }
-  };
-
   return (
     <Layout>
-      <KahootSider
-        collapsed={collapsed}
+      <KahootNavigation
         mobile={mobile}
         setMobile={setMobile}
-        toggle={toggle}
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
       />
-      <Layout className="site-layout" onClick={handleClick}>
+      <Layout className="site-layout">
         <AuthorizedHeader
           mobile={mobile}
           collapsed={collapsed}
-          toggle={toggle}
+          setCollapsed={setCollapsed}
         />
         {props.children}
       </Layout>

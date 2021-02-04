@@ -5,13 +5,13 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 interface HeaderProps {
   mobile: boolean;
   collapsed: boolean;
-  toggle: () => void;
+  setCollapsed: (isCollapsed: boolean) => void;
 }
 
 const AuthorizedHeader: FunctionComponent<HeaderProps> = ({
   mobile,
   collapsed,
-  toggle,
+  setCollapsed,
 }: HeaderProps) => {
   const { Header } = Layout;
 
@@ -22,7 +22,7 @@ const AuthorizedHeader: FunctionComponent<HeaderProps> = ({
             collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
             {
               className: "trigger",
-              onClick: toggle,
+              onClick: () => setCollapsed(!collapsed),
             }
           )
         : null}

@@ -1,0 +1,14 @@
+{
+  "CREATE_QUIZ": {
+    "NAME_YOUR_QUIZ": "Name your quiz",
+    "START_TYPING_QUESTION": "Click to start typing your question",
+    "TIME_LIMIT": "Time Limit",
+    "POINTS": "Points",
+    "TYPE": "Type",
+    "DRAG_DROP_IMAGE": "Drag ans drop image",
+    "ANSWER": "{Add answer 0}"
+  },
+  "VALIDATION": {
+    "REQUIRED": "Field is required"
+  }
+}

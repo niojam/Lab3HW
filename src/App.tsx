@@ -1,4 +1,4 @@
-import React, { lazy, useState } from "react";
+import React from "react";
 import "antd/dist/antd.css";
 import "./index.scss";
 import { routes } from "./router/config";
