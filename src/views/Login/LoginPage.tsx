@@ -2,18 +2,23 @@ import React from "react";
 import { Col, Row, Button } from "antd";
 import { Microsoft, LoginIllustration } from "assets/images";
 import { Icon } from "components";
+import "./Login.scss";
 
 const LoginPage = () => {
   return (
     <Row justify="center" align="middle" className="h-100">
       <Col span={24}>
         <div className="text-centre">
-          <img src={LoginIllustration} alt="LoginIllustration" />
+          <img
+            src={LoginIllustration}
+            alt="LoginIllustration"
+            className="login__illustration"
+          />
         </div>
         <Row justify="center">
           <Col>
             <Button
-              style={{ paddingTop: 0.1 }}
+              className="login__microsoft-button"
               type="default"
               size="large"
               shape="round"

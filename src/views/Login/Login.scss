@@ -1,0 +1,14 @@
+@import "../../styles/_functions.scss";
+
+.login__illustration {
+  height: 350px;
+
+  @include min-width(sm) {
+    height: 440px;
+  }
+}
+
+// bug with href property
+.login__microsoft-button {
+  padding-top: 0.1px !important;
+}
