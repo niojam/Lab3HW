@@ -13,10 +13,11 @@ const LoginPage = () => {
         <Row justify="center">
           <Col>
             <Button
+              style={{ paddingTop: 0.1 }}
               type="default"
               size="large"
-              className="mx-auto"
               shape="round"
+              href="/api/oauth2/authorization/azure"
               icon={
                 <Icon
                   src={Microsoft}
@@ -31,12 +32,7 @@ const LoginPage = () => {
         </Row>
         <Row justify="center" className="mt-3">
           <Col>
-            <Button
-              type="default"
-              size="large"
-              className="mx-auto"
-              shape="round"
-            >
+            <Button type="default" size="large" shape="round">
               🌈 Magic Login 🧙
             </Button>
           </Col>
