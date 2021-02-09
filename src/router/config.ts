@@ -10,10 +10,16 @@ export interface RouteType {
 
 export const routes: RouteType[] = [
   {
+    path: "/login",
+    component: lazy(() => import("views/Login/LoginPage")),
+    exact: true,
+    private: false,
+  },
+  {
     path: "/home",
     component: lazy(() => import("containers/Home/Home")),
     exact: true,
-    private: false,
+    private: true,
   },
   {
     path: "/my-quizzes",
@@ -25,6 +31,6 @@ export const routes: RouteType[] = [
     path: "/statistics",
     component: lazy(() => import("containers/Home/Home")),
     exact: true,
-    private: false,
+    private: true,
   },
 ];

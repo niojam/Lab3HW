@@ -2,9 +2,31 @@ import React from "react";
 import { Col, Row, Button } from "antd";
 import { Microsoft, LoginIllustration } from "assets/images";
 import { Icon } from "components";
+import {
+  isUserAuthenticated,
+  magicLoginAttempt,
+} from "store/AuthenticationSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./Login.scss";
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const isAuthenticated = useSelector(isUserAuthenticated);
+
+  if (isAuthenticated) {
+    history.push("/home");
+  }
+
+  const handleMagicLogin = () => {
+    dispatch(magicLoginAttempt());
+  };
+
+  const handleMicrosoftLogin = () => {
+    window.location.href = "http://localhost:8090/oauth2/authorization/azure";
+  };
+
   return (
     <Row justify="center" align="middle" className="h-100">
       <Col span={24}>
@@ -30,6 +52,7 @@ const LoginPage = () => {
                   style="icon__login-microsoft"
                 />
               }
+              onClick={handleMicrosoftLogin}
             >
               Continue with Microsoft
             </Button>
@@ -37,7 +60,12 @@ const LoginPage = () => {
         </Row>
         <Row justify="center" className="mt-3">
           <Col>
-            <Button type="default" size="large" shape="round">
+            <Button
+              type="default"
+              size="large"
+              shape="round"
+              onClick={handleMagicLogin}
+            >
               🌈 Magic Login 🧙
             </Button>
           </Col>
