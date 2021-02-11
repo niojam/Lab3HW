@@ -1,0 +1,31 @@
+.search-bar-wrapper {
+
+  .search-input{
+
+    .ant-input {
+      border: transparent;
+      height: 60px;
+      font-size: 20px;
+    }
+
+    .ant-btn {
+      height: 50px;
+      width: 50px;
+      background: white;
+      border: transparent;
+    }
+
+    .search-input--search-button {
+      background: transparent;
+      border: none;
+      font-size: 30px;
+    }
+
+  }
+
+  .ant-input-affix-wrapper-lg {
+    padding-top: 0;
+    padding-bottom: 0 ;
+    padding-right: 0;
+  }
+}
