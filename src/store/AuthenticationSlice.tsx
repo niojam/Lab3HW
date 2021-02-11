@@ -1,25 +1,42 @@
 import {
+  createAsyncThunk,
   createSelector,
   createSlice,
   Draft,
   PayloadAction,
 } from "@reduxjs/toolkit";
+import { magicLogin } from "../common/client/BackOfficeApplicationClient";
 
 export interface AuthenticationSliceState {
   isAuthenticated: boolean;
 }
 
+export const magicLoginAttempt: any = createAsyncThunk(
+  "auth/magicLoginAttempt",
+  async () => {
+    return await magicLogin();
+  }
+);
+
 const AuthenticationSlice = createSlice({
+  name: "auth",
   initialState: {
     isAuthenticated: false,
   } as AuthenticationSliceState,
-  name: "QuizAuthenticationSlice",
   reducers: {
     setIsUserAuthenticated: (
-      prevState: Draft<AuthenticationSliceState>,
+      state: Draft<AuthenticationSliceState>,
       action: PayloadAction<boolean>
     ) => {
-      return { ...prevState, ...{ isAuthenticated: action.payload } };
+      state.isAuthenticated = action.payload;
+    },
+  },
+  extraReducers: {
+    [magicLoginAttempt.fulfilled]: (state: Draft<AuthenticationSliceState>) => {
+      state.isAuthenticated = true;
+    },
+    [magicLoginAttempt.rejected]: (state: Draft<AuthenticationSliceState>) => {
+      state.isAuthenticated = false;
     },
   },
 });

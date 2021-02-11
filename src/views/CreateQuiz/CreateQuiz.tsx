@@ -1,7 +1,7 @@
 import React from "react";
-import { Form, Input, Button, Row, Col, Select } from "antd";
 import "antd/dist/antd.css";
-import { QUESTION_SCORE, QUESTION_TIMER, QUESTION_TYPE } from "../constants";
+import { Form, Input, Button, Row, Col, Select } from "antd";
+import { QUESTION_SCORE, QUESTION_TIMER, QUESTION_TYPE } from "../../constants";
 import { Answer } from "containers";
 import { ImageDragger } from "components";
 import { Heart, Lego, Star, Coin } from "assets/images/index";

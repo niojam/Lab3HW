@@ -1,7 +1,10 @@
 module.exports = {
   devServer: {
     proxy: {
-      "/quiz/quizzes": "http://localhost:8090",
+      "/api": {
+        target: "http://localhost:8090",
+        pathRewrite: { "^/api": "" },
+      },
     },
   },
 };

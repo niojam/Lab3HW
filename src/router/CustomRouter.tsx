@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { RouteType } from "./config";
-import { LoginPageLayout, MainLayout } from "../containers";
+import { LoginPageLayout, MainLayout } from "containers";
 
 interface RouterProps {
   routes: RouteType[];
