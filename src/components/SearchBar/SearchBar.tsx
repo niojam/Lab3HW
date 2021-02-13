@@ -3,15 +3,18 @@ import "./SearchBar.scss";
 import { Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const SearchBar = ({ onSearch }) => {
+interface SearchBarProps {
+  onSearchClick: () => void;
+}
+
+const SearchBar = ({ onSearchClick }: SearchBarProps) => {
   return (
     <Input
       suffix={
         <Button
           icon={
             <SearchOutlined
+              onClick={() => onSearchClick()}
               size={5}
               className={"search-input--search-button"}
             />
