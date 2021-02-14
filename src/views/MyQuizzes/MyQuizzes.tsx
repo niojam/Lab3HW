@@ -1,7 +1,8 @@
 import React from "react";
 import "antd/dist/antd.css";
-import { QuizCard, SearchBar } from "../../components";
+import { SearchBar } from "../../components";
 import { Col, Row } from "antd";
+import { QuizCardList } from "../../containers";
 
 const MyQuizzes = () => {
   return (
@@ -20,8 +21,8 @@ const MyQuizzes = () => {
             </Col>
           </Row>
           <Row justify="space-around">
-            <Col span={18}>
-              <QuizCard />
+            <Col style={{ display: "flex" }} span={18}>
+              <QuizCardList />
             </Col>
           </Row>
         </Col>
