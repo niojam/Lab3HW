@@ -23,7 +23,7 @@ export const routes: RouteType[] = [
   },
   {
     path: "/statistics",
-    component: lazy(() => import("containers/Home/Home")),
+    component: lazy(() => import("views/PlayedQuizzes/PlayedQuizzes")),
     exact: true,
     private: false,
   },
