@@ -23,7 +23,7 @@ const SearchBar = ({ onSearchClick }: SearchBarProps) => {
       }
       size={"large"}
       className={"search-input"}
-      placeholder="input search text"
+      placeholder="Search..."
     />
   );
 };
