@@ -1,8 +1,9 @@
 import React from "react";
-import { Table, Space } from "antd";
+import { Space } from "antd";
 import { Icon } from "components";
 import { Users, Download, Remove, Chart } from "../../assets/images";
-
+import { GenericTable } from "../../components";
+import "./StatisticsOverviewTable.scss";
 const data = [
   {
     key: "1",
@@ -24,28 +25,40 @@ const data = [
   },
 ];
 
-const { Column } = Table;
+const columns = [
+  {
+    title: "Quiz Name",
+    dataIndex: "quizName",
+    key: "quizName",
+  },
+  {
+    title: "Room Name",
+    dataIndex: "roomName",
+    key: "roomName",
+  },
+  {
+    title: "Time",
+    dataIndex: "time",
+    key: "time",
+  },
+  {
+    title: "Action",
+    key: "action",
+    render: function renderIcons() {
+      return (
+        <Space size="middle">
+          <Icon src={Chart} size={"extra-small"} />
+          <Icon src={Users} size={"extra-small"} />
+          <Icon src={Download} size={"extra-small"} />
+          <Icon src={Remove} size={"extra-small"} />
+        </Space>
+      );
+    },
+  },
+];
 
 const StatisticsOverviewTable = () => {
-  return (
-    <Table dataSource={data}>
-      <Column title="Quiz Name" dataIndex="quizName" key="quizName" />
-      <Column title="Room Name" dataIndex="roomName" key="roomName" />
-      <Column title="Time" dataIndex="time" key="time" />
-      <Column
-        title=""
-        key="action"
-        render={() => (
-          <Space size="middle">
-            <Icon src={Chart} size={"small"} />
-            <Icon src={Users} size={"small"} />
-            <Icon src={Download} size={"small"} />
-            <Icon src={Remove} size={"small"} />
-          </Space>
-        )}
-      />
-    </Table>
-  );
+  return <GenericTable tableData={data} columns={columns} />;
 };
 
 export default StatisticsOverviewTable;
