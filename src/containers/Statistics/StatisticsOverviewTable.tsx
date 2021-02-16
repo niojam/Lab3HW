@@ -42,15 +42,15 @@ const columns = [
     key: "time",
   },
   {
-    title: "Action",
+    title: "",
     key: "action",
     render: function renderIcons() {
       return (
         <Space size="middle">
-          <Icon src={Chart} size={"extra-small"} />
-          <Icon src={Users} size={"extra-small"} />
-          <Icon src={Download} size={"extra-small"} />
-          <Icon src={Remove} size={"extra-small"} />
+          <Icon src={Chart} size={"small"} />
+          <Icon src={Users} size={"small"} />
+          <Icon src={Download} size={"small"} />
+          <Icon src={Remove} size={"small"} />
         </Space>
       );
     },

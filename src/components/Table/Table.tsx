@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "antd";
+import "./Table.scss";
 
 interface TableProps {
   tableData: Array<any>;
@@ -7,7 +8,7 @@ interface TableProps {
 }
 
 const GenericTable = ({ tableData, columns }: TableProps) => (
-  <Table dataSource={tableData} columns={columns} />
+  <Table dataSource={tableData} columns={columns} pagination={false} />
 );
 
 export default GenericTable;
