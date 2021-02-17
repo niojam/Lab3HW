@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Col, Row, Button } from "antd";
 import { Microsoft, LoginIllustration } from "assets/images";
 import { Icon } from "components";
@@ -15,9 +15,11 @@ const LoginPage = () => {
   const history = useHistory();
   const isAuthenticated = useSelector(isUserAuthenticated);
 
-  if (isAuthenticated) {
-    history.push("/home");
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push("/home");
+    }
+  }, [isAuthenticated]);
 
   const handleMagicLogin = () => {
     dispatch(magicLoginAttempt());
@@ -52,7 +54,7 @@ const LoginPage = () => {
                   style="icon__login-microsoft"
                 />
               }
-              onClick={handleMicrosoftLogin}
+              onClick={() => handleMicrosoftLogin()}
             >
               Continue with Microsoft
             </Button>
@@ -64,7 +66,7 @@ const LoginPage = () => {
               type="default"
               size="large"
               shape="round"
-              onClick={handleMagicLogin}
+              onClick={() => handleMagicLogin()}
             >
               🌈 Magic Login 🧙
             </Button>
