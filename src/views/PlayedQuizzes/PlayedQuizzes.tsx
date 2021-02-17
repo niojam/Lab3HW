@@ -16,7 +16,7 @@ const PlayedQuizzes = () => {
         <Pagination
           defaultCurrent={1}
           defaultPageSize={10}
-          total={200}
+          total={300}
           style={{ padding: "3%" }}
         />
       </Col>
