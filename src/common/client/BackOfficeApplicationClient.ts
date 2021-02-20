@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
+import { QuizDetails } from "../type/Types";
 
-export const getQuizzes = async (): Promise<AxiosResponse> => {
+export const getQuizzes = async (): Promise<AxiosResponse<QuizDetails[]>> => {
   return await axios.get(`api/quiz/quizzes`);
 };
 

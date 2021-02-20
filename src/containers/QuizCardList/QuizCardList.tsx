@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { Col, Pagination, Row } from "antd";
 import { QuizCard } from "../../components";
+import { QuizDetails } from "../../common/type/Types";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface QuizCardListProps {}
+interface QuizCardListProps {
+  quizzes: QuizDetails[];
+}
 
-const QuizCardList = ({}: QuizCardListProps) => {
+const QuizCardList = ({ quizzes }: QuizCardListProps) => {
+  console.log(quizzes);
+
   return (
     <>
       <Row gutter={[16, 12]}>
