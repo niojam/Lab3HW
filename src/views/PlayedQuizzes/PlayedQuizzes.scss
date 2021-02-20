@@ -1,0 +1,14 @@
+ul {
+  background: white;
+  margin: 0;
+}
+
+.div-container {
+  display: flex;
+}
+
+@media screen and (min-width: 764px) {
+  .div-container {
+    margin-top: 5%;
+  }
+}
