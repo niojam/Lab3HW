@@ -68,11 +68,11 @@ const MyQuizzes = () => {
       <Row justify="space-around">
         <Col span={18}>
           {isLoading ? (
-            <QuizCardList quizzes={quizzes} />
-          ) : (
             <Row justify={"center"}>
               <Spin size="large" />
             </Row>
+          ) : (
+            <QuizCardList quizzes={quizzes} />
           )}
         </Col>
       </Row>
