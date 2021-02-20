@@ -60,19 +60,14 @@ const columns = [
 
 const PlayedQuizzes = () => {
   return (
-    <Row
-      justify={"center"}
-      align={"middle"}
-      style={{ display: "flex" }}
-      className={"div-container"}
-    >
+    <Row justify={"center"} align={"middle"} className={"div-container"}>
       <Col md={24} lg={18}>
         <StatisticsOverviewTable data={data} columns={columns} />
         <Pagination
           defaultCurrent={1}
           defaultPageSize={10}
           total={300}
-          style={{ padding: "3%" }}
+          className={"p-3"}
         />
       </Col>
     </Row>
