@@ -11,15 +11,14 @@ const MyQuizzes = () => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [quizzes, setQuizzes] = useState<QuizDetails[]>([]);
 
-  const { isLoading, isError, data, error } = useQuery(
-    "getAllQuizzes",
-    getQuizzes,
-    {
-      staleTime: 10000,
-      refetchOnWindowFocus: false,
-      retry: false,
-    }
-  );
+  const { isLoading, data } = useQuery("getAllQuizzes", getQuizzes, {
+    staleTime: 10000,
+    refetchOnWindowFocus: false,
+    retry: false,
+    onSuccess: (result) => {
+      setQuizzes(result.data);
+    },
+  });
 
   const filterAndSortQuizzes = (keyWord: string) => {
     if (data?.data && keyWord) {

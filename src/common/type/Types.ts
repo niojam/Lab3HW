@@ -28,5 +28,6 @@ export interface QuizAnswer {
 
 export interface QuizDetails {
   quizId: number;
+  imageId: number;
   quizName: string;
 }
