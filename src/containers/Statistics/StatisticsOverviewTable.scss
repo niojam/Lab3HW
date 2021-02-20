@@ -1,0 +1,13 @@
+table {
+  padding: 3%;
+}
+
+.ant-table-tbody > tr > td {
+  font-size: 1.1rem;
+}
+.ant-table-tbody > tr > td:nth-child(3) {
+  color: #8F8F8F;
+}
+.ant-pagination > .ant-table-pagination > .ant-table-pagination-right {
+  background: white;
+}
