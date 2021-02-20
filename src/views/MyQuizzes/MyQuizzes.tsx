@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { SearchBar } from "../../components";
-import { Affix, Col, Row } from "antd";
+import { Affix, Col, Row, Spin } from "antd";
 import { QuizCardList } from "../../containers";
 import { useQuery } from "react-query";
 import { getQuizzes } from "../../common/client/BackOfficeApplicationClient";
@@ -67,7 +67,13 @@ const MyQuizzes = () => {
       </Row>
       <Row justify="space-around">
         <Col span={18}>
-          {isLoading ? <div>Loader</div> : <QuizCardList quizzes={quizzes} />}
+          {isLoading ? (
+            <QuizCardList quizzes={quizzes} />
+          ) : (
+            <Row justify={"center"}>
+              <Spin size="large" />
+            </Row>
+          )}
         </Col>
       </Row>
     </div>
