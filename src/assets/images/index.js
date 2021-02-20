@@ -10,3 +10,5 @@ export { default as Close } from "./close.svg";
 export { default as Download } from "./direct-download.svg";
 export { default as Remove } from "./delete.svg";
 export { default as Chart } from "./bar-chart.svg";
+export { default as Microsoft } from "./microsoft.svg";
+export { default as LoginIllustration } from "./login_illustration.png";
