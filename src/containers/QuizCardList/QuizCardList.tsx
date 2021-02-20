@@ -6,8 +6,6 @@ import { QuizCard } from "../../components";
 interface QuizCardListProps {}
 
 const QuizCardList = ({}: QuizCardListProps) => {
-  const [page, setPage] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(9);
   return (
     <>
       <Row gutter={[16, 12]}>
@@ -52,24 +50,6 @@ const QuizCardList = ({}: QuizCardListProps) => {
               }
             />
           </div>
-        </Col>
-      </Row>
-      <Row className={"my-3"} justify="center">
-        <Col>
-          <Pagination
-            current={page}
-            defaultPageSize={9}
-            pageSize={pageSize}
-            hideOnSinglePage
-            onChange={(pageNumber) => {
-              setPage(pageNumber);
-            }}
-            onShowSizeChange={(current, selectedPageSize) => {
-              console.log(selectedPageSize);
-              setPageSize(selectedPageSize);
-            }}
-            total={100} // #TODO ADD REAL DATA
-          />
         </Col>
       </Row>
     </>
