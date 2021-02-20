@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import { SearchBar } from "../../components";
 import { Affix, Col, Row } from "antd";
@@ -20,8 +20,14 @@ const MyQuizzes = () => {
     },
   });
 
+  useEffect(() => {
+    if (data?.data) {
+      setQuizzes(data.data);
+    }
+  }, []);
+
   const filterAndSortQuizzes = (keyWord: string) => {
-    if (data?.data && keyWord) {
+    if (data?.data && keyWord && keyWord.trim()) {
       const keyWordLowerCase = keyWord.toLocaleLowerCase();
       const filteredData = data.data
         .filter((quiz) =>
@@ -43,6 +49,8 @@ const MyQuizzes = () => {
           return 0;
         });
       setQuizzes(filteredData);
+    } else {
+      setQuizzes(data?.data ?? []);
     }
   };
 
@@ -52,14 +60,16 @@ const MyQuizzes = () => {
         <Col className={"mt-5"} span={18}>
           <div className="search-bar-wrapper">
             <Affix offsetTop={-40} target={() => container}>
-              <SearchBar onSearchClick={filterAndSortQuizzes} />
+              <SearchBar
+                onSearchClick={(value) => filterAndSortQuizzes(value)}
+              />
             </Affix>
           </div>
         </Col>
       </Row>
       <Row justify="space-around">
         <Col span={18}>
-          <QuizCardList quizzes={quizzes} />
+          {isLoading ? <div>Loader</div> : <QuizCardList quizzes={quizzes} />}
         </Col>
       </Row>
     </div>

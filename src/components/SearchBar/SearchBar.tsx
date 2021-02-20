@@ -11,25 +11,22 @@ const SearchBar = ({ onSearchClick }: SearchBarProps) => {
   const [input, setInput] = useState<string>("");
 
   const handleInput = (e: FormEvent<HTMLInputElement>) => {
-    const keyWord = e.currentTarget.value;
-    if (keyWord.trim()) {
-      setInput(keyWord);
-    }
+    setInput(e.currentTarget.value);
   };
   return (
     <Input
       suffix={
         <Button
+          onClick={() => onSearchClick(input)}
           icon={
             <SearchOutlined
-              onClick={() => onSearchClick(input)}
               size={5}
               className={"search-input--search-button"}
             />
           }
         />
       }
-      onChange={handleInput}
+      onChange={(event) => handleInput(event)}
       size={"large"}
       className={"search-input"}
       placeholder="Search..."
