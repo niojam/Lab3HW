@@ -26,7 +26,7 @@ const SearchBar = ({ onSearchClick }: SearchBarProps) => {
           }
         />
       }
-      onChange={(event) => handleInput(event)}
+      onChange={handleInput}
       size={"large"}
       className={"search-input"}
       placeholder="Search..."

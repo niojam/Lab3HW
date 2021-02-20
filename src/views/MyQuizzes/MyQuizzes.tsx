@@ -60,9 +60,7 @@ const MyQuizzes = () => {
         <Col className={"mt-5"} span={18}>
           <div className="search-bar-wrapper">
             <Affix offsetTop={-40} target={() => container}>
-              <SearchBar
-                onSearchClick={(value) => filterAndSortQuizzes(value)}
-              />
+              <SearchBar onSearchClick={filterAndSortQuizzes} />
             </Affix>
           </div>
         </Col>
