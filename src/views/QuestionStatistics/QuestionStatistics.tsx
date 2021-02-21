@@ -40,7 +40,7 @@ const columns = [
     key: "view",
     render: function renderIcons() {
       return (
-        <Space size="small" style={{ textAlign: "center" }}>
+        <Space size="small">
           <Icon src={Show} size={"small"} />
         </Space>
       );
