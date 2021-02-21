@@ -8,7 +8,12 @@ interface TableProps {
 }
 
 const GenericTable = ({ tableData, columns }: TableProps) => (
-  <Table dataSource={tableData} columns={columns} pagination={false} />
+  <Table
+    dataSource={tableData}
+    columns={columns}
+    pagination={false}
+    scroll={{ x: 400 }}
+  />
 );
 
 export default GenericTable;
