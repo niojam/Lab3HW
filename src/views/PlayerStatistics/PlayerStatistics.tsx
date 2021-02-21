@@ -3,7 +3,9 @@ import { Col, Row } from "antd";
 import PlayerStatisticsTable from "../../containers/Statistics/PlayerStatisticsTable";
 import { Icon } from "../../components";
 import { Check, Close } from "../../assets/images";
+import "./PlayerStatistics.scss";
 
+const quizTitle = "What is OOP";
 const data = [
   {
     key: "1",
@@ -65,6 +67,13 @@ const PlayerStatistics = () => {
   return (
     <Row justify={"center"} align={"middle"}>
       <Col md={24} lg={18} className={"m-3 col-container"}>
+        <Row className={"p-3"}>
+          <Col sm={16} md={10} className={"col-text p-3"}>
+            {quizTitle}
+            <hr />
+          </Col>
+        </Row>
+
         <PlayerStatisticsTable data={data} columns={columns} />
       </Col>
     </Row>
