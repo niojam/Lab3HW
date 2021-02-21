@@ -34,7 +34,7 @@ export const routes: RouteType[] = [
     private: true,
   },
   {
-    path: "/quiz",
+    path: "/quiz", // this is here temporary for demo purposes
     component: lazy(
       () => import("views/QuestionStatistics/QuestionStatistics")
     ),

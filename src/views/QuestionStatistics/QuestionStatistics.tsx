@@ -1,10 +1,12 @@
 import React from "react";
-import { Col, Pagination, Row, Space } from "antd";
+import { Col, Row, Space } from "antd";
 import QuestionStatisticsTable from "../../containers/Statistics/QuestionStatisticsTable";
 import { Icon } from "../../components";
 import { Show } from "../../assets/images";
 import "./QuestionStatistics.scss";
 
+const quizName = "What is OOP?";
+const roomName = "Room 1";
 const data = [
   {
     key: "1",
@@ -38,7 +40,7 @@ const columns = [
     key: "view",
     render: function renderIcons() {
       return (
-        <Space size="middle" align={"center"}>
+        <Space size="small" style={{ textAlign: "center" }}>
           <Icon src={Show} size={"small"} />
         </Space>
       );
@@ -49,14 +51,24 @@ const columns = [
 const QuestionStatistics = () => {
   return (
     <Row justify={"center"} align={"middle"}>
-      <Col md={24} lg={18} className={"m-3"}>
+      <Col md={24} lg={18} className={"m-3 col-container"}>
+        <Row className={"p-3"}>
+          <Col
+            span={12}
+            style={{ display: "flex", justifyContent: "flex-start" }}
+            className={"col-text p-2"}
+          >
+            {quizName}
+          </Col>
+          <Col
+            span={12}
+            style={{ display: "flex", justifyContent: "flex-end" }}
+            className={"col-text p-2"}
+          >
+            {roomName}
+          </Col>
+        </Row>
         <QuestionStatisticsTable data={data} columns={columns} />
-        <Pagination
-          defaultCurrent={1}
-          defaultPageSize={10}
-          total={300}
-          className={"p-3"}
-        />
       </Col>
     </Row>
   );

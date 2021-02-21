@@ -1,5 +1,6 @@
 import React from "react";
 import { GenericTable } from "../../components";
+import "./QuestionStatisticsTable.scss";
 
 interface QuestionStatisticsTableProps {
   data: Array<any>;
@@ -10,7 +11,13 @@ const QuestionStatisticsTable = ({
   data,
   columns,
 }: QuestionStatisticsTableProps) => {
-  return <GenericTable tableData={data} columns={columns} />;
+  return (
+    <GenericTable
+      tableData={data}
+      columns={columns}
+      className={"table-style"}
+    />
+  );
 };
 
 export default QuestionStatisticsTable;
