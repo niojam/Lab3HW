@@ -4,13 +4,16 @@ import Title from "antd/es/typography/Title";
 import "./GeneralHeader.scss";
 
 interface PageHeaderProps {
-  placeholder?: string;
+  title: string;
 }
 
-const GeneralHeader = ({ placeholder }: PageHeaderProps) => {
+const GeneralHeader = ({ title }: PageHeaderProps) => {
   return (
     <>
-      <Title className={"general-header"}>Introduction</Title>
+      <Title level={3} className={"general-header"}>
+        {title}
+      </Title>
+      <div className={"general-header-line mb-3"} />
     </>
   );
 };
