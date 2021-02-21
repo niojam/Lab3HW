@@ -33,4 +33,16 @@ export const routes: RouteType[] = [
     exact: true,
     private: true,
   },
+  {
+    path: "/edit-quiz",
+    component: lazy(() => import("views/EditQuiz/EditQuiz")),
+    exact: true,
+    private: false,
+  },
+  {
+    path: "/create",
+    component: lazy(() => import("views/CreateQuiz/CreateQuiz")),
+    exact: true,
+    private: false,
+  },
 ];
