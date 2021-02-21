@@ -1,8 +1,9 @@
 import React from "react";
 import { InboxOutlined } from "@ant-design/icons";
-import { Upload, message } from "antd";
-const { Dragger } = Upload;
+import { message, Upload } from "antd";
 import "antd/dist/antd.css";
+
+const { Dragger } = Upload;
 
 const props = {
   name: "file",
@@ -21,9 +22,13 @@ const props = {
   },
 };
 
-const ImageDragger = () => {
+interface ImageDraggerProps {
+  height?: number;
+}
+
+const ImageDragger = ({ height }: ImageDraggerProps) => {
   return (
-    <Dragger {...props}>
+    <Dragger {...props} height={height}>
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
