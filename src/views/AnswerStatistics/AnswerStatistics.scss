@@ -1,0 +1,16 @@
+.col-text {
+  font-size: 1.25rem;
+  color: #342B60;
+}
+
+.col-container {
+  background: white;
+}
+
+.ant-table-cell:nth-child(2) {
+  display: flex;
+  justify-content: center;
+}
+.ant-table-cell:nth-child(3) {
+  text-align: center;
+}
