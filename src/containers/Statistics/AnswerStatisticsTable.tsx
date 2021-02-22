@@ -1,5 +1,5 @@
 import React from "react";
-import { GenericTable } from "../../components";
+import { GenericTable } from "components";
 import "./common.scss";
 
 interface AnswerStatisticsTableProps {

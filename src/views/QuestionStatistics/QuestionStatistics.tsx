@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Row, Space } from "antd";
-import QuestionStatisticsTable from "../../containers/Statistics/QuestionStatisticsTable";
-import { Icon } from "../../components";
-import { Show } from "../../assets/images";
+import { QuestionStatisticsTable } from "containers";
+import { Icon } from "components";
+import { Show } from "assets/images";
 import "./QuestionStatistics.scss";
 
 const quizName = "What is OOP?";

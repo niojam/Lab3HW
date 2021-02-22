@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Row, Space } from "antd";
-import AnswerStatisticsTable from "../../containers/Statistics/AnswerStatisticsTable";
-import { Icon } from "../../components";
-import { Check, Close } from "../../assets/images";
+import { AnswerStatisticsTable } from "containers";
+import { Icon } from "components";
+import { Check, Close } from "assets/images";
 import "./AnswerStatistics.scss";
 
 const questionTitle = "What is something";
