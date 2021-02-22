@@ -25,3 +25,9 @@ export interface QuizAnswer {
   questionId: number;
   isCorrect: boolean;
 }
+
+export interface QuizDetails {
+  quizId: number;
+  imageId: number;
+  quizName: string;
+}

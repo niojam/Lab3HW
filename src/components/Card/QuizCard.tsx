@@ -11,14 +11,21 @@ import {
 interface QuizCardProps {
   title: string;
   description: string;
-  coverImg: ReactNode;
+  coverSrc: string;
 }
 
-const QuizCard = ({ title, description, coverImg }: QuizCardProps) => {
+const QuizCard = ({ title, description, coverSrc }: QuizCardProps) => {
   return (
     <Card
       className={"quiz-card"}
-      cover={coverImg}
+      cover={
+        <img
+          className={"quiz-card--img"}
+          alt="QuizImg"
+          src={coverSrc}
+          loading="lazy"
+        />
+      }
       actions={[
         <CaretRightOutlined className={"quiz-card--button"} key="playQuiz" />,
         <EditOutlined className={"quiz-card--button"} key="editQuiz" />,
