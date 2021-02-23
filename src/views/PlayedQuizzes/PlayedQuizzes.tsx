@@ -1,8 +1,8 @@
 import React from "react";
-import StatisticsOverviewTable from "../../containers/Statistics/StatisticsOverviewTable";
+import { StatisticsOverviewTable } from "containers";
 import { Col, Pagination, Row, Space } from "antd";
 import { Icon } from "components";
-import { Users, Download, Remove, Chart } from "../../assets/images";
+import { Users, Download, Remove, Chart } from "assets/images";
 import "./PlayedQuizzes.scss";
 
 const data = [
@@ -60,8 +60,8 @@ const columns = [
 
 const PlayedQuizzes = () => {
   return (
-    <Row justify={"center"} align={"middle"} className={"div-container"}>
-      <Col md={24} lg={18}>
+    <Row justify={"center"} align={"middle"}>
+      <Col md={24} lg={18} className={"m-3"}>
         <StatisticsOverviewTable data={data} columns={columns} />
         <Pagination
           defaultCurrent={1}
