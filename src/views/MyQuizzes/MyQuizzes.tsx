@@ -4,14 +4,14 @@ import { SearchBar } from "../../components";
 import { Affix, Col, Row, Spin } from "antd";
 import { QuizCardList } from "../../containers";
 import { useQuery } from "react-query";
-import { getQuizzes } from "../../common/client/BackOfficeApplicationClient";
+import { getQuizzesDetails } from "../../common/client/BackOfficeApplicationClient";
 import { QuizDetails } from "../../common/type/Types";
 
 const MyQuizzes = () => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [quizzes, setQuizzes] = useState<QuizDetails[]>([]);
 
-  const { isLoading, data } = useQuery("getAllQuizzes", getQuizzes, {
+  const { isLoading, data } = useQuery("getAllQuizzes", getQuizzesDetails, {
     staleTime: 10000,
     refetchOnWindowFocus: false,
     retry: false,

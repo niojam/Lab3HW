@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
+
 import { Col, Row } from "antd";
 import { GeneralHeader, ImageDragger } from "../../components";
 import GeneralInput from "../../components/Input/GeneralInput";
 import { QuestionCardList } from "../../containers";
 import "./EditQuiz.scss";
+import { useQuery } from "react-query";
+import { getQuiz } from "../../common/client/BackOfficeApplicationClient";
+import { Quiz } from "../../common/type/Types";
 
-const EditQuiz = () => {
+interface EditQuizRouterProps {
+  quizId: string;
+}
+
+type EditQuizProps = RouteComponentProps<EditQuizRouterProps>;
+
+const EditQuiz = (props: EditQuizProps) => {
+  const { quizId } = props.match.params;
+  const [quiz, setQuiz] = useState<Quiz>();
+
+  useQuery(["getQuizData", quizId], () => getQuiz(quizId), {
+    refetchOnWindowFocus: false,
+    retry: false,
+    onSuccess: (data) => {
+      setQuiz(data.data);
+    },
+  });
+
   return (
     <div className={"scrollY"}>
       <Row className={"my-5"} justify="space-around">
