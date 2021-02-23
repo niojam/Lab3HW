@@ -3,46 +3,52 @@ import { Col, Row } from "antd";
 import "./QuestionCardList.scss";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { QuizCard } from "../../components";
+import { QuizQuestion } from "../../common/type/Types";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface QuestionCardListProps {}
+interface QuestionCardListProps {
+  questions: QuizQuestion[];
+}
 
-const QuestionCardList = ({}: QuestionCardListProps) => {
+const QuestionCardList = ({ questions }: QuestionCardListProps) => {
   return (
     <>
       <Row gutter={[16, 12]}>
-        <Col style={{ textAlign: "center" }} span={24}>
-          <QuizCard
-            className={"question-card"}
-            title={
-              <ul className={"no-bullets"}>
-                <li>
-                  Question: Titleefefefefewfefewf pikk kusimu aj mis on selle
-                  elu mote
-                </li>
-                <li className={"question-card--list-element__display_none"}>
-                  <span>Time limit: Title</span>
-                </li>
-                <li className={"question-card--list-element__display_none"}>
-                  <span>Points: Title</span>
-                </li>
-                <li className={"question-card--list-element__display_none"}>
-                  <span>Type: Title</span>
-                </li>
-              </ul>
-            }
-            coverSrc={
-              "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-            }
-            actions={[
-              <EditFilled className={"quiz-card--button"} key="editQuestion" />,
-              <DeleteFilled
-                className={"quiz-card--button"}
-                key="deleteQuestion"
-              />,
-            ]}
-          />
-        </Col>
+        {questions.map((question) => (
+          <Col key={question.id} style={{ textAlign: "center" }} span={24}>
+            <QuizCard
+              className={"question-card"}
+              title={
+                <ul className={"no-bullets"}>
+                  <li>{`Question: ${question.text}`}</li>
+                  <li className={"question-card--list-element__display_none"}>
+                    <span>{`Time limit: ${question.timer}`}</span>
+                  </li>
+                  <li className={"question-card--list-element__display_none"}>
+                    <span>{`Points: ${question.reward}`}</span>
+                  </li>
+                  <li className={"question-card--list-element__display_none"}>
+                    <span>{`Type: ${question.questionType}`}</span>
+                  </li>
+                </ul>
+              }
+              coverSrc={
+                question.imageId
+                  ? `/api/image?id=${question.imageId}`
+                  : "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+              }
+              actions={[
+                <EditFilled
+                  className={"quiz-card--button"}
+                  key="editQuestion"
+                />,
+                <DeleteFilled
+                  className={"quiz-card--button"}
+                  key="deleteQuestion"
+                />,
+              ]}
+            />
+          </Col>
+        ))}
       </Row>
     </>
   );

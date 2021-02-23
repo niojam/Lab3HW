@@ -30,27 +30,31 @@ const EditQuiz = (props: EditQuizProps) => {
 
   return (
     <div className={"scrollY"}>
-      <Row className={"my-5"} justify="space-around">
-        <Col className={"mt-5"} span={16}>
-          <GeneralHeader title={"GENERAL"} />
-          <div className="general-input-wrapper">
-            <GeneralInput placeholder={"Name Your Quiz"} />
-          </div>
-        </Col>
-      </Row>
-      <Row justify="space-around">
-        <Col span={16}>
-          <Row justify={"center"} className={"image-dragger-wrapper"}>
-            <ImageDragger height={250} />
+      {quiz ? (
+        <>
+          <Row className={"my-5"} justify="space-around">
+            <Col className={"mt-5"} span={16}>
+              <GeneralHeader title={"GENERAL"} />
+              <div className="general-input-wrapper">
+                <GeneralInput placeholder={"Name Your Quiz"} />
+              </div>
+            </Col>
           </Row>
-        </Col>
-      </Row>
-      <Row className={"my-5"} justify="space-around">
-        <Col className={"mt-5"} span={16}>
-          <GeneralHeader title={"QUESTIONS"} />
-          <QuestionCardList />
-        </Col>
-      </Row>
+          <Row justify="space-around">
+            <Col span={16}>
+              <Row justify={"center"} className={"image-dragger-wrapper"}>
+                <ImageDragger height={250} />
+              </Row>
+            </Col>
+          </Row>
+          <Row className={"my-5"} justify="space-around">
+            <Col className={"mt-5"} span={16}>
+              <GeneralHeader title={"QUESTIONS"} />
+              <QuestionCardList questions={quiz.questions} />
+            </Col>
+          </Row>{" "}
+        </>
+      ) : undefined}
     </div>
   );
 };

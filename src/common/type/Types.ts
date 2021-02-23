@@ -12,7 +12,7 @@ export interface QuizQuestion {
   title: string;
   text: string;
   answers: Array<QuizAnswer>;
-  picture: Uint8Array;
+  imageId: number;
   nextQuestionId: number;
   timer: number;
   reward: number;
