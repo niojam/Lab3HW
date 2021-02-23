@@ -1,8 +1,8 @@
 import React from "react";
-import StatisticsOverviewTable from "../../containers/Statistics/StatisticsOverviewTable";
+import { StatisticsOverviewTable } from "containers";
 import { Col, Pagination, Row, Space } from "antd";
 import { Icon } from "components";
-import { Users, Download, Remove, Chart } from "../../assets/images";
+import { Users, Download, Remove, Chart } from "assets/images";
 import "./PlayedQuizzes.scss";
 
 const data = [

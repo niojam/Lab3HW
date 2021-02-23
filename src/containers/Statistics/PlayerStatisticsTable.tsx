@@ -2,15 +2,15 @@ import React from "react";
 import { GenericTable } from "components";
 import "./common.scss";
 
-interface QuestionStatisticsTableProps {
+interface PlayerStatisticsTableProps {
   data: Array<any>;
   columns: Array<any>;
 }
 
-const QuestionStatisticsTable = ({
+const PlayerStatisticsTable = ({
   data,
   columns,
-}: QuestionStatisticsTableProps) => {
+}: PlayerStatisticsTableProps) => {
   return (
     <GenericTable
       tableData={data}
@@ -20,4 +20,4 @@ const QuestionStatisticsTable = ({
   );
 };
 
-export default QuestionStatisticsTable;
+export default PlayerStatisticsTable;
