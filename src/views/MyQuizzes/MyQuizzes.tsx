@@ -55,7 +55,7 @@ const MyQuizzes = () => {
   };
 
   return (
-    <div style={{ overflowY: "scroll" }} ref={setContainer}>
+    <div className={"scrollY"} ref={setContainer}>
       <Row className={"my-5"} justify="space-around">
         <Col className={"mt-5"} span={18}>
           <div className="search-bar-wrapper">
