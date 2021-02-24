@@ -1,0 +1,15 @@
+ul.no-bullets {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+
+@media all and (max-width: 1000px) {
+
+  .question-card--list-element__display_none {
+    display: none;
+  }
+
+}
