@@ -63,7 +63,7 @@ const PlayedQuizzes = () => {
         <Pagination
           defaultCurrent={1}
           defaultPageSize={10}
-          total={300}
+          total={rooms.length}
           className={"p-3"}
         />
       </Col>
