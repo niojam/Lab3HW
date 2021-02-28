@@ -6,10 +6,13 @@ import { QuizCardList } from "../../containers";
 import { useQuery } from "react-query";
 import { getQuizzesDetails } from "../../common/client/BackOfficeApplicationClient";
 import { QuizDetails } from "../../common/type/Types";
+import { useHistory } from "react-router-dom";
+import { EDIT_QUIZ_PAGE_PATH } from "../../router/config";
 
 const MyQuizzes = () => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [quizzes, setQuizzes] = useState<QuizDetails[]>([]);
+  const history = useHistory();
 
   const { isLoading, data } = useQuery("getAllQuizzes", getQuizzesDetails, {
     staleTime: 10000,
@@ -19,6 +22,10 @@ const MyQuizzes = () => {
       setQuizzes(result.data);
     },
   });
+
+  const handleModifyQuiz = (quizId: number) => {
+    history.push(`${EDIT_QUIZ_PAGE_PATH}/${quizId}`);
+  };
 
   useEffect(() => {
     if (data?.data) {
@@ -72,7 +79,10 @@ const MyQuizzes = () => {
               <Spin size="large" />
             </Row>
           ) : (
-            <QuizCardList quizzes={quizzes} />
+            <QuizCardList
+              handleModifyQuiz={handleModifyQuiz}
+              quizzes={quizzes}
+            />
           )}
         </Col>
       </Row>

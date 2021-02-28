@@ -4,15 +4,16 @@ import { QuizCard } from "../../components";
 import { QuizDetails } from "../../common/type/Types";
 import {
   CaretRightOutlined,
+  DeleteFilled,
   EditOutlined,
-  EllipsisOutlined,
 } from "@ant-design/icons";
 
 interface QuizCardListProps {
   quizzes: QuizDetails[];
+  handleModifyQuiz: (quizId: number) => void;
 }
 
-const QuizCardList = ({ quizzes }: QuizCardListProps) => {
+const QuizCardList = ({ quizzes, handleModifyQuiz }: QuizCardListProps) => {
   return (
     <>
       <Row gutter={[16, 12]}>
@@ -40,12 +41,13 @@ const QuizCardList = ({ quizzes }: QuizCardListProps) => {
                     key="playQuiz"
                   />,
                   <EditOutlined
+                    onClick={() => handleModifyQuiz(quiz.quizId)}
                     className={"quiz-card--button"}
                     key="editQuiz"
                   />,
-                  <EllipsisOutlined
+                  <DeleteFilled
                     className={"quiz-card--button"}
-                    key="ellipsis"
+                    key="deleteQuestion"
                   />,
                 ]}
               />

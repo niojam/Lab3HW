@@ -16,7 +16,7 @@ export const deleteQuestion = async (deleteQuestionRequest: {
   quizId: string;
 }): Promise<AxiosResponse<void>> => {
   return await axios.delete(
-    `/api/question?id=${deleteQuestionRequest.questionId}?quizId=${deleteQuestionRequest.quizId}`
+    `/api/question?id=${deleteQuestionRequest.questionId}&quizId=${deleteQuestionRequest.quizId}`
   );
 };
 
