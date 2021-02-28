@@ -7,9 +7,13 @@ import { QuizQuestion } from "../../common/type/Types";
 
 interface QuestionCardListProps {
   questions: QuizQuestion[];
+  handleDeleteQuestion: (questionId: number) => void;
 }
 
-const QuestionCardList = ({ questions }: QuestionCardListProps) => {
+const QuestionCardList = ({
+  questions,
+  handleDeleteQuestion,
+}: QuestionCardListProps) => {
   return (
     <>
       <Row gutter={[16, 12]}>
@@ -42,6 +46,7 @@ const QuestionCardList = ({ questions }: QuestionCardListProps) => {
                   key="editQuestion"
                 />,
                 <DeleteFilled
+                  onClick={() => handleDeleteQuestion(question.id)}
                   className={"quiz-card--button"}
                   key="deleteQuestion"
                 />,

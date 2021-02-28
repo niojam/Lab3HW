@@ -29,7 +29,6 @@ const QuizCardList = ({ quizzes }: QuizCardListProps) => {
               <QuizCard
                 className={"quiz-card"}
                 title={quiz.quizName}
-                description={"Mingi text"}
                 coverSrc={
                   quiz.imageId
                     ? `/api/image?id=${quiz.imageId}`

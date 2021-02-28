@@ -6,9 +6,12 @@ import { GeneralHeader, ImageDragger } from "../../components";
 import GeneralInput from "../../components/Input/GeneralInput";
 import { QuestionCardList } from "../../containers";
 import "./EditQuiz.scss";
-import { useQuery } from "react-query";
-import { getQuiz } from "../../common/client/BackOfficeApplicationClient";
-import { Quiz } from "../../common/type/Types";
+import { useMutation, useQuery } from "react-query";
+import {
+  deleteQuestion,
+  getQuiz,
+} from "../../common/client/BackOfficeApplicationClient";
+import { Quiz, QuizQuestion } from "../../common/type/Types";
 
 interface EditQuizRouterProps {
   quizId: string;
@@ -19,6 +22,7 @@ type EditQuizProps = RouteComponentProps<EditQuizRouterProps>;
 const EditQuiz = (props: EditQuizProps) => {
   const { quizId } = props.match.params;
   const [quiz, setQuiz] = useState<Quiz>();
+  const deleteQuestionMutation = useMutation(deleteQuestion);
 
   useQuery(["getQuizData", quizId], () => getQuiz(quizId), {
     refetchOnWindowFocus: false,
@@ -28,7 +32,23 @@ const EditQuiz = (props: EditQuizProps) => {
     },
   });
 
-  // const deleteQuestion = (questionId: number) => {};
+  const handleDeleteQuestion = (questionId: number) => {
+    if (quiz) {
+      deleteQuestionMutation.mutate(
+        { questionId, quizId },
+        {
+          onSuccess: () => {
+            const questions: QuizQuestion[] = quiz?.questions.filter(
+              (question) => {
+                return question.id !== questionId;
+              }
+            );
+            setQuiz({ ...quiz, questions: questions });
+          },
+        }
+      );
+    }
+  };
 
   return (
     <div className={"scrollY"}>
@@ -52,7 +72,10 @@ const EditQuiz = (props: EditQuizProps) => {
           <Row className={"my-5"} justify="space-around">
             <Col className={"mt-5"} span={16}>
               <GeneralHeader title={"QUESTIONS"} />
-              <QuestionCardList questions={quiz.questions} />
+              <QuestionCardList
+                handleDeleteQuestion={handleDeleteQuestion}
+                questions={quiz.questions}
+              />
             </Col>
           </Row>{" "}
         </>
