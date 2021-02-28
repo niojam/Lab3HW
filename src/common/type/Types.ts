@@ -39,4 +39,5 @@ export interface AuthorQuizzes {
   quizName: string;
   quizId: number;
   authorId: number;
+  time: Date;
 }
