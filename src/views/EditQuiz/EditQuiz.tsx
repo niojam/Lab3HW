@@ -28,6 +28,8 @@ const EditQuiz = (props: EditQuizProps) => {
     },
   });
 
+  // const deleteQuestion = (questionId: number) => {};
+
   return (
     <div className={"scrollY"}>
       {quiz ? (

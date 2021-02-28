@@ -13,8 +13,6 @@ interface QuizCardListProps {
 }
 
 const QuizCardList = ({ quizzes }: QuizCardListProps) => {
-  console.log(quizzes);
-
   return (
     <>
       <Row gutter={[16, 12]}>
