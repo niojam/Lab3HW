@@ -40,19 +40,17 @@ const PlayedQuizzes = () => {
       },
     },
   ];
-  const [rooms, setData] = useState<AuthorQuizzes[]>([]);
+  const [rooms, setRoomStatistics] = useState<AuthorQuizzes[]>([]);
   const {} = useQuery("getAuthorQuizzes", getAuthorQuizzes, {
     staleTime: 10000,
     refetchOnWindowFocus: false,
     retry: false,
     onSuccess: (result) => {
-      const data: AuthorQuizzes[] = [];
-      for (let i = 0; i < result.data.length; i++) {
-        const authorQuiz = result.data[i];
-        authorQuiz.key = i + 1;
-        data.push(authorQuiz);
-      }
-      setData(data);
+      const data: AuthorQuizzes[] = result.data.map((quiz, index) => {
+        quiz.key = index++;
+        return quiz;
+      });
+      setRoomStatistics(data);
     },
   });
 
