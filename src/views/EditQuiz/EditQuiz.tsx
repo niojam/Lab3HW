@@ -37,7 +37,6 @@ const EditQuiz = (props: EditQuizProps) => {
       setQuizDetails({
         quizName: data.name,
         quizId: data.id,
-        imageId: 11,
       } as QuizDetails);
     },
   });
@@ -72,20 +71,31 @@ const EditQuiz = (props: EditQuizProps) => {
     }
   };
 
+  const handleNameChange = (input: any) => {
+    const { value } = input.currentTarget;
+    setQuizDetails(
+      (prevState) => ({ ...prevState, quizName: value } as QuizDetails)
+    );
+  };
+
   return (
     <div className={"scrollY"}>
-      {quiz ? (
+      {quiz && quizDetails ? (
         <>
           <Row className={"my-5"} justify="space-around">
-            <Col className={"mt-5"} span={16}>
+            <Col className={"mt-5"} xxl={12} xs={16}>
               <GeneralHeader title={"NAME"} />
               <div className="general-input-wrapper">
-                <GeneralInput placeholder={"Name Your Quiz"} />
+                <GeneralInput
+                  value={quizDetails.quizName}
+                  onChange={handleNameChange}
+                  placeholder={"Name Your Quiz"}
+                />
               </div>
             </Col>
           </Row>
           <Row className={"my-5"} justify="space-around">
-            <Col span={16}>
+            <Col xxl={12} xs={16}>
               <GeneralHeader title={"IMAGE"} />
               <ImageUploader
                 className={"edit-quiz--image-uploader"}
@@ -101,7 +111,7 @@ const EditQuiz = (props: EditQuizProps) => {
             </Col>
           </Row>
           <Row className={"my-5"} justify="space-around">
-            <Col className={"mt-5"} span={16}>
+            <Col className={"mt-5"} xxl={12} xs={16}>
               <GeneralHeader title={"QUESTIONS"} />
               <QuestionCardList
                 handleDeleteQuestion={handleDeleteQuestion}
@@ -110,7 +120,7 @@ const EditQuiz = (props: EditQuizProps) => {
             </Col>
           </Row>
           <Row justify={"center"}>
-            <Col className={"edit-quiz--button-wrapper"} span={16}>
+            <Col className={"edit-quiz--button-wrapper"} xxl={12} xs={16}>
               <Button
                 className={"edit-quiz--button mb-1"}
                 icon={<PlusOutlined />}
