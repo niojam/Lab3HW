@@ -1,6 +1,10 @@
 .answer {
   .ant-input-affix-wrapper {
     padding: 0;
+
+    .ant-input {
+      padding-left: 20px;
+    }
   }
 
   .ant-input-prefix {
@@ -8,7 +12,7 @@
     justify-content: center;
     height: 60px;
     width: 60px;
-    margin-right: 24px;
+    margin-right: 0;
   }
   .answer-icon__color-blue {
     .ant-input-prefix {

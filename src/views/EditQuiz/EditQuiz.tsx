@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
-import { Button, Col, message, Row } from "antd";
+import { Button, Col, message, Modal, Row } from "antd";
 import { GeneralHeader, ImageUploader } from "../../components";
 import GeneralInput from "../../components/Input/GeneralInput";
-import { QuestionCardList } from "../../containers";
+import { EditQuizQuestion, QuestionCardList } from "../../containers";
 import "./EditQuiz.scss";
 import { useMutation, useQuery } from "react-query";
 import {
@@ -135,6 +135,19 @@ const EditQuiz = (props: EditQuizProps) => {
               </Button>
             </Col>
           </Row>
+          <Modal
+            title="Basic Modal"
+            visible={true}
+            okText={"Save"}
+            onOk={() => {
+              console.log(true);
+            }}
+            onCancel={() => {
+              console.log(false);
+            }}
+          >
+            <EditQuizQuestion />
+          </Modal>
         </>
       ) : undefined}
     </div>

@@ -32,7 +32,7 @@ const fullWidthCol = {
   },
 };
 
-const CreateQuiz = () => {
+const EditQuizQuestion = () => {
   const [form] = Form.useForm();
 
   return (
@@ -217,11 +217,11 @@ const CreateQuiz = () => {
 
       <Form.Item {...fullWidthCol}>
         <Button type="primary" htmlType="submit">
-          Register
+          Save Question
         </Button>
       </Form.Item>
     </Form>
   );
 };
 
-export default CreateQuiz;
+export default EditQuizQuestion;
