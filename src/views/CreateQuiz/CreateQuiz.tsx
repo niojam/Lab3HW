@@ -1,10 +1,10 @@
 import React from "react";
 import "antd/dist/antd.css";
-import { Form, Input, Button, Row, Col, Select } from "antd";
+import { Button, Col, Form, Input, Row, Select } from "antd";
 import { QUESTION_SCORE, QUESTION_TIMER, QUESTION_TYPE } from "../../constants";
 import { Answer } from "containers";
 import { ImageDragger } from "components";
-import { Heart, Lego, Star, Coin } from "assets/images/index";
+import { Coin, Heart, Lego, Star } from "assets/images/index";
 
 const formItemLayout = {
   labelCol: {
@@ -167,7 +167,12 @@ const CreateQuiz = () => {
       <Row>
         <Col xs={24} md={24}>
           <Form.Item {...fullWidthCol} name="questionType">
-            <ImageDragger />
+            <ImageDragger
+              onChange={(info: any) => {
+                console.log(info);
+              }}
+              action={"https://www.mocky.io/v2/5cc8019d300000980a055e76"}
+            />
           </Form.Item>
         </Col>
       </Row>

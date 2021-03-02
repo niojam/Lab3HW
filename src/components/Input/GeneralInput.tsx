@@ -1,17 +1,20 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { Input } from "antd";
 
 import "./GeneralInput.scss";
 
 interface GeneralInputProps {
   placeholder?: string;
+  onChange: (input: FormEvent<HTMLInputElement>) => void;
+  value: string;
 }
 
-const GeneralInput = ({ placeholder }: GeneralInputProps) => {
+const GeneralInput = ({ placeholder, onChange, value }: GeneralInputProps) => {
   return (
     <>
       <Input
-        defaultValue={"Super quiz"}
+        onChange={onChange}
+        value={value}
         placeholder={placeholder}
         className={"edit-quiz--name-input"}
       />

@@ -1,8 +1,10 @@
 import { QuestionType } from "./Enums";
 
 export interface Quiz {
+  id: number;
   name: string;
   questions: Array<QuizQuestion>;
+  authorId: number;
   firstQuestionId: number;
 }
 
@@ -12,7 +14,7 @@ export interface QuizQuestion {
   title: string;
   text: string;
   answers: Array<QuizAnswer>;
-  picture: Uint8Array;
+  imageId: number;
   nextQuestionId: number;
   timer: number;
   reward: number;

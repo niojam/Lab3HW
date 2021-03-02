@@ -8,36 +8,42 @@ export interface RouteType {
   private?: boolean;
 }
 
+export const LOGIN_PAGE_PATH = "/login";
+export const HOME_PAGE_PATH = "/home";
+export const MY_QUIZZES_PAGE_PATH = "/my-quizzes";
+export const STATISTICS_PAGE_PATH = "/statistics";
+export const EDIT_QUIZ_PAGE_PATH = "/edit-quiz";
+
 export const routes: RouteType[] = [
   {
-    path: "/login",
+    path: LOGIN_PAGE_PATH,
     component: lazy(() => import("views/Login/LoginPage")),
     exact: true,
     private: false,
   },
   {
-    path: "/home",
+    path: HOME_PAGE_PATH,
     component: lazy(() => import("containers/Home/Home")),
     exact: true,
     private: true,
   },
   {
-    path: "/my-quizzes",
+    path: MY_QUIZZES_PAGE_PATH,
     component: lazy(() => import("views/MyQuizzes/MyQuizzes")),
     exact: true,
     private: true,
   },
   {
-    path: "/statistics",
+    path: STATISTICS_PAGE_PATH,
     component: lazy(() => import("views/PlayedQuizzes/PlayedQuizzes")),
     exact: true,
     private: true,
   },
   {
-    path: "/edit-quiz",
+    path: EDIT_QUIZ_PAGE_PATH + "/:quizId",
     component: lazy(() => import("views/EditQuiz/EditQuiz")),
     exact: true,
-    private: true,
+    private: false,
   },
   {
     path: "/create",

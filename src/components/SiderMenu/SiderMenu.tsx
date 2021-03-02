@@ -2,9 +2,9 @@ import React from "react";
 import "antd/dist/antd.css";
 import { Menu } from "antd";
 import {
+  UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
@@ -18,7 +18,7 @@ const SiderMenu = () => {
         <Link to={"/my-quizzes"}>My quizzes</Link>
       </Menu.Item>
       <Menu.Item key="3" icon={<UploadOutlined />}>
-        <Link to={"/statistics"}>Statistics</Link>
+        <Link to={"/edit-quiz/-1"}>Statistics</Link>
       </Menu.Item>
     </Menu>
   );
