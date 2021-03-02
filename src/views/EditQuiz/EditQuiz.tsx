@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 import { Button, Col, message, Modal, Row } from "antd";
@@ -26,6 +26,8 @@ const EditQuiz = (props: EditQuizProps) => {
   const { quizId } = props.match.params;
   const [quiz, setQuiz] = useState<Quiz>();
   const [quizDetails, setQuizDetails] = useState<QuizDetails>();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const questionToModify = useRef<QuizQuestion>();
   const deleteQuestionMutation = useMutation(deleteQuestion);
 
   useQuery(["getQuizData", quizId], () => getQuiz(quizId), {
@@ -78,6 +80,13 @@ const EditQuiz = (props: EditQuizProps) => {
     );
   };
 
+  const handleModifyQuestion = (question: QuizQuestion) => {
+    questionToModify.current = question;
+    setIsModalVisible(true);
+  };
+
+  // const handleAddNewQuestion = () => {};
+
   return (
     <div className={"scrollY"}>
       {quiz && quizDetails ? (
@@ -114,6 +123,7 @@ const EditQuiz = (props: EditQuizProps) => {
             <Col className={"mt-5"} xxl={12} xs={16}>
               <GeneralHeader title={"QUESTIONS"} />
               <QuestionCardList
+                handleModifyQuestion={handleModifyQuestion}
                 handleDeleteQuestion={handleDeleteQuestion}
                 questions={quiz.questions}
               />
@@ -137,16 +147,16 @@ const EditQuiz = (props: EditQuizProps) => {
           </Row>
           <Modal
             title="Basic Modal"
-            visible={true}
-            okText={"Save"}
-            onOk={() => {
-              console.log(true);
-            }}
-            onCancel={() => {
-              console.log(false);
-            }}
+            visible={isModalVisible}
+            onCancel={() => setIsModalVisible((prevState) => !prevState)}
+            footer={null}
           >
-            <EditQuizQuestion />
+            <EditQuizQuestion
+              question={{} as QuizQuestion}
+              handleSaveQuestion={() => {
+                console.log("handleSaveQuestion");
+              }}
+            />
           </Modal>
         </>
       ) : undefined}

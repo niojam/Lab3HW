@@ -19,6 +19,7 @@ interface AnswerProps {
   iconSrc: string;
   placeholder: string;
   color: color;
+  isOptional?: boolean;
 }
 
 const Answer: FunctionComponent<AnswerProps> = ({
@@ -26,6 +27,7 @@ const Answer: FunctionComponent<AnswerProps> = ({
   iconSrc,
   placeholder,
   color,
+  isOptional,
 }: AnswerProps) => {
   return (
     <div className="answer">
@@ -33,12 +35,16 @@ const Answer: FunctionComponent<AnswerProps> = ({
         {...fullWidthCol}
         className={`answer-icon__color-${color}`}
         name={name}
-        rules={[
-          {
-            required: true,
-            message: "VALIDATION.REQUIRED",
-          },
-        ]}
+        rules={
+          isOptional
+            ? []
+            : [
+                {
+                  required: true,
+                  message: "VALIDATION.REQUIRED",
+                },
+              ]
+        }
       >
         <Input prefix={<Icon src={iconSrc} />} placeholder={placeholder} />
       </Form.Item>

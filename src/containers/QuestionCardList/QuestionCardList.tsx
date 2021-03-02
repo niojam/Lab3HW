@@ -8,11 +8,13 @@ import { QuizQuestion } from "../../common/type/Types";
 interface QuestionCardListProps {
   questions: QuizQuestion[];
   handleDeleteQuestion: (questionId: number) => void;
+  handleModifyQuestion: (question: QuizQuestion) => void;
 }
 
 const QuestionCardList = ({
   questions,
   handleDeleteQuestion,
+  handleModifyQuestion,
 }: QuestionCardListProps) => {
   return (
     <>
@@ -42,6 +44,7 @@ const QuestionCardList = ({
               }
               actions={[
                 <EditFilled
+                  onClick={() => handleModifyQuestion(question)}
                   className={"quiz-card--button"}
                   key="editQuestion"
                 />,

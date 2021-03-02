@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { QUESTION_SCORE, QUESTION_TIMER, QUESTION_TYPE } from "../../constants";
 import { Answer } from "containers";
 import { ImageDragger } from "components";
 import { Coin, Heart, Lego, Star } from "assets/images/index";
+import "./EditQuizQuestion.scss";
+import { QuizQuestion } from "../../common/type/Types";
 
 const formItemLayout = {
   labelCol: {
@@ -31,12 +33,37 @@ const fullWidthCol = {
     },
   },
 };
+interface EditQuizQuestionProps {
+  handleSaveQuestion: (question: QuizQuestion) => void;
+  question: QuizQuestion;
+}
 
-const EditQuizQuestion = () => {
+const EditQuizQuestion = ({
+  handleSaveQuestion,
+  question,
+}: EditQuizQuestionProps) => {
+  const [currentQuestion, setCurrentQuestion] = useState<QuizQuestion>(
+    question
+  );
   const [form] = Form.useForm();
 
+  const onFinish = (fieldsValue: any) => {
+    const name = fieldsValue["quizName"];
+    const questionText = fieldsValue["questionText"];
+    const answers = [];
+    console.log(name);
+    handleSaveQuestion({} as QuizQuestion);
+  };
+
   return (
-    <Form {...formItemLayout} form={form} name="register" scrollToFirstError>
+    <Form
+      onFinish={onFinish}
+      {...formItemLayout}
+      form={form}
+      className={"edit-question-form"}
+      name="register"
+      scrollToFirstError
+    >
       <Row>
         <Col xs={24}>
           <Form.Item
@@ -199,6 +226,7 @@ const EditQuizQuestion = () => {
       <Row gutter={24}>
         <Col xs={24} md={12}>
           <Answer
+            isOptional
             name="answer3"
             iconSrc={Coin}
             placeholder="Add answer 3"
@@ -207,6 +235,7 @@ const EditQuizQuestion = () => {
         </Col>
         <Col xs={24} md={12}>
           <Answer
+            isOptional
             name="answer4"
             iconSrc={Star}
             placeholder="Add answer 4"
