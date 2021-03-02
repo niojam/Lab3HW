@@ -1,34 +1,25 @@
 import React from "react";
 import { InboxOutlined } from "@ant-design/icons";
-import { message, Upload } from "antd";
+import { Upload } from "antd";
 import "antd/dist/antd.css";
 
 const { Dragger } = Upload;
 
-const props = {
-  name: "file",
-  multiple: false,
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  onChange(info: any) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-
 interface ImageDraggerProps {
   height?: number;
+  action: any;
+  onChange: (info: any) => void;
 }
 
-const ImageDragger = ({ height }: ImageDraggerProps) => {
+const ImageDragger = ({ height, action, onChange }: ImageDraggerProps) => {
   return (
-    <Dragger {...props} height={height}>
+    <Dragger
+      name={"file"}
+      multiple={false}
+      onChange={onChange}
+      action={action}
+      height={height}
+    >
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>

@@ -23,3 +23,6 @@ export const deleteQuestion = async (deleteQuestionRequest: {
 export const magicLogin = async (): Promise<AxiosResponse> => {
   return await axios.get(`/api/magic-login`);
 };
+
+export const IMAGE_UPLOAD_URL = "/api/image";
+export const GET_IMAGE_BY_ID_URL = "/api/image?id=";

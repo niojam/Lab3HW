@@ -20,6 +20,7 @@
   }
 
 }
+
 @media all and (min-width: 875px) {
 
   .edit-quiz--button-wrapper {
@@ -31,3 +32,10 @@
 
 }
 
+
+.edit-quiz--image-uploader {
+  .ant-upload-select-picture-card {
+    width: 250px;
+    height: 250px;
+  }
+}
