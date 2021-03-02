@@ -33,3 +33,13 @@ export interface QuizDetails {
   imageId: number;
   quizName: string;
 }
+
+export interface AuthorQuizzes {
+  key: number;
+  id: number;
+  roomName: string;
+  quizName: string;
+  quizId: number;
+  authorId: number;
+  time: Date;
+}

@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { Quiz, QuizDetails } from "../type/Types";
+import { AuthorQuizzes, Quiz, QuizDetails } from "../type/Types";
 
 export const getQuizzesDetails = async (): Promise<
   AxiosResponse<QuizDetails[]>
@@ -22,6 +22,12 @@ export const deleteQuestion = async (deleteQuestionRequest: {
 
 export const magicLogin = async (): Promise<AxiosResponse> => {
   return await axios.get(`/api/magic-login`);
+};
+
+export const getAuthorQuizzes = async (): Promise<
+  AxiosResponse<AuthorQuizzes[]>
+> => {
+  return await axios.get("api/room/rooms");
 };
 
 export const IMAGE_UPLOAD_URL = "/api/image";
