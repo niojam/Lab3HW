@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "antd/dist/antd.css";
 import { Button, Col, Form, Input, Row, Select } from "antd";
 import { QUESTION_SCORE, QUESTION_TIMER, QUESTION_TYPE } from "../../constants";
@@ -45,6 +45,10 @@ const EditQuizQuestion = ({
   const [currentQuestion, setCurrentQuestion] = useState<QuizQuestion>(
     question
   );
+  const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
+  const selectedAnsweringMode = useRef<string>(
+    QUESTION_TYPE.SINGLE_MATCH.value
+  );
   const [form] = Form.useForm();
 
   const onFinish = (fieldsValue: any) => {
@@ -55,9 +59,37 @@ const EditQuizQuestion = ({
     handleSaveQuestion({} as QuizQuestion);
   };
 
+  const handleCorrectAnswerSelect = (name: string) => {
+    const { current } = selectedAnsweringMode;
+    if (
+      current === QUESTION_TYPE.SINGLE_MATCH.value ||
+      current === QUESTION_TYPE.SINGLE_ANY.value
+    ) {
+      setCorrectAnswers((prevState) =>
+        prevState?.length && prevState[0] === name ? [] : [name]
+      );
+    } else {
+      setCorrectAnswers((prevState) =>
+        prevState.includes(name)
+          ? [...prevState].filter((value) => value !== name)
+          : [...prevState, name]
+      );
+    }
+  };
+
+  const handleValueChange = (changedValues: any, allValues: any) => {
+    if (changedValues.questionType) {
+      console.log("done");
+      selectedAnsweringMode.current = changedValues.questionType;
+    }
+    console.log(changedValues);
+    console.log(allValues);
+  };
+
   return (
     <Form
       onFinish={onFinish}
+      onValuesChange={handleValueChange}
       {...formItemLayout}
       form={form}
       className={"edit-question-form"}
@@ -76,7 +108,7 @@ const EditQuizQuestion = ({
               },
             ]}
           >
-            <Input placeholder="Name your quiz" />
+            <Input autoComplete={"off"} placeholder="Name your quiz" />
           </Form.Item>
         </Col>
       </Row>
@@ -93,7 +125,10 @@ const EditQuizQuestion = ({
               },
             ]}
           >
-            <Input placeholder="Click to start typing your question" />
+            <Input
+              autoComplete={"off"}
+              placeholder="Click to start typing your question"
+            />
           </Form.Item>
         </Col>
       </Row>
@@ -205,41 +240,48 @@ const EditQuizQuestion = ({
       </Row>
 
       <Row gutter={24}>
-        <Col xs={24} md={12}>
+        <Col className={"card"} xs={24} md={12}>
           <Answer
+            handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             name="answer1"
             iconSrc={Lego}
             placeholder="Add answer 1"
             color="blue"
+            selectedAnswers={correctAnswers}
           />
         </Col>
-        <Col xs={24} md={12}>
+        <Col className={"card"} xs={24} md={12}>
           <Answer
+            handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             name="answer2"
             iconSrc={Heart}
             placeholder="Add answer 2"
             color="red"
+            selectedAnswers={correctAnswers}
           />
         </Col>
       </Row>
-
       <Row gutter={24}>
-        <Col xs={24} md={12}>
+        <Col className={"card"} xs={24} md={12}>
           <Answer
+            handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             isOptional
             name="answer3"
             iconSrc={Coin}
             placeholder="Add answer 3"
             color="green"
+            selectedAnswers={correctAnswers}
           />
         </Col>
-        <Col xs={24} md={12}>
+        <Col className={"card"} xs={24} md={12}>
           <Answer
+            handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             isOptional
             name="answer4"
             iconSrc={Star}
             placeholder="Add answer 4"
             color="violet"
+            selectedAnswers={correctAnswers}
           />
         </Col>
       </Row>

@@ -19,6 +19,8 @@ interface AnswerProps {
   iconSrc: string;
   placeholder: string;
   color: color;
+  handleCorrectAnswerSelect: (name: string) => void;
+  selectedAnswers: string[];
   isOptional?: boolean;
 }
 
@@ -28,12 +30,16 @@ const Answer: FunctionComponent<AnswerProps> = ({
   placeholder,
   color,
   isOptional,
+  handleCorrectAnswerSelect,
+  selectedAnswers,
 }: AnswerProps) => {
   return (
     <div className="answer">
       <Form.Item
         {...fullWidthCol}
-        className={`answer-icon__color-${color}`}
+        className={`answer-icon__color-${color} selectable ${
+          selectedAnswers.includes(name) ? "selected" : ""
+        }`}
         name={name}
         rules={
           isOptional
@@ -46,7 +52,21 @@ const Answer: FunctionComponent<AnswerProps> = ({
               ]
         }
       >
-        <Input prefix={<Icon src={iconSrc} />} placeholder={placeholder} />
+        <Input
+          autoComplete={"off"}
+          prefix={
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => handleCorrectAnswerSelect(name)}
+            >
+              <Icon src={iconSrc} />
+            </div>
+          }
+          placeholder={placeholder}
+        />
+        <div className="check">
+          <span className="checkmark">✔</span>
+        </div>
       </Form.Item>
     </div>
   );

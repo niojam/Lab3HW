@@ -146,6 +146,7 @@ const EditQuiz = (props: EditQuizProps) => {
             </Col>
           </Row>
           <Modal
+            width={700}
             title="Basic Modal"
             visible={isModalVisible}
             onCancel={() => setIsModalVisible((prevState) => !prevState)}
