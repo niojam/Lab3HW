@@ -35,12 +35,10 @@ export const getAuthorQuizzes = async (): Promise<
   return await axios.get("api/room/rooms");
 };
 
-export const getPlayersStatistics = async (getStatisticsRequest: {
-  roomId: string;
-}): Promise<AxiosResponse<PlayerStatisticsData[]>> => {
-  return await axios.get(
-    `/api/statistics/players?roomId=${getStatisticsRequest.roomId}`
-  );
+export const getPlayersStatistics = async (
+  roomId: string
+): Promise<AxiosResponse<PlayerStatisticsData[]>> => {
+  return await axios.get(`/api/statistics/players?roomId=${roomId}`);
 };
 
 export const IMAGE_UPLOAD_URL = "/api/image";

@@ -22,7 +22,7 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
   const [playerData, setPlayerData] = useState<PlayerStatisticsData[]>([]);
   useQuery(
     ["getPlayersStatisticsData", roomId],
-    () => getPlayersStatistics({ roomId: roomId }),
+    () => getPlayersStatistics(String(roomId)),
     {
       refetchOnWindowFocus: false,
       retry: false,
