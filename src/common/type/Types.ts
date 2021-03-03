@@ -43,3 +43,11 @@ export interface AuthorQuizzes {
   authorId: number;
   time: Date;
 }
+
+export interface PlayerStatistics {
+  username: string;
+  correctAnswers: number;
+  wrongAnswers: number;
+  score: number;
+  roomId: number;
+}
