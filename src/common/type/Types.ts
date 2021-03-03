@@ -44,7 +44,8 @@ export interface AuthorQuizzes {
   time: Date;
 }
 
-export interface PlayerStatistics {
+export interface PlayerStatisticsData {
+  key: number;
   username: string;
   correctAnswers: number;
   wrongAnswers: number;

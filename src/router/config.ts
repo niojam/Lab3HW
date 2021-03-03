@@ -13,6 +13,7 @@ export const HOME_PAGE_PATH = "/home";
 export const MY_QUIZZES_PAGE_PATH = "/my-quizzes";
 export const STATISTICS_PAGE_PATH = "/statistics";
 export const EDIT_QUIZ_PAGE_PATH = "/edit-quiz";
+export const PLAYERS_STATISTICS_PAGE_PATH = "/players";
 
 export const routes: RouteType[] = [
   {
@@ -37,7 +38,7 @@ export const routes: RouteType[] = [
     path: STATISTICS_PAGE_PATH,
     component: lazy(() => import("views/PlayedQuizzes/PlayedQuizzes")),
     exact: true,
-    private: true,
+    private: false,
   },
   {
     path: EDIT_QUIZ_PAGE_PATH + "/:quizId",
@@ -66,7 +67,10 @@ export const routes: RouteType[] = [
     private: false,
   },
   {
-    path: "/player", // this is here temporary for demo purposes
+    path:
+      STATISTICS_PAGE_PATH +
+      "/:roomId/:quizName" +
+      PLAYERS_STATISTICS_PAGE_PATH,
     component: lazy(() => import("views/PlayerStatistics/PlayerStatistics")),
     exact: true,
     private: false,
