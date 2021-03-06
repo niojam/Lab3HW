@@ -1,5 +1,10 @@
 import axios, { AxiosResponse } from "axios";
-import { AuthorQuizzes, Quiz, QuizDetails } from "../type/Types";
+import {
+  AuthorQuizzes,
+  PlayerStatisticsData,
+  Quiz,
+  QuizDetails,
+} from "../type/Types";
 
 export const getQuizzesDetails = async (): Promise<
   AxiosResponse<QuizDetails[]>
@@ -28,6 +33,12 @@ export const getAuthorQuizzes = async (): Promise<
   AxiosResponse<AuthorQuizzes[]>
 > => {
   return await axios.get("api/room/rooms");
+};
+
+export const getPlayersStatistics = async (
+  roomId: string
+): Promise<AxiosResponse<PlayerStatisticsData[]>> => {
+  return await axios.get(`/api/statistics/players?roomId=${roomId}`);
 };
 
 export const IMAGE_UPLOAD_URL = "/api/image";
