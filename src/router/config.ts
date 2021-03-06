@@ -67,6 +67,7 @@ export const routes: RouteType[] = [
     private: false,
   },
   {
+    //TODO change private to true once everything is ready
     path:
       STATISTICS_PAGE_PATH +
       "/:roomId/:quizName" +
