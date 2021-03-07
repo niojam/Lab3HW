@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import {
   AuthorQuizzes,
   PlayerStatisticsData,
+  QuestionStatisticsData,
   Quiz,
   QuizDetails,
 } from "../type/Types";
@@ -39,6 +40,12 @@ export const getPlayersStatistics = async (
   roomId: string
 ): Promise<AxiosResponse<PlayerStatisticsData[]>> => {
   return await axios.get(`/api/statistics/players?roomId=${roomId}`);
+};
+
+export const getQuestionStatistics = async (
+  quizId: string
+): Promise<AxiosResponse<QuestionStatisticsData[]>> => {
+  return await axios.get(`/api/question/details?quizId=${quizId}`);
 };
 
 export const IMAGE_UPLOAD_URL = "/api/image";

@@ -7,8 +7,37 @@ import "./PlayedQuizzes.scss";
 import { AuthorQuizzes } from "../../common/type/Types";
 import { useQuery } from "react-query";
 import { getAuthorQuizzes } from "../../common/client/BackOfficeApplicationClient";
+import { useHistory } from "react-router-dom";
+import {
+  QUIZ_STATISTICS_PAGE_PATH,
+  STATISTICS_PAGE_PATH,
+} from "../../router/config";
 
 const PlayedQuizzes = () => {
+  const history = useHistory();
+  const [rooms, setRoomStatistics] = useState<AuthorQuizzes[]>([]);
+  useQuery("getAuthorQuizzes", getAuthorQuizzes, {
+    staleTime: 10000,
+    refetchOnWindowFocus: false,
+    retry: false,
+    onSuccess: (result) => {
+      const data: AuthorQuizzes[] = result.data.map((quiz, index) => {
+        quiz.key = index++;
+        return quiz;
+      });
+      setRoomStatistics(data);
+    },
+  });
+  const handleShowQuizStatistics = (record: AuthorQuizzes) => {
+    history.push(
+      `${STATISTICS_PAGE_PATH}/${record.roomName}${QUIZ_STATISTICS_PAGE_PATH}`,
+      {
+        quizId: record.quizId,
+        quizName: record.quizName,
+        roomName: record.roomName,
+      }
+    );
+  };
   const columns = [
     {
       title: "Quiz Name",
@@ -28,10 +57,12 @@ const PlayedQuizzes = () => {
     {
       title: "",
       key: "action",
-      render: function renderIcons() {
+      render: function renderIcons(record: AuthorQuizzes) {
         return (
           <Space size="middle">
-            <Icon src={Chart} size={"small"} />
+            <div onClick={() => handleShowQuizStatistics(record)}>
+              <Icon src={Chart} size={"small"} />
+            </div>
             <Icon src={Users} size={"small"} />
             <Icon src={Download} size={"small"} />
             <Icon src={Remove} size={"small"} />
@@ -40,19 +71,6 @@ const PlayedQuizzes = () => {
       },
     },
   ];
-  const [rooms, setRoomStatistics] = useState<AuthorQuizzes[]>([]);
-  const {} = useQuery("getAuthorQuizzes", getAuthorQuizzes, {
-    staleTime: 10000,
-    refetchOnWindowFocus: false,
-    retry: false,
-    onSuccess: (result) => {
-      const data: AuthorQuizzes[] = result.data.map((quiz, index) => {
-        quiz.key = index++;
-        return quiz;
-      });
-      setRoomStatistics(data);
-    },
-  });
 
   return (
     <Row justify={"center"} align={"middle"}>

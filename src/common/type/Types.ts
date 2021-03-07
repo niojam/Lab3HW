@@ -52,3 +52,9 @@ export interface PlayerStatisticsData {
   score: number;
   roomId: number;
 }
+
+export interface QuestionStatisticsData {
+  key: number;
+  title: string;
+  type: QuestionType;
+}
