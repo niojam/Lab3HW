@@ -4,7 +4,7 @@ import { AnswerStatisticsTable } from "containers";
 import { Icon } from "components";
 import { Check, Close } from "assets/images";
 import "./AnswerStatistics.scss";
-import { RouteComponentProps, useHistory } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import { AnswerStatisticsData } from "../../common/type/Types";
 import { useQuery } from "react-query";
 import { getAnswerStatistics } from "../../common/client/BackOfficeApplicationClient";
@@ -16,7 +16,6 @@ interface AnswerStatisticsRouterProps {
 type AnswerStatisticsProps = RouteComponentProps<AnswerStatisticsRouterProps>;
 
 const AnswerStatistics = (props: AnswerStatisticsProps) => {
-  const history = useHistory();
   const roomId = props.match.params.roomId;
   const [answers, setAnswersData] = useState<AnswerStatisticsData[]>([]);
   let questionTitle = "";
