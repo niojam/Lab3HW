@@ -1,10 +1,10 @@
 import React from "react";
 import { GenericTable } from "components";
 import "./StatisticsOverviewTable.scss";
-import { AuthorQuizzes } from "../../common/type/Types";
+import { PlayedQuizzesData } from "../../common/type/Types";
 
 interface StatisticsOverviewTableProps {
-  data: AuthorQuizzes[];
+  data: PlayedQuizzesData[];
   columns: Array<any>;
 }
 

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import {
-  AuthorQuizzes,
+  PlayedQuizzesData,
   PlayerStatisticsData,
   QuestionStatisticsData,
   Quiz,
@@ -31,7 +31,7 @@ export const magicLogin = async (): Promise<AxiosResponse> => {
 };
 
 export const getAuthorQuizzes = async (): Promise<
-  AxiosResponse<AuthorQuizzes[]>
+  AxiosResponse<PlayedQuizzesData[]>
 > => {
   return await axios.get("api/room/rooms");
 };

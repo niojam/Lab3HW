@@ -4,7 +4,7 @@ import { Col, Pagination, Row, Space } from "antd";
 import { Icon } from "components";
 import { Users, Download, Remove, Chart } from "assets/images";
 import "./PlayedQuizzes.scss";
-import { AuthorQuizzes } from "../../common/type/Types";
+import { PlayedQuizzesData } from "../../common/type/Types";
 import { useQuery } from "react-query";
 import { getAuthorQuizzes } from "../../common/client/BackOfficeApplicationClient";
 import { useHistory } from "react-router-dom";
@@ -15,20 +15,20 @@ import {
 
 const PlayedQuizzes = () => {
   const history = useHistory();
-  const [rooms, setRoomStatistics] = useState<AuthorQuizzes[]>([]);
+  const [rooms, setRoomStatistics] = useState<PlayedQuizzesData[]>([]);
   useQuery("getAuthorQuizzes", getAuthorQuizzes, {
     staleTime: 10000,
     refetchOnWindowFocus: false,
     retry: false,
     onSuccess: (result) => {
-      const data: AuthorQuizzes[] = result.data.map((quiz, index) => {
+      const data: PlayedQuizzesData[] = result.data.map((quiz, index) => {
         quiz.key = index++;
         return quiz;
       });
       setRoomStatistics(data);
     },
   });
-  const handleShowQuizStatistics = (record: AuthorQuizzes) => {
+  const handleShowQuizStatistics = (record: PlayedQuizzesData) => {
     history.push(
       `${STATISTICS_PAGE_PATH}/${record.roomName}${QUIZ_STATISTICS_PAGE_PATH}`,
       {
@@ -57,7 +57,7 @@ const PlayedQuizzes = () => {
     {
       title: "",
       key: "action",
-      render: function renderIcons(record: AuthorQuizzes) {
+      render: function renderIcons(record: PlayedQuizzesData) {
         return (
           <Space size="middle">
             <div onClick={() => handleShowQuizStatistics(record)}>
