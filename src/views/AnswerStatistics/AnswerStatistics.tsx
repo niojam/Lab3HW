@@ -1,69 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row, Space } from "antd";
 import { AnswerStatisticsTable } from "containers";
 import { Icon } from "components";
 import { Check, Close } from "assets/images";
 import "./AnswerStatistics.scss";
+import { RouteComponentProps, useHistory } from "react-router-dom";
+import { AnswerStatisticsData } from "../../common/type/Types";
+import { useQuery } from "react-query";
+import { getAnswerStatistics } from "../../common/client/BackOfficeApplicationClient";
 
-const questionTitle = "What is something";
-const questionText = "What is something that is something extra text";
-const data = [
-  {
-    key: "1",
-    answer: "Something",
-    correct: true,
-    frequency: 10,
-  },
-  {
-    key: "2",
-    answer: "Another thing",
-    correct: false,
-    frequency: 15,
-  },
-  {
-    key: "3",
-    answer: "And yet another thing",
-    correct: false,
-    frequency: 17,
-  },
-  {
-    key: "4",
-    answer: "Something",
-    correct: true,
-    frequency: 20,
-  },
-];
+interface AnswerStatisticsRouterProps {
+  roomId: string;
+}
 
-const columns = [
-  {
-    title: "Answer",
-    dataIndex: "answer",
-    key: "answer",
-  },
-  {
-    title: "Correct",
-    dataIndex: "correct",
-    key: "correct",
-    render: function renderIcon(isCorrect: boolean) {
-      return isCorrect ? (
-        <Space size={"small"}>
-          <Icon src={Check} size={"extra-small"} />
-        </Space>
-      ) : (
-        <Space size={"small"}>
-          <Icon src={Close} size={"extra-small"} />
-        </Space>
-      );
+type AnswerStatisticsProps = RouteComponentProps<AnswerStatisticsRouterProps>;
+
+const AnswerStatistics = (props: AnswerStatisticsProps) => {
+  const history = useHistory();
+  const roomId = props.match.params.roomId;
+  const [answers, setAnswersData] = useState<AnswerStatisticsData[]>([]);
+  let questionTitle = "";
+  let questionText = "";
+
+  useQuery("getAnswerStatistics", () => getAnswerStatistics(roomId), {
+    refetchOnWindowFocus: false,
+    retry: false,
+    onSuccess: (result) => {
+      const data: AnswerStatisticsData[] = result.data.map((answer, index) => {
+        answer.key = index++;
+        questionTitle = answer.questionTitle;
+        questionText = answer.questionText;
+        return answer;
+      });
+      setAnswersData(data);
     },
-  },
-  {
-    title: "Frequency",
-    dataIndex: "frequency",
-    key: "frequency",
-  },
-];
-
-const AnswerStatistics = () => {
+  });
+  const columns = [
+    {
+      title: "Answer",
+      dataIndex: "answerText",
+      key: "answerText",
+    },
+    {
+      title: "Correct",
+      dataIndex: "isCorrect",
+      key: "isCorrect",
+      render: function renderIcon(isCorrect: boolean) {
+        return isCorrect ? (
+          <Space size={"small"}>
+            <Icon src={Check} size={"extra-small"} />
+          </Space>
+        ) : (
+          <Space size={"small"}>
+            <Icon src={Close} size={"extra-small"} />
+          </Space>
+        );
+      },
+    },
+    {
+      title: "Frequency",
+      dataIndex: "frequency",
+      key: "frequency",
+    },
+  ];
   return (
     <Row justify={"center"} align={"middle"}>
       <Col md={24} lg={18} className={"m-3 col-container"}>
@@ -74,7 +73,7 @@ const AnswerStatistics = () => {
             <div className={"col-text"}>{questionText}</div>
           </Col>
         </Row>
-        <AnswerStatisticsTable data={data} columns={columns} />
+        <AnswerStatisticsTable data={answers} columns={columns} />
       </Col>
     </Row>
   );

@@ -60,8 +60,10 @@ export interface QuestionStatisticsData {
 }
 
 export interface AnswerStatisticsData {
+  key: number;
   questionTitle: string;
   questionText: string;
   answerText: string;
   frequency: number;
+  isCorrect: boolean;
 }
