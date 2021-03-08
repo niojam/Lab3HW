@@ -6,7 +6,7 @@ import { Users, Download, Remove, Chart } from "assets/images";
 import "./PlayedQuizzes.scss";
 import { PlayedQuizzesData } from "../../common/type/Types";
 import { useQuery } from "react-query";
-import { getAuthorQuizzes } from "../../common/client/BackOfficeApplicationClient";
+import { getPlayedQuizzes } from "../../common/client/BackOfficeApplicationClient";
 import { useHistory } from "react-router-dom";
 import {
   QUIZ_STATISTICS_PAGE_PATH,
@@ -16,7 +16,7 @@ import {
 const PlayedQuizzes = () => {
   const history = useHistory();
   const [rooms, setRoomStatistics] = useState<PlayedQuizzesData[]>([]);
-  useQuery("getAuthorQuizzes", getAuthorQuizzes, {
+  useQuery("getAuthorQuizzes", getPlayedQuizzes, {
     staleTime: 10000,
     refetchOnWindowFocus: false,
     retry: false,
