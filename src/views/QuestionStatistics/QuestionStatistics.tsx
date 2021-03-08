@@ -8,10 +8,15 @@ import { QuestionStatisticsData } from "../../common/type/Types";
 import { useQuery } from "react-query";
 import { getQuestionStatistics } from "../../common/client/BackOfficeApplicationClient";
 import { useHistory } from "react-router-dom";
+import {
+  ANSWER_STATISTICS_PAGE_PATH,
+  STATISTICS_PAGE_PATH,
+} from "../../router/config";
 
 interface HistoryProps {
   quizId: string;
   quizName: string;
+  roomId: string;
   roomName: string;
 }
 
@@ -36,8 +41,10 @@ const QuestionStatistics = () => {
       },
     }
   );
-  const handleViewAnswers = (record: QuestionStatisticsData) => {
-    console.log(record);
+  const handleViewAnswers = () => {
+    history.push(
+      `${STATISTICS_PAGE_PATH}/${dataFromHistory.roomId}${ANSWER_STATISTICS_PAGE_PATH}`
+    );
   };
   const columns = [
     {
@@ -53,9 +60,9 @@ const QuestionStatistics = () => {
     {
       title: "View Answers",
       key: "view",
-      render: function renderCell(record: QuestionStatisticsData) {
+      render: function renderCell() {
         return (
-          <div onClick={() => handleViewAnswers(record)}>
+          <div onClick={() => handleViewAnswers()}>
             <Space>
               <Icon src={Show} size={"small"} />
             </Space>

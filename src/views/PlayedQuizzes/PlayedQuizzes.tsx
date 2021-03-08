@@ -34,6 +34,7 @@ const PlayedQuizzes = () => {
       {
         quizId: record.quizId,
         quizName: record.quizName,
+        roomId: record.id,
         roomName: record.roomName,
       }
     );
