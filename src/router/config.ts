@@ -15,6 +15,7 @@ export const STATISTICS_PAGE_PATH = "/statistics";
 export const EDIT_QUIZ_PAGE_PATH = "/edit-quiz";
 export const PLAYERS_STATISTICS_PAGE_PATH = "/players";
 export const QUIZ_STATISTICS_PAGE_PATH = "/quiz";
+export const ANSWER_STATISTICS_PAGE_PATH = "/answer";
 
 export const routes: RouteType[] = [
   {
@@ -62,10 +63,10 @@ export const routes: RouteType[] = [
     private: true,
   },
   {
-    path: "/answer", // this is here temporary for demo purposes
+    path: STATISTICS_PAGE_PATH + "/:roomName" + ANSWER_STATISTICS_PAGE_PATH,
     component: lazy(() => import("views/AnswerStatistics/AnswerStatistics")),
     exact: true,
-    private: false,
+    private: true,
   },
   {
     //TODO change private to true once everything is ready
