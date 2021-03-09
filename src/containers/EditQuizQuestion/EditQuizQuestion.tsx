@@ -58,15 +58,12 @@ const EditQuizQuestion = ({
   const [form] = Form.useForm();
 
   useEffect(() => {
-    console.log("Useeftct");
     for (let i = 0; i < maxAnswerCount; i++) {
       if (currentQuestion.answers[i]?.isCorrect) {
         setCorrectAnswers((prevState) => [...prevState, `answer${i}`]);
       }
     }
-    console.log(correctAnswers);
     if (!correctAnswers.length) {
-      console.log("setDefault");
       setCorrectAnswers([defaultCorrectAnswerName]);
     }
   }, []);
