@@ -1,9 +1,10 @@
 import React from "react";
 import { GenericTable } from "components";
 import "./common.scss";
+import { AnswerStatisticsData } from "../../common/type/Types";
 
 interface AnswerStatisticsTableProps {
-  data: Array<any>;
+  data: AnswerStatisticsData[];
   columns: Array<any>;
 }
 

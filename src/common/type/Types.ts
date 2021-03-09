@@ -31,3 +31,56 @@ export interface QuizDetails {
   imageId: number;
   quizName: string;
 }
+
+export interface AuthorQuizzes {
+  key: number;
+  id: number;
+  roomName: string;
+  quizName: string;
+  quizId: number;
+  authorId: number;
+  time: Date;
+}
+
+export interface PlayerStatisticsData {
+  key: number;
+  username: string;
+  correctAnswers: number;
+  wrongAnswers: number;
+  score: number;
+  roomId: number;
+}
+
+export interface PlayedQuizzesData {
+  key: number;
+  id: number;
+  roomName: string;
+  quizName: string;
+  quizId: number;
+  authorId: number;
+  time: Date;
+}
+
+export interface PlayerStatisticsData {
+  key: number;
+  username: string;
+  correctAnswers: number;
+  wrongAnswers: number;
+  score: number;
+  roomId: number;
+}
+
+export interface QuestionStatisticsData {
+  key: number;
+  title: string;
+  type: string;
+}
+
+export interface AnswerStatisticsData {
+  key: number;
+  questionTitle: string;
+  questionText: string;
+  answerText: string;
+  frequency: number;
+  isCorrect: boolean;
+}

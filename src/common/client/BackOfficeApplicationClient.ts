@@ -1,7 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 import {
-  AuthorQuizzes,
+  AnswerStatisticsData,
+  PlayedQuizzesData,
   PlayerStatisticsData,
+  QuestionStatisticsData,
   Quiz,
   QuizDetails,
   QuizQuestion,
@@ -54,8 +56,8 @@ export const magicLogin = async (): Promise<AxiosResponse> => {
   return await axios.get(`/api/magic-login`);
 };
 
-export const getAuthorQuizzes = async (): Promise<
-  AxiosResponse<AuthorQuizzes[]>
+export const getPlayedQuizzes = async (): Promise<
+  AxiosResponse<PlayedQuizzesData[]>
 > => {
   return await axios.get("api/room/rooms");
 };
@@ -64,6 +66,18 @@ export const getPlayersStatistics = async (
   roomId: string
 ): Promise<AxiosResponse<PlayerStatisticsData[]>> => {
   return await axios.get(`/api/statistics/players?roomId=${roomId}`);
+};
+
+export const getQuestionStatistics = async (
+  quizId: string
+): Promise<AxiosResponse<QuestionStatisticsData[]>> => {
+  return await axios.get(`/api/question/details?quizId=${quizId}`);
+};
+
+export const getAnswerStatistics = async (
+  roomId: string
+): Promise<AxiosResponse<AnswerStatisticsData[]>> => {
+  return await axios.get(`/api/statistics/answer?roomId=${roomId}`);
 };
 
 export const IMAGE_UPLOAD_URL = "/api/image";
