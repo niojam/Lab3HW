@@ -34,7 +34,7 @@ export interface QuizDetails {
   quizName: string;
 }
 
-export interface AuthorQuizzes {
+export interface PlayedQuizzesData {
   key: number;
   id: number;
   roomName: string;
@@ -51,4 +51,19 @@ export interface PlayerStatisticsData {
   wrongAnswers: number;
   score: number;
   roomId: number;
+}
+
+export interface QuestionStatisticsData {
+  key: number;
+  title: string;
+  type: QuestionType;
+}
+
+export interface AnswerStatisticsData {
+  key: number;
+  questionTitle: string;
+  questionText: string;
+  answerText: string;
+  frequency: number;
+  isCorrect: boolean;
 }
