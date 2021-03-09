@@ -9,6 +9,7 @@ import "./EditQuiz.scss";
 import { useMutation, useQuery } from "react-query";
 import {
   addQuestion,
+  createQuiz,
   deleteQuestion,
   GET_IMAGE_BY_ID_URL,
   getQuiz,
@@ -34,6 +35,7 @@ const EditQuiz = (props: EditQuizProps) => {
   const deleteQuestionMutation = useMutation(deleteQuestion);
   const addQuestionMutation = useMutation(addQuestion);
   const updateQuestionMutation = useMutation(updateQuestion);
+  const createQuizMutation = useMutation(createQuiz);
 
   useQuery(["getQuizData", quizId], () => getQuiz(quizId), {
     refetchOnWindowFocus: false,
@@ -63,6 +65,10 @@ const EditQuiz = (props: EditQuizProps) => {
           },
         }
       );
+      const questions: QuizQuestion[] = quiz?.questions.filter((question) => {
+        return question.id !== questionId;
+      });
+      setQuiz({ ...quiz, questions: questions });
     }
   };
 
@@ -127,12 +133,21 @@ const EditQuiz = (props: EditQuizProps) => {
   };
 
   const handleSaveQuestion = (question: QuizQuestion) => {
-    console.log(question);
     questionToModify.current = undefined;
     if (question.id) {
       updateQuizQuestion(question);
     } else {
       addNewQuestion(question);
+    }
+  };
+
+  const handleQuizUpdate = () => {
+    if (quiz) {
+      createQuizMutation.mutate(quiz, {
+        onSuccess: (result) => {
+          setQuiz(result.data);
+        },
+      });
     }
   };
 
@@ -188,6 +203,7 @@ const EditQuiz = (props: EditQuizProps) => {
                 Add question
               </Button>
               <Button
+                onClick={() => handleQuizUpdate()}
                 className={"edit-quiz--button mb-4"}
                 icon={<CheckOutlined />}
               >

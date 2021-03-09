@@ -40,6 +40,10 @@ export const updateQuestion = async (addQuestionRequest: {
   );
 };
 
+export const createQuiz = async (quiz: Quiz): Promise<AxiosResponse<Quiz>> => {
+  return await axios.post(`/api/quiz`, quiz);
+};
+
 export const magicLogin = async (): Promise<AxiosResponse> => {
   return await axios.get(`/api/magic-login`);
 };
