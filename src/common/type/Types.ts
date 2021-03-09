@@ -1,5 +1,3 @@
-import { QuestionType } from "./Enums";
-
 export interface Quiz {
   id: number;
   name: string;
@@ -18,7 +16,7 @@ export interface QuizQuestion {
   nextQuestionId: number;
   timer: number;
   reward: number;
-  questionType: QuestionType;
+  questionType: string;
 }
 
 export interface QuizAnswer {
