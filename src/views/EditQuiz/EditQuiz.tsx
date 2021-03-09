@@ -85,7 +85,7 @@ const EditQuiz = (props: EditQuizProps) => {
     );
   };
 
-  const handleModifyQuestion = (question: QuizQuestion) => {
+  const handleModifyQuestion = (question: QuizQuestion | undefined) => {
     questionToModify.current = question;
     setIsModalVisible(true);
   };
@@ -182,7 +182,7 @@ const EditQuiz = (props: EditQuizProps) => {
             <Col className={"edit-quiz--button-wrapper"} xxl={12} xs={16}>
               <Button
                 className={"edit-quiz--button mb-1"}
-                onClick={() => handleModifyQuestion({} as QuizQuestion)}
+                onClick={() => handleModifyQuestion(undefined)}
                 icon={<PlusOutlined />}
               >
                 Add question
@@ -201,10 +201,16 @@ const EditQuiz = (props: EditQuizProps) => {
             visible={isModalVisible}
             onCancel={() => setIsModalVisible((prevState) => !prevState)}
             footer={null}
+            destroyOnClose={true}
           >
             <EditQuizQuestion
               quizId={quiz.id}
-              question={questionToModify.current ?? ({} as QuizQuestion)}
+              question={
+                questionToModify.current ??
+                (({
+                  answers: [],
+                } as unknown) as QuizQuestion)
+              }
               handleSaveQuestion={handleSaveQuestion}
             />
           </Modal>

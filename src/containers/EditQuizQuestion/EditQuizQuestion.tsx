@@ -60,11 +60,13 @@ const EditQuizQuestion = ({
   useEffect(() => {
     console.log("Useeftct");
     for (let i = 0; i < maxAnswerCount; i++) {
-      if (currentQuestion.answers[i].isCorrect) {
+      if (currentQuestion.answers[i]?.isCorrect) {
         setCorrectAnswers((prevState) => [...prevState, `answer${i}`]);
       }
     }
-    if (!currentQuestion) {
+    console.log(correctAnswers);
+    if (!correctAnswers.length) {
+      console.log("setDefault");
       setCorrectAnswers([defaultCorrectAnswerName]);
     }
   }, []);
@@ -204,7 +206,7 @@ const EditQuizQuestion = ({
               },
             ]}
             initialValue={
-              question.timer.toString() ?? QUESTION_TIMER.T_15.value
+              question?.timer?.toString() ?? QUESTION_TIMER.T_15.value
             }
           >
             <Select placeholder="Time limit">
@@ -234,7 +236,7 @@ const EditQuizQuestion = ({
               },
             ]}
             initialValue={
-              question.reward.toString() ?? QUESTION_SCORE.P_100.value
+              question.reward?.toString() ?? QUESTION_SCORE.P_100.value
             }
           >
             <Select placeholder="Points">
@@ -301,7 +303,7 @@ const EditQuizQuestion = ({
           <Answer
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             name="answer0"
-            exitingAnswer={question.answers[0]}
+            exitingAnswer={question.answers ? question.answers[0] : undefined}
             iconSrc={Lego}
             placeholder="Add answer 1"
             color="blue"
@@ -310,7 +312,7 @@ const EditQuizQuestion = ({
         </Col>
         <Col className={"card mb-3"} xs={24} md={12}>
           <Answer
-            exitingAnswer={question.answers[1]}
+            exitingAnswer={question.answers ? question.answers[1] : undefined}
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             name="answer1"
             iconSrc={Heart}
@@ -323,7 +325,7 @@ const EditQuizQuestion = ({
       <Row gutter={24}>
         <Col className={"card mb-3"} xs={24} md={12}>
           <Answer
-            exitingAnswer={question.answers[2]}
+            exitingAnswer={question.answers ? question.answers[2] : undefined}
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             name="answer2"
             isOptional
@@ -335,7 +337,7 @@ const EditQuizQuestion = ({
         </Col>
         <Col className={"card mb-3"} xs={24} md={12}>
           <Answer
-            exitingAnswer={question.answers[3]}
+            exitingAnswer={question.answers ? question.answers[3] : undefined}
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             name="answer3"
             isOptional
