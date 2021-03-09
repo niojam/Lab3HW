@@ -7,17 +7,17 @@ const { Dragger } = Upload;
 
 interface ImageDraggerProps {
   height?: number;
-  action: any;
-  onChange: (info: any) => void;
+  action: string;
+  onUpload: (info: any) => void;
 }
 
-const ImageDragger = ({ height, action, onChange }: ImageDraggerProps) => {
+const ImageDragger = ({ height, action, onUpload }: ImageDraggerProps) => {
   return (
     <Dragger
       name={"file"}
       multiple={false}
-      onChange={onChange}
       action={action}
+      onChange={onUpload}
       height={height}
     >
       <p className="ant-upload-drag-icon">

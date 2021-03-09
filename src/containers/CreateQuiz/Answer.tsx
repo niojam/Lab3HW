@@ -3,6 +3,7 @@ import { Form, Input } from "antd";
 import "antd/dist/antd.css";
 import "./Answer.scss";
 import { Icon } from "components";
+import { QuizAnswer } from "../../common/type/Types";
 
 const fullWidthCol = {
   wrapperCol: {
@@ -21,6 +22,7 @@ interface AnswerProps {
   color: color;
   handleCorrectAnswerSelect: (name: string) => void;
   selectedAnswers: string[];
+  exitingAnswer: QuizAnswer | undefined;
   isOptional?: boolean;
 }
 
@@ -32,42 +34,48 @@ const Answer: FunctionComponent<AnswerProps> = ({
   isOptional,
   handleCorrectAnswerSelect,
   selectedAnswers,
+  exitingAnswer,
 }: AnswerProps) => {
   return (
     <div className="answer">
-      <Form.Item
-        {...fullWidthCol}
-        className={`answer-icon__color-${color} selectable ${
+      <div
+        className={`selectable ${
           selectedAnswers.includes(name) ? "selected" : ""
         }`}
-        name={name}
-        rules={
-          isOptional
-            ? []
-            : [
-                {
-                  required: true,
-                  message: "VALIDATION.REQUIRED",
-                },
-              ]
-        }
       >
-        <Input
-          autoComplete={"off"}
-          prefix={
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => handleCorrectAnswerSelect(name)}
-            >
-              <Icon src={iconSrc} />
-            </div>
+        <Form.Item
+          {...fullWidthCol}
+          className={`answer-icon__color-${color}`}
+          name={name}
+          rules={
+            isOptional
+              ? []
+              : [
+                  {
+                    required: true,
+                    message: "Must be at least 2 correct answers",
+                  },
+                ]
           }
-          placeholder={placeholder}
-        />
-        <div className="check">
+          initialValue={exitingAnswer?.text}
+        >
+          <Input
+            autoComplete={"off"}
+            prefix={
+              <div
+                className={"answer--wrapper"}
+                onClick={() => handleCorrectAnswerSelect(name)}
+              >
+                <Icon style={"m-auto"} src={iconSrc} />
+              </div>
+            }
+            placeholder={placeholder}
+          />
+        </Form.Item>
+        <span className="check">
           <span className="checkmark">✔</span>
-        </div>
-      </Form.Item>
+        </span>
+      </div>
     </div>
   );
 };

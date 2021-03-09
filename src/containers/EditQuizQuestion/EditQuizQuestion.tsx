@@ -1,12 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "antd/dist/antd.css";
-import { Button, Col, Form, Input, Row, Select } from "antd";
+import { Button, Col, Form, Input, message, Row, Select } from "antd";
 import { QUESTION_SCORE, QUESTION_TIMER, QUESTION_TYPE } from "../../constants";
 import { Answer } from "containers";
 import { ImageDragger } from "components";
 import { Coin, Heart, Lego, Star } from "assets/images/index";
 import "./EditQuizQuestion.scss";
-import { QuizQuestion } from "../../common/type/Types";
+import { QuizAnswer, QuizQuestion } from "../../common/type/Types";
+import { IMAGE_UPLOAD_URL } from "../../common/client/BackOfficeApplicationClient";
 
 const formItemLayout = {
   labelCol: {
@@ -34,11 +35,16 @@ const fullWidthCol = {
   },
 };
 interface EditQuizQuestionProps {
+  quizId: number;
   handleSaveQuestion: (question: QuizQuestion) => void;
   question: QuizQuestion;
 }
 
+const defaultCorrectAnswerName = "answer0";
+
+const maxAnswerCount = 4;
 const EditQuizQuestion = ({
+  quizId,
   handleSaveQuestion,
   question,
 }: EditQuizQuestionProps) => {
@@ -51,12 +57,53 @@ const EditQuizQuestion = ({
   );
   const [form] = Form.useForm();
 
+  useEffect(() => {
+    console.log("Useeftct");
+    for (let i = 0; i < maxAnswerCount; i++) {
+      if (currentQuestion.answers[i].isCorrect) {
+        setCorrectAnswers((prevState) => [...prevState, `answer${i}`]);
+      }
+    }
+    if (!currentQuestion) {
+      setCorrectAnswers([defaultCorrectAnswerName]);
+    }
+  }, []);
+
   const onFinish = (fieldsValue: any) => {
     const name = fieldsValue["quizName"];
     const questionText = fieldsValue["questionText"];
-    const answers = [];
-    console.log(name);
-    handleSaveQuestion({} as QuizQuestion);
+    const questionTime = fieldsValue["time"];
+    const questionPoints = fieldsValue["points"];
+    const answers: QuizAnswer[] = [];
+
+    for (let i = 0; i < maxAnswerCount; i++) {
+      const answer = fieldsValue[`answer${i}`] as string;
+      let isCorrect = false;
+      if (correctAnswers.includes(`answer${i}`)) {
+        isCorrect = true;
+      }
+      if (answer) {
+        if (currentQuestion.answers[i]) {
+          answers.push({
+            ...currentQuestion.answers[i],
+            text: answer,
+            isCorrect: isCorrect,
+          });
+        } else {
+          answers.push({ text: answer, isCorrect: isCorrect } as QuizAnswer);
+        }
+      }
+    }
+    handleSaveQuestion({
+      ...currentQuestion,
+      quizId: quizId,
+      title: name,
+      text: questionText,
+      timer: Number(questionTime),
+      answers: answers,
+      questionType: selectedAnsweringMode.current,
+      reward: Number(questionPoints),
+    } as QuizQuestion);
   };
 
   const handleCorrectAnswerSelect = (name: string) => {
@@ -79,11 +126,21 @@ const EditQuizQuestion = ({
 
   const handleValueChange = (changedValues: any, allValues: any) => {
     if (changedValues.questionType) {
-      console.log("done");
       selectedAnsweringMode.current = changedValues.questionType;
+      setCorrectAnswers([defaultCorrectAnswerName]);
     }
-    console.log(changedValues);
-    console.log(allValues);
+  };
+
+  const handleOnUploadChange = (info: any) => {
+    const { status } = info.file;
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+      setCurrentQuestion(
+        (prevState) => ({ ...prevState, imageId: 1 } as QuizQuestion)
+      );
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
   };
 
   return (
@@ -107,6 +164,7 @@ const EditQuizQuestion = ({
                 message: "VALIDATION.REQUIRED",
               },
             ]}
+            initialValue={question.title}
           >
             <Input autoComplete={"off"} placeholder="Name your quiz" />
           </Form.Item>
@@ -124,6 +182,7 @@ const EditQuizQuestion = ({
                 message: "VALIDATION.REQUIRED",
               },
             ]}
+            initialValue={question.text}
           >
             <Input
               autoComplete={"off"}
@@ -144,11 +203,11 @@ const EditQuizQuestion = ({
                 message: "VALIDATION.REQUIRED",
               },
             ]}
+            initialValue={
+              question.timer.toString() ?? QUESTION_TIMER.T_15.value
+            }
           >
-            <Select
-              defaultValue={QUESTION_TIMER.T_15.value}
-              placeholder="Time limit"
-            >
+            <Select placeholder="Time limit">
               <Select.Option value={QUESTION_TIMER.T_15.value}>
                 {QUESTION_TIMER.T_15.text}
               </Select.Option>
@@ -174,11 +233,11 @@ const EditQuizQuestion = ({
                 message: "VALIDATION.REQUIRED",
               },
             ]}
+            initialValue={
+              question.reward.toString() ?? QUESTION_SCORE.P_100.value
+            }
           >
-            <Select
-              defaultValue={QUESTION_SCORE.P_100.value}
-              placeholder="Points"
-            >
+            <Select placeholder="Points">
               <Select.Option value={QUESTION_SCORE.P_100.value}>
                 {QUESTION_SCORE.P_100.text}
               </Select.Option>
@@ -204,11 +263,11 @@ const EditQuizQuestion = ({
                 message: "VALIDATION.REQUIRED",
               },
             ]}
+            initialValue={
+              question.questionType ?? QUESTION_TYPE.SINGLE_MATCH.value
+            }
           >
-            <Select
-              defaultValue={QUESTION_TYPE.SINGLE_MATCH.value}
-              placeholder="Type"
-            >
+            <Select placeholder="Type">
               <Select.Option value={QUESTION_TYPE.SINGLE_MATCH.value}>
                 {QUESTION_TYPE.SINGLE_MATCH.text}
               </Select.Option>
@@ -228,32 +287,32 @@ const EditQuizQuestion = ({
 
       <Row>
         <Col xs={24} md={24}>
-          <Form.Item {...fullWidthCol} name="questionType">
+          <Form.Item {...fullWidthCol} name="image">
             <ImageDragger
-              onChange={(info: any) => {
-                console.log(info);
-              }}
-              action={"https://www.mocky.io/v2/5cc8019d300000980a055e76"}
+              onUpload={handleOnUploadChange}
+              action={IMAGE_UPLOAD_URL}
             />
           </Form.Item>
         </Col>
       </Row>
 
       <Row gutter={24}>
-        <Col className={"card"} xs={24} md={12}>
+        <Col className={"card mb-3"} xs={24} md={12}>
           <Answer
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
-            name="answer1"
+            name="answer0"
+            exitingAnswer={question.answers[0]}
             iconSrc={Lego}
             placeholder="Add answer 1"
             color="blue"
             selectedAnswers={correctAnswers}
           />
         </Col>
-        <Col className={"card"} xs={24} md={12}>
+        <Col className={"card mb-3"} xs={24} md={12}>
           <Answer
+            exitingAnswer={question.answers[1]}
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
-            name="answer2"
+            name="answer1"
             iconSrc={Heart}
             placeholder="Add answer 2"
             color="red"
@@ -262,22 +321,24 @@ const EditQuizQuestion = ({
         </Col>
       </Row>
       <Row gutter={24}>
-        <Col className={"card"} xs={24} md={12}>
+        <Col className={"card mb-3"} xs={24} md={12}>
           <Answer
+            exitingAnswer={question.answers[2]}
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
+            name="answer2"
             isOptional
-            name="answer3"
             iconSrc={Coin}
             placeholder="Add answer 3"
             color="green"
             selectedAnswers={correctAnswers}
           />
         </Col>
-        <Col className={"card"} xs={24} md={12}>
+        <Col className={"card mb-3"} xs={24} md={12}>
           <Answer
+            exitingAnswer={question.answers[3]}
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
+            name="answer3"
             isOptional
-            name="answer4"
             iconSrc={Star}
             placeholder="Add answer 4"
             color="violet"

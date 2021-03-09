@@ -8,10 +8,12 @@ import { EditQuizQuestion, QuestionCardList } from "../../containers";
 import "./EditQuiz.scss";
 import { useMutation, useQuery } from "react-query";
 import {
+  addQuestion,
   deleteQuestion,
   GET_IMAGE_BY_ID_URL,
   getQuiz,
   IMAGE_UPLOAD_URL,
+  updateQuestion,
 } from "../../common/client/BackOfficeApplicationClient";
 import { Quiz, QuizDetails, QuizQuestion } from "../../common/type/Types";
 import { CheckOutlined, PlusOutlined } from "@ant-design/icons";
@@ -28,7 +30,10 @@ const EditQuiz = (props: EditQuizProps) => {
   const [quizDetails, setQuizDetails] = useState<QuizDetails>();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const questionToModify = useRef<QuizQuestion>();
+
   const deleteQuestionMutation = useMutation(deleteQuestion);
+  const addQuestionMutation = useMutation(addQuestion);
+  const updateQuestionMutation = useMutation(updateQuestion);
 
   useQuery(["getQuizData", quizId], () => getQuiz(quizId), {
     refetchOnWindowFocus: false,
@@ -85,7 +90,51 @@ const EditQuiz = (props: EditQuizProps) => {
     setIsModalVisible(true);
   };
 
-  // const handleAddNewQuestion = () => {};
+  const updateQuizQuestion = (question: QuizQuestion) => {
+    updateQuestionMutation.mutate(
+      { question: question, quizId: quizId },
+      {
+        onSuccess: (result) => {
+          const questions = quiz?.questions.map((quizQuestion) => {
+            return quizQuestion.id === question.id ? result.data : quizQuestion;
+          });
+
+          setQuiz(
+            (prevState) => ({ ...prevState, questions: questions } as Quiz)
+          );
+        },
+      }
+    );
+  };
+
+  const addNewQuestion = (question: QuizQuestion) => {
+    addQuestionMutation.mutate(
+      { question: question, quizId: quizId },
+      {
+        onSuccess: (result) => {
+          let questions: QuizQuestion[] = [];
+          if (quiz?.questions) {
+            questions = [...quiz?.questions, result.data];
+          } else {
+            questions.push(result.data);
+          }
+          setQuiz(
+            (prevState) => ({ ...prevState, questions: questions } as Quiz)
+          );
+        },
+      }
+    );
+  };
+
+  const handleSaveQuestion = (question: QuizQuestion) => {
+    console.log(question);
+    questionToModify.current = undefined;
+    if (question.id) {
+      updateQuizQuestion(question);
+    } else {
+      addNewQuestion(question);
+    }
+  };
 
   return (
     <div className={"scrollY"}>
@@ -133,6 +182,7 @@ const EditQuiz = (props: EditQuizProps) => {
             <Col className={"edit-quiz--button-wrapper"} xxl={12} xs={16}>
               <Button
                 className={"edit-quiz--button mb-1"}
+                onClick={() => handleModifyQuestion({} as QuizQuestion)}
                 icon={<PlusOutlined />}
               >
                 Add question
@@ -147,16 +197,15 @@ const EditQuiz = (props: EditQuizProps) => {
           </Row>
           <Modal
             width={700}
-            title="Basic Modal"
+            title="Question Details"
             visible={isModalVisible}
             onCancel={() => setIsModalVisible((prevState) => !prevState)}
             footer={null}
           >
             <EditQuizQuestion
-              question={{} as QuizQuestion}
-              handleSaveQuestion={() => {
-                console.log("handleSaveQuestion");
-              }}
+              quizId={quiz.id}
+              question={questionToModify.current ?? ({} as QuizQuestion)}
+              handleSaveQuestion={handleSaveQuestion}
             />
           </Modal>
         </>
