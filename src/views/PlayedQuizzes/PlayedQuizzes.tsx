@@ -9,6 +9,7 @@ import { useQuery } from "react-query";
 import { getPlayedQuizzes } from "../../common/client/BackOfficeApplicationClient";
 import { useHistory } from "react-router-dom";
 import {
+  PLAYERS_STATISTICS_PAGE_PATH,
   QUIZ_STATISTICS_PAGE_PATH,
   STATISTICS_PAGE_PATH,
 } from "../../router/config";
@@ -26,6 +27,7 @@ const PlayedQuizzes = () => {
         return quiz;
       });
       setRoomStatistics(data);
+      console.log("DATA FETCHED");
     },
   });
   const handleShowQuizStatistics = (record: PlayedQuizzesData) => {
@@ -39,6 +41,14 @@ const PlayedQuizzes = () => {
       }
     );
   };
+
+  function handleShowPlayerStatistics(record: PlayedQuizzesData) {
+    history.push(
+      `${STATISTICS_PAGE_PATH}/${record.id}${PLAYERS_STATISTICS_PAGE_PATH}`,
+      { quizName: record.quizName }
+    );
+  }
+
   const columns = [
     {
       title: "Quiz Name",
@@ -64,7 +74,9 @@ const PlayedQuizzes = () => {
             <div onClick={() => handleShowQuizStatistics(record)}>
               <Icon src={Chart} size={"small"} />
             </div>
-            <Icon src={Users} size={"small"} />
+            <div onClick={() => handleShowPlayerStatistics(record)}>
+              <Icon src={Users} size={"small"} />
+            </div>
             <Icon src={Download} size={"small"} />
             <Icon src={Remove} size={"small"} />
           </Space>
