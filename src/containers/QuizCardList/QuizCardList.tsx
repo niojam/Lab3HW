@@ -11,9 +11,14 @@ import {
 interface QuizCardListProps {
   quizzes: QuizDetails[];
   handleModifyQuiz: (quizId: number) => void;
+  handleDeleteQuiz: (quizId: number) => void;
 }
 
-const QuizCardList = ({ quizzes, handleModifyQuiz }: QuizCardListProps) => {
+const QuizCardList = ({
+  quizzes,
+  handleModifyQuiz,
+  handleDeleteQuiz,
+}: QuizCardListProps) => {
   return (
     <>
       <Row gutter={[16, 12]}>
@@ -46,6 +51,7 @@ const QuizCardList = ({ quizzes, handleModifyQuiz }: QuizCardListProps) => {
                     key="editQuiz"
                   />,
                   <DeleteFilled
+                    onClick={() => handleDeleteQuiz(quiz.quizId)}
                     className={"quiz-card--button"}
                     key="deleteQuestion"
                   />,
