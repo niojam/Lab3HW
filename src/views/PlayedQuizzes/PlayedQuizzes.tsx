@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StatisticsOverviewTable } from "containers";
 import { Col, Pagination, Row, Space } from "antd";
 import { Icon } from "components";
-import { Users, Download, Remove, Chart } from "assets/images";
+import { Chart, Download, Remove, Users } from "assets/images";
 import "./PlayedQuizzes.scss";
 import { PlayedQuizzesData } from "../../common/type/Types";
 import { useQuery } from "react-query";

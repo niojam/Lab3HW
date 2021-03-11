@@ -6,6 +6,7 @@ import {
   QuestionStatisticsData,
   Quiz,
   QuizDetails,
+  QuizQuestion,
 } from "../type/Types";
 
 export const getQuizzesDetails = async (): Promise<
@@ -25,6 +26,30 @@ export const deleteQuestion = async (deleteQuestionRequest: {
   return await axios.delete(
     `/api/question?id=${deleteQuestionRequest.questionId}&quizId=${deleteQuestionRequest.quizId}`
   );
+};
+
+export const addQuestion = async (addQuestionRequest: {
+  question: QuizQuestion;
+  quizId: string;
+}): Promise<AxiosResponse<QuizQuestion>> => {
+  return await axios.post(
+    `/api/question?quizId=${addQuestionRequest.quizId}`,
+    addQuestionRequest.question
+  );
+};
+
+export const updateQuestion = async (addQuestionRequest: {
+  question: QuizQuestion;
+  quizId: string;
+}): Promise<AxiosResponse<QuizQuestion>> => {
+  return await axios.put(
+    `/api/question?quizId=${addQuestionRequest.quizId}`,
+    addQuestionRequest.question
+  );
+};
+
+export const createQuiz = async (quiz: Quiz): Promise<AxiosResponse<Quiz>> => {
+  return await axios.post(`/api/quiz`, quiz);
 };
 
 export const magicLogin = async (): Promise<AxiosResponse> => {

@@ -3,6 +3,7 @@ import { Form, Input } from "antd";
 import "antd/dist/antd.css";
 import "./Answer.scss";
 import { Icon } from "components";
+import { QuizAnswer } from "../../common/type/Types";
 
 const fullWidthCol = {
   wrapperCol: {
@@ -19,6 +20,10 @@ interface AnswerProps {
   iconSrc: string;
   placeholder: string;
   color: color;
+  handleCorrectAnswerSelect: (name: string) => void;
+  selectedAnswers: string[];
+  exitingAnswer: QuizAnswer | undefined;
+  isOptional?: boolean;
 }
 
 const Answer: FunctionComponent<AnswerProps> = ({
@@ -26,22 +31,51 @@ const Answer: FunctionComponent<AnswerProps> = ({
   iconSrc,
   placeholder,
   color,
+  isOptional,
+  handleCorrectAnswerSelect,
+  selectedAnswers,
+  exitingAnswer,
 }: AnswerProps) => {
   return (
     <div className="answer">
-      <Form.Item
-        {...fullWidthCol}
-        className={`answer-icon__color-${color}`}
-        name={name}
-        rules={[
-          {
-            required: true,
-            message: "VALIDATION.REQUIRED",
-          },
-        ]}
+      <div
+        className={`selectable ${
+          selectedAnswers.includes(name) ? "selected" : ""
+        }`}
       >
-        <Input prefix={<Icon src={iconSrc} />} placeholder={placeholder} />
-      </Form.Item>
+        <Form.Item
+          {...fullWidthCol}
+          className={`answer-icon__color-${color}`}
+          name={name}
+          rules={
+            isOptional
+              ? []
+              : [
+                  {
+                    required: true,
+                    message: "Must be at least 2 correct answers",
+                  },
+                ]
+          }
+          initialValue={exitingAnswer?.text}
+        >
+          <Input
+            autoComplete={"off"}
+            prefix={
+              <div
+                className={"answer--wrapper"}
+                onClick={() => handleCorrectAnswerSelect(name)}
+              >
+                <Icon style={"m-auto"} src={iconSrc} />
+              </div>
+            }
+            placeholder={placeholder}
+          />
+        </Form.Item>
+        <span className="check">
+          <span className="checkmark">✔</span>
+        </span>
+      </div>
     </div>
   );
 };
