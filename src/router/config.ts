@@ -70,6 +70,6 @@ export const routes: RouteType[] = [
       PLAYERS_STATISTICS_PAGE_PATH,
     component: lazy(() => import("views/PlayerStatistics/PlayerStatistics")),
     exact: true,
-    private: false,
+    private: true,
   },
 ];
