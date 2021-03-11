@@ -58,15 +58,17 @@ const EditQuizQuestion = ({
   const [form] = Form.useForm();
 
   useEffect(() => {
+    let answerFound = false;
     for (let i = 0; i < maxAnswerCount; i++) {
       if (currentQuestion.answers[i]?.isCorrect) {
+        answerFound = true;
         setCorrectAnswers((prevState) => [...prevState, `answer${i}`]);
       }
     }
-    if (!correctAnswers.length) {
+    if (!answerFound) {
       setCorrectAnswers([defaultCorrectAnswerName]);
     }
-  }, []);
+  }, [currentQuestion]);
 
   const onFinish = (fieldsValue: any) => {
     const name = fieldsValue["quizName"];
