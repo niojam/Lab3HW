@@ -29,7 +29,7 @@ const QuizCardList = ({ quizzes, handleModifyQuiz }: QuizCardListProps) => {
             <div style={{ display: "inline-block" }}>
               <QuizCard
                 className={"quiz-card"}
-                title={quiz.quizName}
+                title={quiz.quizName ?? "Quiz"}
                 coverSrc={
                   quiz.imageId
                     ? `/api/image?id=${quiz.imageId}`

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
 import { Button, Col, message, Modal, Row } from "antd";
@@ -6,7 +6,7 @@ import { GeneralHeader, ImageUploader } from "../../components";
 import GeneralInput from "../../components/Input/GeneralInput";
 import { EditQuizQuestion, QuestionCardList } from "../../containers";
 import "./EditQuiz.scss";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import {
   addQuestion,
   createQuiz,
@@ -16,7 +16,7 @@ import {
   IMAGE_UPLOAD_URL,
   updateQuestion,
 } from "../../common/client/BackOfficeApplicationClient";
-import { Quiz, QuizDetails, QuizQuestion } from "../../common/type/Types";
+import { Quiz, QuizQuestion } from "../../common/type/Types";
 import { CheckOutlined, PlusOutlined } from "@ant-design/icons";
 
 interface EditQuizRouterProps {
@@ -28,7 +28,6 @@ type EditQuizProps = RouteComponentProps<EditQuizRouterProps>;
 const EditQuiz = (props: EditQuizProps) => {
   const { quizId } = props.match.params;
   const [quiz, setQuiz] = useState<Quiz>();
-  const [quizDetails, setQuizDetails] = useState<QuizDetails>();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const questionToModify = useRef<QuizQuestion>();
 
@@ -37,18 +36,21 @@ const EditQuiz = (props: EditQuizProps) => {
   const updateQuestionMutation = useMutation(updateQuestion);
   const createQuizMutation = useMutation(createQuiz);
 
-  useQuery(["getQuizData", quizId], () => getQuiz(quizId), {
-    refetchOnWindowFocus: false,
-    retry: false,
-    onSuccess: (result) => {
-      const { data } = result;
-      setQuiz(data);
-      setQuizDetails({
-        quizName: data.name,
-        quizId: data.id,
-      } as QuizDetails);
-    },
-  });
+  useEffect(() => {
+    if (quizId) {
+      // Get existing by id
+      getQuiz(quizId).then((result) => {
+        setQuiz(result.data);
+      });
+    } else {
+      // new Quiz
+      createQuizMutation.mutate({ questions: [] as QuizQuestion[] } as Quiz, {
+        onSuccess: (result) => {
+          setQuiz(result.data);
+        },
+      });
+    }
+  }, []);
 
   const handleDeleteQuestion = (questionId: number) => {
     if (quiz) {
@@ -76,9 +78,7 @@ const EditQuiz = (props: EditQuizProps) => {
     const { status, response } = info.file;
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
-      setQuizDetails(
-        (prevState) => ({ ...prevState, imageId: response } as QuizDetails)
-      );
+      setQuiz((prevState) => ({ ...prevState, imageId: response } as Quiz));
     } else if (status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
@@ -86,9 +86,7 @@ const EditQuiz = (props: EditQuizProps) => {
 
   const handleNameChange = (input: any) => {
     const { value } = input.currentTarget;
-    setQuizDetails(
-      (prevState) => ({ ...prevState, quizName: value } as QuizDetails)
-    );
+    setQuiz((prevState) => ({ ...prevState, name: value } as Quiz));
   };
 
   const handleModifyQuestion = (question: QuizQuestion | undefined) => {
@@ -97,39 +95,47 @@ const EditQuiz = (props: EditQuizProps) => {
   };
 
   const updateQuizQuestion = (question: QuizQuestion) => {
-    updateQuestionMutation.mutate(
-      { question: question, quizId: quizId },
-      {
-        onSuccess: (result) => {
-          const questions = quiz?.questions.map((quizQuestion) => {
-            return quizQuestion.id === question.id ? result.data : quizQuestion;
-          });
+    if (quiz?.id) {
+      updateQuestionMutation.mutate(
+        { question: question, quizId: quiz?.id },
+        {
+          onSuccess: (result) => {
+            const questions = quiz?.questions.map((quizQuestion) => {
+              return quizQuestion.id === question.id
+                ? result.data
+                : quizQuestion;
+            });
 
-          setQuiz(
-            (prevState) => ({ ...prevState, questions: questions } as Quiz)
-          );
-        },
-      }
-    );
+            setQuiz(
+              (prevState) => ({ ...prevState, questions: questions } as Quiz)
+            );
+            setIsModalVisible(false);
+          },
+        }
+      );
+    }
   };
 
   const addNewQuestion = (question: QuizQuestion) => {
-    addQuestionMutation.mutate(
-      { question: question, quizId: quizId },
-      {
-        onSuccess: (result) => {
-          let questions: QuizQuestion[] = [];
-          if (quiz?.questions) {
-            questions = [...quiz?.questions, result.data];
-          } else {
-            questions.push(result.data);
-          }
-          setQuiz(
-            (prevState) => ({ ...prevState, questions: questions } as Quiz)
-          );
-        },
-      }
-    );
+    if (quiz?.id) {
+      addQuestionMutation.mutate(
+        { question: question, quizId: quiz?.id },
+        {
+          onSuccess: (result) => {
+            let questions: QuizQuestion[] = [];
+            if (quiz?.questions) {
+              questions = [...quiz?.questions, result.data];
+            } else {
+              questions.push(result.data);
+            }
+            setQuiz(
+              (prevState) => ({ ...prevState, questions: questions } as Quiz)
+            );
+            setIsModalVisible(false);
+          },
+        }
+      );
+    }
   };
 
   const handleSaveQuestion = (question: QuizQuestion) => {
@@ -153,14 +159,14 @@ const EditQuiz = (props: EditQuizProps) => {
 
   return (
     <div className={"scrollY"}>
-      {quiz && quizDetails ? (
+      {quiz ? (
         <>
           <Row className={"my-5"} justify="space-around">
             <Col className={"mt-5"} xxl={12} xs={16}>
               <GeneralHeader title={"NAME"} />
               <div className="general-input-wrapper">
                 <GeneralInput
-                  value={quizDetails.quizName}
+                  value={quiz.name}
                   onChange={handleNameChange}
                   placeholder={"Name Your Quiz"}
                 />
@@ -173,9 +179,7 @@ const EditQuiz = (props: EditQuizProps) => {
               <ImageUploader
                 className={"edit-quiz--image-uploader"}
                 imageUrl={
-                  quizDetails?.imageId
-                    ? GET_IMAGE_BY_ID_URL + quizDetails.imageId
-                    : undefined
+                  quiz?.imageId ? GET_IMAGE_BY_ID_URL + quiz.imageId : undefined
                 }
                 onChange={(info: any) => handleOnUploadChange(info)}
                 action={IMAGE_UPLOAD_URL}
