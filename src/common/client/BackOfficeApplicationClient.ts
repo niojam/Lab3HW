@@ -34,7 +34,6 @@ export const magicLogin = async (): Promise<AxiosResponse> => {
 export const getPlayedQuizzes = async (): Promise<
   AxiosResponse<PlayedQuizzesData[]>
 > => {
-  console.log("FETCHING DATA");
   return await axios.get("api/room/rooms");
 };
 

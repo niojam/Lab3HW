@@ -27,7 +27,6 @@ const PlayedQuizzes = () => {
         return quiz;
       });
       setRoomStatistics(data);
-      console.log("DATA FETCHED");
     },
   });
   const handleShowQuizStatistics = (record: PlayedQuizzesData) => {
@@ -42,12 +41,12 @@ const PlayedQuizzes = () => {
     );
   };
 
-  function handleShowPlayerStatistics(record: PlayedQuizzesData) {
+  const handleShowPlayerStatistics = (record: PlayedQuizzesData) => {
     history.push(
       `${STATISTICS_PAGE_PATH}/${record.id}${PLAYERS_STATISTICS_PAGE_PATH}`,
       { quizName: record.quizName }
     );
-  }
+  };
 
   const columns = [
     {
