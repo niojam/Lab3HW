@@ -4,21 +4,25 @@ import { PlayerStatisticsTable } from "containers";
 import { Icon } from "components";
 import { Check, Close } from "assets/images";
 import "./PlayerStatistics.scss";
-import { RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps, useHistory } from "react-router-dom";
 import { PlayerStatisticsData } from "../../common/type/Types";
 import { useQuery } from "react-query";
 import { getPlayersStatistics } from "../../common/client/BackOfficeApplicationClient";
 
 interface PlayerStatisticsRouterProps {
   roomId: string;
+}
+
+interface PlayerStatisticsHistoryProps {
   quizName: string;
 }
 
 type PlayerStatisticsProps = RouteComponentProps<PlayerStatisticsRouterProps>;
 
 const PlayerStatistics = (props: PlayerStatisticsProps) => {
+  const history = useHistory<PlayerStatisticsHistoryProps>();
   const roomId = props.match.params.roomId;
-  const quizName = props.match.params.quizName;
+  const quizName = history.location.state.quizName;
   const [playerData, setPlayerData] = useState<PlayerStatisticsData[]>([]);
   useQuery(
     ["getPlayersStatisticsData", roomId],
@@ -34,7 +38,6 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
           }
         );
         setPlayerData(data);
-        console.log(data);
       },
     }
   );

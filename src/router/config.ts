@@ -63,11 +63,7 @@ export const routes: RouteType[] = [
     private: true,
   },
   {
-    //TODO change private to true once everything is ready
-    path:
-      STATISTICS_PAGE_PATH +
-      "/:roomId/:quizName" +
-      PLAYERS_STATISTICS_PAGE_PATH,
+    path: STATISTICS_PAGE_PATH + "/:roomId" + PLAYERS_STATISTICS_PAGE_PATH,
     component: lazy(() => import("views/PlayerStatistics/PlayerStatistics")),
     exact: true,
     private: true,

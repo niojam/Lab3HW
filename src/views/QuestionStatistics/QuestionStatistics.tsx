@@ -13,7 +13,7 @@ import {
   STATISTICS_PAGE_PATH,
 } from "../../router/config";
 
-interface HistoryProps {
+interface QuestionStatisticsHistoryProps {
   quizId: string;
   quizName: string;
   roomId: string;
@@ -21,7 +21,7 @@ interface HistoryProps {
 }
 
 const QuestionStatistics = () => {
-  const history = useHistory<HistoryProps>();
+  const history = useHistory<QuestionStatisticsHistoryProps>();
   const dataFromHistory = history.location.state;
   const [questions, setQuestionData] = useState<QuestionStatisticsData[]>([]);
   const {} = useQuery(
