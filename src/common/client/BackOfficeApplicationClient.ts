@@ -80,5 +80,10 @@ export const getAnswerStatistics = async (
   return await axios.get(`/api/statistics/answer?roomId=${roomId}`);
 };
 
+export const deleteRoom = async (
+  roomId: number
+): Promise<AxiosResponse<void>> => {
+  return await axios.delete(`/api/room?roomId=${roomId}`);
+};
 export const IMAGE_UPLOAD_URL = "/api/image";
 export const GET_IMAGE_BY_ID_URL = "/api/image?id=";

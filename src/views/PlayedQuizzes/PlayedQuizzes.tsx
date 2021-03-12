@@ -5,8 +5,11 @@ import { Icon } from "components";
 import { Chart, Download, Remove, Users } from "assets/images";
 import "./PlayedQuizzes.scss";
 import { PlayedQuizzesData } from "../../common/type/Types";
-import { useQuery } from "react-query";
-import { getPlayedQuizzes } from "../../common/client/BackOfficeApplicationClient";
+import { useMutation, useQuery } from "react-query";
+import {
+  deleteRoom,
+  getPlayedQuizzes,
+} from "../../common/client/BackOfficeApplicationClient";
 import { useHistory } from "react-router-dom";
 import {
   PLAYERS_STATISTICS_PAGE_PATH,
@@ -17,7 +20,8 @@ import {
 const PlayedQuizzes = () => {
   const history = useHistory();
   const [rooms, setRoomStatistics] = useState<PlayedQuizzesData[]>([]);
-  useQuery("getAuthorQuizzes", getPlayedQuizzes, {
+  const deleteRoomMutation = useMutation(deleteRoom);
+  const {} = useQuery("getAuthorQuizzes", getPlayedQuizzes, {
     staleTime: 10000,
     refetchOnWindowFocus: false,
     retry: false,
@@ -46,6 +50,17 @@ const PlayedQuizzes = () => {
       `${STATISTICS_PAGE_PATH}/${record.id}${PLAYERS_STATISTICS_PAGE_PATH}`,
       { quizName: record.quizName }
     );
+  };
+
+  const handleDeleteRoom = (record: PlayedQuizzesData) => {
+    deleteRoomMutation.mutate(record.id, {
+      onSuccess: () => {
+        const filteredRooms: PlayedQuizzesData[] = rooms.filter(
+          (room) => room.id !== record.id
+        );
+        setRoomStatistics(filteredRooms);
+      },
+    });
   };
 
   const columns = [
@@ -77,7 +92,9 @@ const PlayedQuizzes = () => {
               <Icon src={Users} size={"small"} />
             </div>
             <Icon src={Download} size={"small"} />
-            <Icon src={Remove} size={"small"} />
+            <div onClick={() => handleDeleteRoom(record)}>
+              <Icon src={Remove} size={"small"} />
+            </div>
           </Space>
         );
       },
