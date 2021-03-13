@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Tooltip } from "antd";
 import "./QuestionCardList.scss";
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
 import { QuizCard } from "../../components";
@@ -43,16 +43,20 @@ const QuestionCardList = ({
                   : "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
               }
               actions={[
-                <EditFilled
-                  onClick={() => handleModifyQuestion(question)}
-                  className={"quiz-card--button"}
-                  key="editQuestion"
-                />,
-                <DeleteFilled
-                  onClick={() => handleDeleteQuestion(question.id)}
-                  className={"quiz-card--button"}
-                  key="deleteQuestion"
-                />,
+                <Tooltip key={"editQuestion"} title="Edit question">
+                  <EditFilled
+                    onClick={() => handleModifyQuestion(question)}
+                    className={"quiz-card--button"}
+                    key="editQuestion"
+                  />
+                </Tooltip>,
+                <Tooltip key="deleteQuestion" title="Delete question">
+                  <DeleteFilled
+                    onClick={() => handleDeleteQuestion(question.id)}
+                    className={"quiz-card--button"}
+                    key="deleteQuestion"
+                  />
+                </Tooltip>,
               ]}
             />
           </Col>

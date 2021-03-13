@@ -83,11 +83,12 @@ const EditQuizQuestion = ({
   };
 
   const handleOnUploadChange = (info: any) => {
-    const { status } = info.file;
+    const { status, response } = info.file;
+    console.log(info);
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
       setCurrentQuestion(
-        (prevState) => ({ ...prevState, imageId: 1 } as QuizQuestion)
+        (prevState) => ({ ...prevState, imageId: response } as QuizQuestion)
       );
     } else if (status === "error") {
       message.error(`${info.file.name} file upload failed.`);

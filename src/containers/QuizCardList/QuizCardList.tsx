@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Tooltip } from "antd";
 import { QuizCard } from "../../components";
 import { QuizDetails } from "../../common/type/Types";
 import {
@@ -41,20 +41,26 @@ const QuizCardList = ({
                     : "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
                 }
                 actions={[
-                  <CaretRightOutlined
-                    className={"quiz-card--button"}
-                    key="playQuiz"
-                  />,
-                  <EditOutlined
-                    onClick={() => handleModifyQuiz(quiz.quizId)}
-                    className={"quiz-card--button"}
-                    key="editQuiz"
-                  />,
-                  <DeleteFilled
-                    onClick={() => handleDeleteQuiz(quiz.quizId)}
-                    className={"quiz-card--button"}
-                    key="deleteQuestion"
-                  />,
+                  <Tooltip key={"playQuiz"} title="Play quiz">
+                    <CaretRightOutlined
+                      className={"quiz-card--button"}
+                      key="playQuiz"
+                    />
+                  </Tooltip>,
+                  <Tooltip key={"editQuiz"} title="Edit quiz">
+                    <EditOutlined
+                      onClick={() => handleModifyQuiz(quiz.quizId)}
+                      className={"quiz-card--button"}
+                      key="editQuiz"
+                    />
+                  </Tooltip>,
+                  <Tooltip key={"deleteQuestion"} title="Delete quiz">
+                    <DeleteFilled
+                      onClick={() => handleDeleteQuiz(quiz.quizId)}
+                      className={"quiz-card--button"}
+                      key="deleteQuestion"
+                    />
+                  </Tooltip>,
                 ]}
               />
             </div>
