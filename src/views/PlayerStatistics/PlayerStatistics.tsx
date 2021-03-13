@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Pagination, Row } from "antd";
 import { PlayerStatisticsTable } from "containers";
 import { Icon } from "components";
@@ -24,7 +24,7 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
   const roomId = props.match.params.roomId;
   const quizName = history.location.state.quizName;
   const [playerData, setPlayerData] = useState<PlayerStatisticsData[]>([]);
-  useQuery(
+  const { data } = useQuery(
     ["getPlayersStatisticsData", roomId],
     () => getPlayersStatistics(String(roomId)),
     {
@@ -41,7 +41,11 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
       },
     }
   );
-
+  useEffect(() => {
+    if (data?.data) {
+      setPlayerData(data.data);
+    }
+  }, []);
   const columns = [
     {
       title: "Player",
