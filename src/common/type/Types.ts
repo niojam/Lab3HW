@@ -1,8 +1,9 @@
 export interface Quiz {
   id: number;
   name: string;
-  questions: Array<QuizQuestion>;
+  questions: QuizQuestion[];
   authorId: number;
+  imageId: number;
   firstQuestionId: number;
 }
 

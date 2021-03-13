@@ -30,7 +30,7 @@ export const deleteQuestion = async (deleteQuestionRequest: {
 
 export const addQuestion = async (addQuestionRequest: {
   question: QuizQuestion;
-  quizId: string;
+  quizId: number;
 }): Promise<AxiosResponse<QuizQuestion>> => {
   return await axios.post(
     `/api/question?quizId=${addQuestionRequest.quizId}`,
@@ -40,7 +40,7 @@ export const addQuestion = async (addQuestionRequest: {
 
 export const updateQuestion = async (addQuestionRequest: {
   question: QuizQuestion;
-  quizId: string;
+  quizId: number;
 }): Promise<AxiosResponse<QuizQuestion>> => {
   return await axios.put(
     `/api/question?quizId=${addQuestionRequest.quizId}`,
