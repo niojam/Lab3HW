@@ -8,14 +8,23 @@ interface TableProps {
   className?: string;
 }
 
-const GenericTable = ({ tableData, columns, className }: TableProps) => (
-  <Table
-    dataSource={tableData}
-    columns={columns}
-    pagination={false}
-    scroll={{ x: 400 }}
-    className={className}
-  />
-);
+const GenericTable = ({ tableData, columns, className }: TableProps) => {
+  return tableData.length ? (
+    <Table
+      dataSource={tableData}
+      columns={columns}
+      pagination={false}
+      scroll={{ x: 400 }}
+      className={className}
+    />
+  ) : (
+    <Table
+      dataSource={tableData}
+      columns={columns}
+      pagination={false}
+      className={className}
+    />
+  );
+};
 
 export default GenericTable;
