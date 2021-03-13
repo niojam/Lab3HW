@@ -18,10 +18,7 @@ const SiderMenu = () => {
         <Link to={"/my-quizzes"}>My quizzes</Link>
       </Menu.Item>
       <Menu.Item key="3" icon={<UploadOutlined />}>
-        <Link to={"/edit-quiz/-1"}>Statistics</Link>
-      </Menu.Item>
-      <Menu.Item key="4" icon={<UploadOutlined />}>
-        <Link to={"/statistics"}>Real Statistics For Now</Link>
+        <Link to={"/statistics"}>Statistics</Link>
       </Menu.Item>
     </Menu>
   );
