@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Space } from "antd";
 import { QuestionStatisticsTable } from "containers";
 import { Icon } from "components";
@@ -24,7 +24,7 @@ const QuestionStatistics = () => {
   const history = useHistory<QuestionStatisticsHistoryProps>();
   const dataFromHistory = history.location.state;
   const [questions, setQuestionData] = useState<QuestionStatisticsData[]>([]);
-  const {} = useQuery(
+  const { data } = useQuery(
     "getQuestionStatistics",
     () => getQuestionStatistics(dataFromHistory.quizId),
     {
@@ -41,6 +41,11 @@ const QuestionStatistics = () => {
       },
     }
   );
+  useEffect(() => {
+    if (data?.data) {
+      setQuestionData(data.data);
+    }
+  }, []);
   const handleViewAnswers = () => {
     history.push(
       `${STATISTICS_PAGE_PATH}/${dataFromHistory.roomId}${ANSWER_STATISTICS_PAGE_PATH}`
