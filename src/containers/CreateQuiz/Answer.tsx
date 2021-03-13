@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react";
-import { Form, Input } from "antd";
+import React, { FormEvent, FunctionComponent, useState } from "react";
+import { Form, Input, Tooltip } from "antd";
 import "antd/dist/antd.css";
 import "./Answer.scss";
 import { Icon } from "components";
@@ -36,11 +36,20 @@ const Answer: FunctionComponent<AnswerProps> = ({
   selectedAnswers,
   exitingAnswer,
 }: AnswerProps) => {
+  const [answerValue, setAnswerValue] = useState<string | undefined>(
+    exitingAnswer?.text
+  );
+
+  const handleInputChange = (event: FormEvent<HTMLInputElement>) => {
+    const { value } = event.currentTarget;
+    setAnswerValue(value);
+  };
+
   return (
     <div className="answer">
       <div
         className={`selectable ${
-          selectedAnswers.includes(name) ? "selected" : ""
+          selectedAnswers.includes(name) && answerValue ? "selected" : ""
         }`}
       >
         <Form.Item
@@ -61,13 +70,26 @@ const Answer: FunctionComponent<AnswerProps> = ({
         >
           <Input
             autoComplete={"off"}
+            onChange={handleInputChange}
             prefix={
-              <div
-                className={"answer--wrapper"}
-                onClick={() => handleCorrectAnswerSelect(name)}
+              <Tooltip
+                title={
+                  answerValue
+                    ? "Click to select as correct answer"
+                    : "Add text to select as correct answer"
+                }
               >
-                <Icon style={"m-auto"} src={iconSrc} />
-              </div>
+                <div
+                  className={"answer--wrapper"}
+                  onClick={() => {
+                    if (answerValue) {
+                      return handleCorrectAnswerSelect(name);
+                    }
+                  }}
+                >
+                  <Icon style={"m-auto"} src={iconSrc} />
+                </div>
+              </Tooltip>
             }
             placeholder={placeholder}
           />

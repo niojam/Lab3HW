@@ -152,6 +152,7 @@ const EditQuiz = (props: EditQuizProps) => {
       createQuizMutation.mutate(quiz, {
         onSuccess: (result) => {
           setQuiz(result.data);
+          message.success(`Quiz saved successfully.`);
         },
       });
     }
