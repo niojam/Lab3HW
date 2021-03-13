@@ -52,6 +52,12 @@ export const createQuiz = async (quiz: Quiz): Promise<AxiosResponse<Quiz>> => {
   return await axios.post(`/api/quiz`, quiz);
 };
 
+export const deleteQuiz = async (
+  quizId: number
+): Promise<AxiosResponse<Quiz>> => {
+  return await axios.delete(`/api/quiz?quizId=${quizId}`);
+};
+
 export const magicLogin = async (): Promise<AxiosResponse> => {
   return await axios.get(`/api/magic-login`);
 };

@@ -4,8 +4,11 @@ import "./MyQuizzes.scss";
 import { SearchBar } from "../../components";
 import { Affix, Button, Col, Row, Spin, Tooltip } from "antd";
 import { QuizCardList } from "../../containers";
-import { useQuery } from "react-query";
-import { getQuizzesDetails } from "../../common/client/BackOfficeApplicationClient";
+import { useMutation, useQuery } from "react-query";
+import {
+  deleteQuiz,
+  getQuizzesDetails,
+} from "../../common/client/BackOfficeApplicationClient";
 import { QuizDetails } from "../../common/type/Types";
 import { useHistory } from "react-router-dom";
 import { CREATE_NEW_QUIZ_PATH, EDIT_QUIZ_PAGE_PATH } from "../../router/config";
@@ -15,6 +18,8 @@ const MyQuizzes = () => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [quizzes, setQuizzes] = useState<QuizDetails[]>([]);
   const history = useHistory();
+
+  const deleteQuizMutation = useMutation(deleteQuiz);
 
   const { isLoading, data } = useQuery("getAllQuizzes", getQuizzesDetails, {
     staleTime: 10000,
@@ -67,6 +72,16 @@ const MyQuizzes = () => {
     history.push(CREATE_NEW_QUIZ_PATH);
   };
 
+  const handleDeleteQuiz = (quizId: number) => {
+    deleteQuizMutation.mutate(quizId, {
+      onSuccess: () => {
+        setQuizzes((prevState) =>
+          prevState.filter((quiz) => quiz.quizId !== quizId)
+        );
+      },
+    });
+  };
+
   return (
     <div className={"scrollY"} ref={setContainer}>
       <Row className={"my-5"} justify="center">
@@ -96,6 +111,7 @@ const MyQuizzes = () => {
           ) : (
             <QuizCardList
               handleModifyQuiz={handleModifyQuiz}
+              handleDeleteQuiz={handleDeleteQuiz}
               quizzes={quizzes}
             />
           )}
