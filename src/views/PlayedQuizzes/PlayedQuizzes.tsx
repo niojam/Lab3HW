@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatisticsOverviewTable } from "containers";
 import { Col, Pagination, Row, Space } from "antd";
 import { Icon } from "components";
@@ -21,7 +21,7 @@ const PlayedQuizzes = () => {
   const history = useHistory();
   const [rooms, setRoomStatistics] = useState<PlayedQuizzesData[]>([]);
   const deleteRoomMutation = useMutation(deleteRoom);
-  const {} = useQuery("getAuthorQuizzes", getPlayedQuizzes, {
+  const { data } = useQuery("getAuthorQuizzes", getPlayedQuizzes, {
     staleTime: 10000,
     refetchOnWindowFocus: false,
     retry: false,
@@ -33,6 +33,12 @@ const PlayedQuizzes = () => {
       setRoomStatistics(data);
     },
   });
+
+  useEffect(() => {
+    if (data?.data) {
+      setRoomStatistics(data.data);
+    }
+  }, []);
   const handleShowQuizStatistics = (record: PlayedQuizzesData) => {
     history.push(
       `${STATISTICS_PAGE_PATH}/${record.roomName}${QUIZ_STATISTICS_PAGE_PATH}`,
