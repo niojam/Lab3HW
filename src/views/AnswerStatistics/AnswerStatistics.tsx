@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row, Space } from "antd";
 import { AnswerStatisticsTable } from "containers";
 import { Icon } from "components";
@@ -21,19 +21,30 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
   let questionTitle = "";
   let questionText = "";
 
-  useQuery("getAnswerStatistics", () => getAnswerStatistics(roomId), {
-    refetchOnWindowFocus: false,
-    retry: false,
-    onSuccess: (result) => {
-      const data: AnswerStatisticsData[] = result.data.map((answer, index) => {
-        answer.key = index++;
-        questionTitle = answer.questionTitle;
-        questionText = answer.questionText;
-        return answer;
-      });
-      setAnswersData(data);
-    },
-  });
+  const { data } = useQuery(
+    "getAnswerStatistics",
+    () => getAnswerStatistics(roomId),
+    {
+      refetchOnWindowFocus: false,
+      retry: false,
+      onSuccess: (result) => {
+        const data: AnswerStatisticsData[] = result.data.map(
+          (answer, index) => {
+            answer.key = index++;
+            questionTitle = answer.questionTitle;
+            questionText = answer.questionText;
+            return answer;
+          }
+        );
+        setAnswersData(data);
+      },
+    }
+  );
+  useEffect(() => {
+    if (data?.data) {
+      setAnswersData(data.data);
+    }
+  }, []);
   const columns = [
     {
       title: "Answer",
