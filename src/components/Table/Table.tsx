@@ -9,26 +9,22 @@ interface TableProps {
 }
 
 const GenericTable = ({ tableData, columns, className }: TableProps) => {
-  if (tableData.length === 0) {
-    return (
-      <Table
-        dataSource={tableData}
-        columns={columns}
-        pagination={false}
-        className={className}
-      />
-    );
-  } else {
-    return (
-      <Table
-        dataSource={tableData}
-        columns={columns}
-        pagination={false}
-        scroll={{ x: 400 }}
-        className={className}
-      />
-    );
-  }
+  return tableData.length ? (
+    <Table
+      dataSource={tableData}
+      columns={columns}
+      pagination={false}
+      scroll={{ x: 400 }}
+      className={className}
+    />
+  ) : (
+    <Table
+      dataSource={tableData}
+      columns={columns}
+      pagination={false}
+      className={className}
+    />
+  );
 };
 
 export default GenericTable;
