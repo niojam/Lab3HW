@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
-import { Button, Col, message, Modal, Row } from "antd";
+import { Button, Col, message, Modal, Row, Spin } from "antd";
 import { GeneralHeader, ImageUploader } from "../../components";
 import GeneralInput from "../../components/Input/GeneralInput";
 import { EditQuizQuestion, QuestionCardList } from "../../containers";
@@ -235,7 +235,13 @@ const EditQuiz = (props: EditQuizProps) => {
             />
           </Modal>
         </>
-      ) : undefined}
+      ) : (
+        <Row className={"h-100vh"} justify={"center"} align={"middle"}>
+          <Col>
+            <Spin size="large" />
+          </Col>
+        </Row>
+      )}
     </div>
   );
 };
