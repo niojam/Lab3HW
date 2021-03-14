@@ -57,16 +57,43 @@ const EditQuizQuestion = ({
   );
   const [form] = Form.useForm();
 
-  useEffect(() => {
-    for (let i = 0; i < maxAnswerCount; i++) {
-      if (currentQuestion.answers[i]?.isCorrect) {
-        setCorrectAnswers((prevState) => [...prevState, `answer${i}`]);
-      }
+  const handleCorrectAnswerSelect = (name: string) => {
+    const { current } = selectedAnsweringMode;
+    if (
+      current === QUESTION_TYPE.SINGLE_MATCH.value ||
+      current === QUESTION_TYPE.SINGLE_ANY.value
+    ) {
+      setCorrectAnswers((prevState) =>
+        prevState?.length && prevState[0] === name ? [] : [name]
+      );
+    } else {
+      setCorrectAnswers((prevState) =>
+        prevState.includes(name)
+          ? [...prevState].filter((value) => value !== name)
+          : [...prevState, name]
+      );
     }
-    if (!correctAnswers.length) {
+  };
+
+  const handleValueChange = (changedValues: any, allValues: any) => {
+    if (changedValues.questionType) {
+      selectedAnsweringMode.current = changedValues.questionType;
       setCorrectAnswers([defaultCorrectAnswerName]);
     }
-  }, []);
+  };
+
+  const handleOnUploadChange = (info: any) => {
+    const { status, response } = info.file;
+    console.log(info);
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+      setCurrentQuestion(
+        (prevState) => ({ ...prevState, imageId: response } as QuizQuestion)
+      );
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  };
 
   const onFinish = (fieldsValue: any) => {
     const name = fieldsValue["quizName"];
@@ -105,42 +132,18 @@ const EditQuizQuestion = ({
     } as QuizQuestion);
   };
 
-  const handleCorrectAnswerSelect = (name: string) => {
-    const { current } = selectedAnsweringMode;
-    if (
-      current === QUESTION_TYPE.SINGLE_MATCH.value ||
-      current === QUESTION_TYPE.SINGLE_ANY.value
-    ) {
-      setCorrectAnswers((prevState) =>
-        prevState?.length && prevState[0] === name ? [] : [name]
-      );
-    } else {
-      setCorrectAnswers((prevState) =>
-        prevState.includes(name)
-          ? [...prevState].filter((value) => value !== name)
-          : [...prevState, name]
-      );
+  useEffect(() => {
+    let answerFound = false;
+    for (let i = 0; i < maxAnswerCount; i++) {
+      if (currentQuestion.answers[i]?.isCorrect) {
+        answerFound = true;
+        setCorrectAnswers((prevState) => [...prevState, `answer${i}`]);
+      }
     }
-  };
-
-  const handleValueChange = (changedValues: any, allValues: any) => {
-    if (changedValues.questionType) {
-      selectedAnsweringMode.current = changedValues.questionType;
+    if (!answerFound) {
       setCorrectAnswers([defaultCorrectAnswerName]);
     }
-  };
-
-  const handleOnUploadChange = (info: any) => {
-    const { status } = info.file;
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-      setCurrentQuestion(
-        (prevState) => ({ ...prevState, imageId: 1 } as QuizQuestion)
-      );
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  };
+  }, [currentQuestion]);
 
   return (
     <Form

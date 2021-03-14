@@ -47,7 +47,7 @@ export const routes: RouteType[] = [
     path: EDIT_QUIZ_PAGE_PATH + "/:quizId",
     component: lazy(() => import("views/EditQuiz/EditQuiz")),
     exact: true,
-    private: true,
+    private: false,
   },
   {
     path: CREATE_NEW_QUIZ_PATH,
