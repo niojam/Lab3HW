@@ -7,7 +7,7 @@ export { default as Home } from "./Home/Home";
 export { default as MainLayout } from "./Layout/MainLayout";
 export { default as LoginPageLayout } from "./Layout/LoginPageLayout";
 export { default as QuizCardList } from "./QuizCardList/QuizCardList";
-export { default as QuestionCardList } from "./QuestionCardList/QuestionCardList";
+export { default as DraggableQuestionList } from "./QuestionCardList/DraggableQuestionList";
 export { default as PlayerStatisticsTable } from "./Statistics/PlayerStatisticsTable";
 export { default as QuestionStatisticsTable } from "./Statistics/QuestionStatisticsTable";
 export { default as AnswerStatisticsTable } from "./Statistics/AnswerStatisticsTable";

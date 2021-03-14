@@ -4,7 +4,6 @@ import { RouteComponentProps } from "react-router-dom";
 import { Button, Col, message, Modal, Row, Spin } from "antd";
 import { GeneralHeader, ImageUploader } from "../../components";
 import GeneralInput from "../../components/Input/GeneralInput";
-import { EditQuizQuestion, QuestionCardList } from "../../containers";
 import "./EditQuiz.scss";
 import { useMutation } from "react-query";
 import {
@@ -18,6 +17,7 @@ import {
 } from "../../common/client/BackOfficeApplicationClient";
 import { Quiz, QuizQuestion } from "../../common/type/Types";
 import { CheckOutlined, PlusOutlined } from "@ant-design/icons";
+import { DraggableQuestionList, EditQuizQuestion } from "../../containers";
 
 interface EditQuizRouterProps {
   quizId: string;
@@ -158,6 +158,39 @@ const EditQuiz = (props: EditQuizProps) => {
     }
   };
 
+  const handleDragAndDropQuestionOrder = (result: any) => {
+    const reorderQuestions = (
+      list: QuizQuestion[],
+      startIndex: number,
+      endIndex: number
+    ): QuizQuestion[] => {
+      const result = Array.from(list);
+      const [removed] = result.splice(startIndex, 1);
+      result.splice(endIndex, 0, removed);
+
+      return result;
+    };
+
+    if (!result.destination) {
+      return;
+    }
+
+    if (result.destination.index === result.source.index) {
+      return;
+    }
+
+    if (quiz?.questions) {
+      const reorderedQuestions = reorderQuestions(
+        quiz?.questions,
+        result.source.index,
+        result.destination.index
+      );
+      setQuiz(
+        (prevState) => ({ ...prevState, questions: reorderedQuestions } as Quiz)
+      );
+    }
+  };
+
   return (
     <div className={"scrollY"}>
       {quiz ? (
@@ -191,10 +224,11 @@ const EditQuiz = (props: EditQuizProps) => {
           <Row className={"my-5"} justify="space-around">
             <Col className={"mt-5"} xxl={12} xs={16}>
               <GeneralHeader title={"QUESTIONS"} />
-              <QuestionCardList
+              <DraggableQuestionList
+                handleDragAndDropQuestionOrder={handleDragAndDropQuestionOrder}
                 handleModifyQuestion={handleModifyQuestion}
                 handleDeleteQuestion={handleDeleteQuestion}
-                questions={quiz.questions}
+                initialQuestions={quiz.questions}
               />
             </Col>
           </Row>
