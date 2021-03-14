@@ -59,18 +59,14 @@ const DraggableQuestion = ({
               actions={[
                 <Tooltip key={"editQuestion"} title="Edit question">
                   <EditFilled
-                    onClick={() => {
-                      handleModifyQuestion(question);
-                    }}
+                    onClick={() => handleModifyQuestion(question)}
                     className={"quiz-card--button"}
                     key="editQuestion"
                   />
                 </Tooltip>,
                 <Tooltip key="deleteQuestion" title="Delete question">
                   <DeleteFilled
-                    onClick={() => {
-                      handleDeleteQuestion(question.id);
-                    }}
+                    onClick={() => handleDeleteQuestion(question.id)}
                     className={"quiz-card--button"}
                     key="deleteQuestion"
                   />
