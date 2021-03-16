@@ -1,26 +1,40 @@
 import React from "react";
-import { Col, Row, Tooltip } from "antd";
-import "./QuestionCardList.scss";
-import { DeleteFilled, EditFilled } from "@ant-design/icons";
-import { QuizCard } from "../../components";
 import { QuizQuestion } from "../../common/type/Types";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { Col, Tooltip } from "antd";
+import { QuizCard } from "../../components";
+import { DeleteFilled, EditFilled } from "@ant-design/icons";
+import "./QuestionCardList.scss";
 
-interface QuestionCardListProps {
-  questions: QuizQuestion[];
+interface DraggableQuestionListProps {
+  initialQuestions: QuizQuestion[];
+  handleDeleteQuestion: (questionId: number) => void;
+  handleModifyQuestion: (question: QuizQuestion) => void;
+  handleDragAndDropQuestionOrder: (result: any) => void;
+}
+
+interface DraggableQuestionProps {
+  question: QuizQuestion;
+  index: number;
   handleDeleteQuestion: (questionId: number) => void;
   handleModifyQuestion: (question: QuizQuestion) => void;
 }
 
-const QuestionCardList = ({
-  questions,
+const DraggableQuestion = ({
+  question,
+  index,
   handleDeleteQuestion,
   handleModifyQuestion,
-}: QuestionCardListProps) => {
+}: DraggableQuestionProps) => {
   return (
-    <>
-      <Row gutter={[16, 12]}>
-        {questions.map((question) => (
-          <Col key={question.id} style={{ textAlign: "center" }} span={24}>
+    <Draggable draggableId={`id-${question.id}`} index={index}>
+      {(provided) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <Col className={"question-card-wrapper"} span={24}>
             <QuizCard
               className={"question-card"}
               title={
@@ -60,10 +74,36 @@ const QuestionCardList = ({
               ]}
             />
           </Col>
-        ))}
-      </Row>
-    </>
+        </div>
+      )}
+    </Draggable>
   );
 };
 
-export default QuestionCardList;
+const DraggableQuestionList = ({
+  initialQuestions,
+  handleDeleteQuestion,
+  handleModifyQuestion,
+  handleDragAndDropQuestionOrder,
+}: DraggableQuestionListProps) => (
+  <DragDropContext onDragEnd={handleDragAndDropQuestionOrder}>
+    <Droppable droppableId="list">
+      {(provided) => (
+        <div ref={provided.innerRef} {...provided.droppableProps}>
+          {initialQuestions.map((question: any, index: number) => (
+            <DraggableQuestion
+              handleDeleteQuestion={handleDeleteQuestion}
+              handleModifyQuestion={handleModifyQuestion}
+              key={question.id}
+              question={question}
+              index={index}
+            />
+          ))}
+          {provided.placeholder}
+        </div>
+      )}
+    </Droppable>
+  </DragDropContext>
+);
+
+export default DraggableQuestionList;
