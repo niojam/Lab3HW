@@ -83,12 +83,6 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
           </Col>
         </Row>
         <PlayerStatisticsTable data={playerData} columns={columns} />
-        <Pagination
-          defaultCurrent={1}
-          defaultPageSize={10}
-          total={playerData.length}
-          className={"p-3"}
-        />
       </Col>
     </Row>
   );

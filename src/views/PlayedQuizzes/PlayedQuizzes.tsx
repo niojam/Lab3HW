@@ -111,12 +111,6 @@ const PlayedQuizzes = () => {
     <Row justify={"center"} align={"middle"}>
       <Col md={24} lg={18} className={"m-3"}>
         <StatisticsOverviewTable data={rooms} columns={columns} />
-        <Pagination
-          defaultCurrent={1}
-          defaultPageSize={10}
-          total={rooms.length}
-          className={"p-3"}
-        />
       </Col>
     </Row>
   );
