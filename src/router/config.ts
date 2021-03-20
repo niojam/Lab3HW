@@ -61,7 +61,7 @@ export const routes: RouteType[] = [
       () => import("views/QuestionStatistics/QuestionStatistics")
     ),
     exact: true,
-    private: false,
+    private: true,
   },
   {
     path: STATISTICS_PAGE_PATH + "/:roomId" + ANSWER_STATISTICS_PAGE_PATH,
