@@ -69,7 +69,7 @@ const QuestionStatistics = () => {
         return (
           <div onClick={() => handleViewAnswers()}>
             <Space>
-              <Icon src={Show} size={"small"} />
+              <Icon src={Show} size={"smaller"} />
             </Space>
           </div>
         );
@@ -77,27 +77,19 @@ const QuestionStatistics = () => {
     },
   ];
   return (
-    <Row justify={"center"} align={"middle"}>
-      <Col md={24} lg={18} className={"m-3 col-container"}>
-        <Row className={"p-3"}>
-          <Col
-            span={12}
-            style={{ display: "flex", justifyContent: "flex-start" }}
-            className={"col-text p-2"}
-          >
-            {dataFromHistory.quizName}
-          </Col>
-          <Col
-            span={12}
-            style={{ display: "flex", justifyContent: "flex-end" }}
-            className={"col-text p-2"}
-          >
-            {dataFromHistory.roomName}
-          </Col>
-        </Row>
-        <QuestionStatisticsTable data={questions} columns={columns} />
-      </Col>
-    </Row>
+    <div className={"div-container"}>
+      <Row justify={"center"} align={"middle"}>
+        <Col md={24} lg={18} className={"m-3 col-container"}>
+          <Row>
+            <Col className={"col-text"}>
+              <div className={"p__quiz-name"}>{dataFromHistory.quizName}</div>
+              <div className={"p__room-name"}>{dataFromHistory.roomName}</div>
+            </Col>
+          </Row>
+          <QuestionStatisticsTable data={questions} columns={columns} />
+        </Col>
+      </Row>
+    </div>
   );
 };
 
