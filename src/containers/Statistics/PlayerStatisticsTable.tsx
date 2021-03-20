@@ -1,6 +1,5 @@
 import React from "react";
 import { GenericTable } from "components";
-import "./common.scss";
 import { PlayerStatisticsData } from "../../common/type/Types";
 
 interface PlayerStatisticsTableProps {

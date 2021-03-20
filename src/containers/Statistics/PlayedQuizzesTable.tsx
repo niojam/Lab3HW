@@ -7,7 +7,7 @@ interface StatisticsOverviewTableProps {
   columns: Array<any>;
 }
 
-const StatisticsOverviewTable = ({
+const PlayedQuizzesTable = ({
   data,
   columns,
 }: StatisticsOverviewTableProps) => {
@@ -20,4 +20,4 @@ const StatisticsOverviewTable = ({
   );
 };
 
-export default StatisticsOverviewTable;
+export default PlayedQuizzesTable;

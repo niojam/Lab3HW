@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { StatisticsOverviewTable } from "containers";
-import { Col, Pagination, Row, Space } from "antd";
-import { Icon } from "components";
+import { PlayedQuizzesTable } from "containers";
+import { Col, Row, Space } from "antd";
+import { Icon, SearchBar } from "components";
 import { Chart, Download, Remove, Users } from "assets/images";
 import "./PlayedQuizzes.scss";
 import { PlayedQuizzesData } from "../../common/type/Types";
@@ -68,7 +68,33 @@ const PlayedQuizzes = () => {
       },
     });
   };
-
+  const filterAndSortRooms = (keyWord: string) => {
+    if (data?.data && keyWord && keyWord.trim()) {
+      const keyWordLower = keyWord.toLowerCase();
+      const filteredData = data.data
+        .filter((room) => room.roomName.toLowerCase().includes(keyWordLower))
+        .sort((room1, room2) => {
+          const room1NameStartsWithKeyWord: boolean = room1.roomName
+            .toLowerCase()
+            .startsWith(keyWordLower);
+          const room2NameStartsWithKeyWord: boolean = room2.roomName
+            .toLowerCase()
+            .startsWith(keyWordLower);
+          if (room1NameStartsWithKeyWord && !room2NameStartsWithKeyWord) {
+            return -1;
+          } else if (
+            !room1NameStartsWithKeyWord &&
+            room2NameStartsWithKeyWord
+          ) {
+            return 1;
+          }
+          return 0;
+        });
+      setRoomStatistics(filteredData);
+    } else {
+      setRoomStatistics(data?.data ?? []);
+    }
+  };
   const columns = [
     {
       title: "Quiz Name",
@@ -92,14 +118,14 @@ const PlayedQuizzes = () => {
         return (
           <Space size="middle">
             <div onClick={() => handleShowQuizStatistics(record)}>
-              <Icon src={Chart} size={"small"} />
+              <Icon src={Chart} size={"smaller"} />
             </div>
             <div onClick={() => handleShowPlayerStatistics(record)}>
-              <Icon src={Users} size={"small"} />
+              <Icon src={Users} size={"smaller"} />
             </div>
-            <Icon src={Download} size={"small"} />
+            <Icon src={Download} size={"smaller"} />
             <div onClick={() => handleDeleteRoom(record)}>
-              <Icon src={Remove} size={"small"} />
+              <Icon src={Remove} size={"smaller"} />
             </div>
           </Space>
         );
@@ -108,11 +134,22 @@ const PlayedQuizzes = () => {
   ];
 
   return (
-    <Row justify={"center"} align={"middle"}>
-      <Col md={24} lg={18} className={"m-3"}>
-        <StatisticsOverviewTable data={rooms} columns={columns} />
-      </Col>
-    </Row>
+    <div className={"div-container"}>
+      <Row>
+        <Col
+          xs={{ span: 20, offset: 2 }}
+          md={{ span: 12, offset: 6 }}
+          className={"mt-3"}
+        >
+          <SearchBar onSearchClick={filterAndSortRooms} />
+        </Col>
+      </Row>
+      <Row justify={"center"} align={"middle"}>
+        <Col md={24} lg={18} className={"m-3"}>
+          <PlayedQuizzesTable data={rooms} columns={columns} />
+        </Col>
+      </Row>
+    </div>
   );
 };
 export default PlayedQuizzes;

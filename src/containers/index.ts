@@ -11,5 +11,5 @@ export { default as DraggableQuestionList } from "./QuestionCardList/DraggableQu
 export { default as PlayerStatisticsTable } from "./Statistics/PlayerStatisticsTable";
 export { default as QuestionStatisticsTable } from "./Statistics/QuestionStatisticsTable";
 export { default as AnswerStatisticsTable } from "./Statistics/AnswerStatisticsTable";
-export { default as StatisticsOverviewTable } from "./Statistics/StatisticsOverviewTable";
+export { default as PlayedQuizzesTable } from "./Statistics/PlayedQuizzesTable";
 export { default as EditQuizQuestion } from "./EditQuizQuestion/EditQuizQuestion";
