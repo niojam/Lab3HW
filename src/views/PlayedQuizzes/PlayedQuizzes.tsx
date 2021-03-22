@@ -28,6 +28,10 @@ const PlayedQuizzes = () => {
     onSuccess: (result) => {
       const data: PlayedQuizzesData[] = result.data.map((quiz, index) => {
         quiz.key = index++;
+        const [date, time] = quiz.startedAt.split("T");
+        const [year, month, day] = date.split("-");
+        const [hour, minute] = time.split(":");
+        quiz.startedAt = `${day}.${month}.${year} ${hour}:${minute}`;
         return quiz;
       });
       setRoomStatistics(data);
@@ -82,8 +86,8 @@ const PlayedQuizzes = () => {
     },
     {
       title: "Time",
-      dataIndex: "time",
-      key: "time",
+      dataIndex: "startedAt",
+      key: "startedAt",
     },
     {
       title: "",

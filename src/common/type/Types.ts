@@ -33,16 +33,6 @@ export interface QuizDetails {
   quizName: string;
 }
 
-export interface AuthorQuizzes {
-  key: number;
-  id: number;
-  roomName: string;
-  quizName: string;
-  quizId: number;
-  authorId: number;
-  time: Date;
-}
-
 export interface PlayerStatisticsData {
   key: number;
   username: string;
@@ -59,7 +49,7 @@ export interface PlayedQuizzesData {
   quizName: string;
   quizId: number;
   authorId: number;
-  time: Date;
+  startedAt: string;
 }
 
 export interface PlayerStatisticsData {
