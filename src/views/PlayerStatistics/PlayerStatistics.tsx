@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Pagination, Row } from "antd";
+import { Col, Row } from "antd";
 import { PlayerStatisticsTable } from "containers";
 import { Icon } from "components";
 import { Check, Close } from "assets/images";
@@ -74,17 +74,18 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
   ];
 
   return (
-    <Row justify={"center"} align={"middle"}>
-      <Col md={24} lg={18} className={"m-3 col-container"}>
-        <Row className={"p-3"}>
-          <Col sm={16} md={10} className={"col-text p-3"}>
-            {quizName}
-            <hr />
-          </Col>
-        </Row>
-        <PlayerStatisticsTable data={playerData} columns={columns} />
-      </Col>
-    </Row>
+    <div className={"div-container"}>
+      <Row justify={"center"} align={"middle"}>
+        <Col md={24} lg={18} className={"m-3 col-container"}>
+          <Row className={"p-3"}>
+            <Col className={"col-text"}>
+              <div className={"div__quiz-name"}>{quizName}</div>
+            </Col>
+          </Row>
+          <PlayerStatisticsTable data={playerData} columns={columns} />
+        </Col>
+      </Row>
+    </div>
   );
 };
 
