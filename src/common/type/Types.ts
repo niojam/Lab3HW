@@ -33,16 +33,6 @@ export interface QuizDetails {
   quizName: string;
 }
 
-export interface AuthorQuizzes {
-  key: number;
-  id: number;
-  roomName: string;
-  quizName: string;
-  quizId: number;
-  authorId: number;
-  time: Date;
-}
-
 export interface PlayerStatisticsData {
   key: number;
   username: string;
@@ -83,5 +73,5 @@ export interface AnswerStatisticsData {
   questionText: string;
   answerText: string;
   frequency: number;
-  isCorrect: boolean;
+  correct: boolean;
 }

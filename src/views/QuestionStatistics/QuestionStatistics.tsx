@@ -82,8 +82,8 @@ const QuestionStatistics = () => {
         <Col md={24} lg={18} className={"m-3 col-container"}>
           <Row>
             <Col className={"col-text"}>
-              <div className={"p__quiz-name"}>{dataFromHistory.quizName}</div>
-              <div className={"p__room-name"}>{dataFromHistory.roomName}</div>
+              <div className={"div__quiz-name"}>{dataFromHistory.quizName}</div>
+              <div className={"div__room-name"}>{dataFromHistory.roomName}</div>
             </Col>
           </Row>
           <QuestionStatisticsTable data={questions} columns={columns} />
