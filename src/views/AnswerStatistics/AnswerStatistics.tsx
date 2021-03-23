@@ -11,19 +11,21 @@ import { getAnswerStatistics } from "../../common/client/BackOfficeApplicationCl
 
 interface AnswerStatisticsRouterProps {
   roomId: string;
+  questionId: string;
 }
 
 type AnswerStatisticsProps = RouteComponentProps<AnswerStatisticsRouterProps>;
 
 const AnswerStatistics = (props: AnswerStatisticsProps) => {
   const roomId = props.match.params.roomId;
+  const questionId = props.match.params.questionId;
   const [answers, setAnswersData] = useState<AnswerStatisticsData[]>([]);
   const [questionTitle, setQuestionTitle] = useState("");
   const [questionText, setQuestionText] = useState("");
 
   const { data } = useQuery(
     "getAnswerStatistics",
-    () => getAnswerStatistics(roomId),
+    () => getAnswerStatistics(roomId, questionId),
     {
       refetchOnWindowFocus: false,
       retry: false,
@@ -73,7 +75,7 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
   return (
     <div className={"div-container"}>
       <Row justify={"center"} align={"middle"}>
-        <Col md={24} lg={18} className={"m-3 col-container"}>
+        <Col span={24} className={"m-3"}>
           <Row className={"p-3"}>
             <Col className={"col-text"}>
               <div className={"div__question-title"}>{questionTitle}</div>
