@@ -1,6 +1,11 @@
 import React, { FunctionComponent } from "react";
-import { Layout } from "antd";
-import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import "./AuthorizedHeader.scss";
+import { Button, Layout } from "antd";
+import {
+  LogoutOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons";
 
 interface HeaderProps {
   mobile: boolean;
@@ -17,15 +22,16 @@ const AuthorizedHeader: FunctionComponent<HeaderProps> = ({
 
   return (
     <Header className={"p-0"}>
-      {mobile
-        ? React.createElement(
-            collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-            {
-              className: "trigger",
-              onClick: () => setCollapsed(!collapsed),
-            }
-          )
-        : null}
+      {(mobile &&
+        React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+          className: "trigger",
+          onClick: () => setCollapsed(!collapsed),
+        })) || (
+        <Button className={"header--sign-out-button"} type="text">
+          <LogoutOutlined />
+          Sign out
+        </Button>
+      )}
     </Header>
   );
 };
