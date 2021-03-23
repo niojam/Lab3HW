@@ -73,5 +73,5 @@ export interface AnswerStatisticsData {
   questionText: string;
   answerText: string;
   frequency: number;
-  isCorrect: boolean;
+  correct: boolean;
 }

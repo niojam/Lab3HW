@@ -1,6 +1,5 @@
 import React from "react";
 import { GenericTable } from "components";
-import "./StatisticsOverviewTable.scss";
 import { PlayedQuizzesData } from "../../common/type/Types";
 
 interface StatisticsOverviewTableProps {
@@ -8,11 +7,17 @@ interface StatisticsOverviewTableProps {
   columns: Array<any>;
 }
 
-const StatisticsOverviewTable = ({
+const PlayedQuizzesTable = ({
   data,
   columns,
 }: StatisticsOverviewTableProps) => {
-  return <GenericTable tableData={data} columns={columns} />;
+  return (
+    <GenericTable
+      tableData={data}
+      columns={columns}
+      className={"table-style"}
+    />
+  );
 };
 
-export default StatisticsOverviewTable;
+export default PlayedQuizzesTable;

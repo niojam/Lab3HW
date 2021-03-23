@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import "./Icon.scss";
 
-type size = "extra-small" | "small" | "medium" | "large";
+type size = "extra-small" | "smaller" | "small" | "medium" | "large";
 type color = "white";
 
 interface IconProps {
