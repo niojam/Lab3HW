@@ -62,6 +62,10 @@ export const magicLogin = async (): Promise<AxiosResponse> => {
   return await axios.get(`/api/magic-login`);
 };
 
+export const login = async (): Promise<AxiosResponse> => {
+  return await axios.get(`/oauth2/authorization/azure`);
+};
+
 export const getPlayedQuizzes = async (): Promise<
   AxiosResponse<PlayedQuizzesData[]>
 > => {
