@@ -11,7 +11,7 @@ const LoginPage = () => {
   };
 
   return (
-    <Row justify="center" align="middle" className="h-100">
+    <Row justify="center" align="middle" className="h-100 login-page">
       <Col span={24}>
         <div className="text-centre">
           <img
