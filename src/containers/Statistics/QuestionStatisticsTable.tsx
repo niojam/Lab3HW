@@ -11,13 +11,7 @@ const QuestionStatisticsTable = ({
   data,
   columns,
 }: QuestionStatisticsTableProps) => {
-  return (
-    <GenericTable
-      tableData={data}
-      columns={columns}
-      className={"table-style"}
-    />
-  );
+  return <GenericTable tableData={data} columns={columns} />;
 };
 
 export default QuestionStatisticsTable;

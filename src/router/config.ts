@@ -64,7 +64,10 @@ export const routes: RouteType[] = [
     private: true,
   },
   {
-    path: STATISTICS_PAGE_PATH + "/:roomId" + ANSWER_STATISTICS_PAGE_PATH,
+    path:
+      STATISTICS_PAGE_PATH +
+      "/room/:roomId/question/:questionId" +
+      ANSWER_STATISTICS_PAGE_PATH,
     component: lazy(() => import("views/AnswerStatistics/AnswerStatistics")),
     exact: true,
     private: true,

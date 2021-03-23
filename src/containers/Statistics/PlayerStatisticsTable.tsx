@@ -11,13 +11,7 @@ const PlayerStatisticsTable = ({
   data,
   columns,
 }: PlayerStatisticsTableProps) => {
-  return (
-    <GenericTable
-      tableData={data}
-      columns={columns}
-      className={"table-style"}
-    />
-  );
+  return <GenericTable tableData={data} columns={columns} />;
 };
 
 export default PlayerStatisticsTable;

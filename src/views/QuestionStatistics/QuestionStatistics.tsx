@@ -46,9 +46,9 @@ const QuestionStatistics = () => {
       setQuestionData(data.data);
     }
   }, []);
-  const handleViewAnswers = () => {
+  const handleViewAnswers = (id: number) => {
     history.push(
-      `${STATISTICS_PAGE_PATH}/${dataFromHistory.roomId}${ANSWER_STATISTICS_PAGE_PATH}`
+      `${STATISTICS_PAGE_PATH}/room/${dataFromHistory.roomId}/question/${id}${ANSWER_STATISTICS_PAGE_PATH}`
     );
   };
   const columns = [
@@ -65,9 +65,9 @@ const QuestionStatistics = () => {
     {
       title: "View Answers",
       key: "view",
-      render: function renderCell() {
+      render: function renderCell(record: QuestionStatisticsData) {
         return (
-          <div onClick={() => handleViewAnswers()}>
+          <div onClick={() => handleViewAnswers(record.id)}>
             <Space>
               <Icon src={Show} size={"smaller"} />
             </Space>
@@ -79,7 +79,7 @@ const QuestionStatistics = () => {
   return (
     <div className={"div-container"}>
       <Row justify={"center"} align={"middle"}>
-        <Col md={24} lg={18} className={"m-3 col-container"}>
+        <Col span={24} className={"m-3 col-container"}>
           <Row>
             <Col className={"col-text"}>
               <div className={"div__quiz-name"}>{dataFromHistory.quizName}</div>

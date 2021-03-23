@@ -63,6 +63,7 @@ export interface PlayerStatisticsData {
 
 export interface QuestionStatisticsData {
   key: number;
+  id: number;
   title: string;
   type: string;
 }
