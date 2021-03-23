@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PlayedQuizzesTable } from "containers";
-import { Col, Row, Space } from "antd";
+import { Affix, Col, Row, Space } from "antd";
 import { Icon, SearchBar } from "components";
 import { Chart, Download, Remove, Users } from "assets/images";
 import "./PlayedQuizzes.scss";
@@ -139,15 +139,13 @@ const PlayedQuizzes = () => {
 
   return (
     <div className={"div-container"}>
-      <Row>
-        <Col
-          xs={{ span: 20, offset: 2 }}
-          md={{ span: 12, offset: 6 }}
-          className={"mt-3"}
-        >
-          <SearchBar onSearchClick={filterAndSortRooms} />
-        </Col>
-      </Row>
+      <Col className={"mt-5"} span={18} offset={3}>
+        <div className="search-bar-wrapper">
+          <Affix>
+            <SearchBar onSearchClick={filterAndSortRooms} />
+          </Affix>
+        </div>
+      </Col>
       <Row justify={"center"} align={"middle"}>
         <Col md={24} lg={18} className={"m-3"}>
           <PlayedQuizzesTable data={rooms} columns={columns} />
