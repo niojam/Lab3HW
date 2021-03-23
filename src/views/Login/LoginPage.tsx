@@ -2,21 +2,14 @@ import React from "react";
 import { Button, Col, Row } from "antd";
 import { LoginIllustration, Microsoft } from "assets/images";
 import { Icon } from "components";
-import { isUserAuthenticated } from "store/AuthenticationSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import "./Login.scss";
+import { AUTHORIZATION_URL } from "../../common/client/BackOfficeApplicationClient";
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const isAuthenticated = useSelector(isUserAuthenticated);
-
   const handleMicrosoftLogin = () => {
-    window.location.href = "http://localhost:8090/oauth2/authorization/azure";
+    window.location.href = AUTHORIZATION_URL;
   };
 
-  console.log(isAuthenticated);
   return (
     <Row justify="center" align="middle" className="h-100">
       <Col span={24}>

@@ -19,7 +19,7 @@ const AuthenticationSlice = createSlice({
       state: Draft<AuthenticationSliceState>,
       action: PayloadAction<boolean>
     ) => {
-      state.isAuthenticated = action.payload;
+      return { ...state, isAuthenticated: action.payload };
     },
   },
 });

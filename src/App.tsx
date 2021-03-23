@@ -9,11 +9,11 @@ import {
   setIsUserAuthenticated,
 } from "./store/AuthenticationSlice";
 import { useCookies } from "react-cookie";
+import { KAHOOT_TOKEN_COOKIE } from "./common/constants/Constants";
 
-const KAHOOT_TOKEN_COOKIE = "kahoot-back-office_refresh-token";
 const App = () => {
   const dispatch = useDispatch();
-  const [cookies] = useCookies([KAHOOT_TOKEN_COOKIE]);
+  const [cookies] = useCookies();
   const authenticated = useSelector(isUserAuthenticated);
 
   useEffect(() => {
@@ -22,14 +22,7 @@ const App = () => {
     }
   }, [cookies]);
 
-  return (
-    <CustomRouter
-      routes={routes}
-      isAuthenticated={
-        authenticated ? authenticated : !!cookies[KAHOOT_TOKEN_COOKIE]
-      }
-    />
-  );
+  return <CustomRouter routes={routes} isAuthenticated={authenticated} />;
 };
 
 export default App;

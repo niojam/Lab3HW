@@ -42,7 +42,7 @@ const KahootSider: FunctionComponent<SiderProps> = ({
       <div className="logo">
         <Icon src={TalTechLogo} size="medium" />
       </div>
-      <SiderMenu />
+      <SiderMenu isMobile={mobile} />
     </Sider>
   );
 };
