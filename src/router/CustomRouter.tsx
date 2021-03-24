@@ -13,26 +13,34 @@ const CustomRouter = ({ routes, isAuthenticated }: RouterProps) => {
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
         <Route path="/" exact={true} render={() => <Redirect to="/home" />} />
-        <Route path="/login" component={LoginPageLayout} />
+        <Route
+          path="/login"
+          render={() =>
+            isAuthenticated ? <Redirect to="/home" /> : <LoginPageLayout />
+          }
+        />
         <MainLayout>
-          {routes?.map((route: RouteType) => (
-            <Route
-              key={route.path}
-              exact={route.exact}
-              path={route.path}
-              render={(props) =>
-                route.private ? (
-                  isAuthenticated ? (
-                    route.component && <route.component {...props} />
+          <Switch>
+            {routes?.map((route: RouteType) => (
+              <Route
+                key={route.path}
+                exact={route.exact}
+                path={route.path}
+                render={(props) =>
+                  route.private ? (
+                    isAuthenticated ? (
+                      route.component && <route.component {...props} />
+                    ) : (
+                      <Redirect to="/login" />
+                    )
                   ) : (
-                    <Redirect to="/login" />
+                    route.component && <route.component {...props} />
                   )
-                ) : (
-                  route.component && <route.component {...props} />
-                )
-              }
-            />
-          ))}
+                }
+              />
+            ))}
+            <Route render={() => <Redirect to="/login" />} />
+          </Switch>
         </MainLayout>
       </Switch>
     </Suspense>

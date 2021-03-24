@@ -20,7 +20,7 @@ const KahootDrawer = ({ mobile, collapsed, setCollapsed }: DrawerProps) => {
       onClose={() => setCollapsed(true)}
       visible={!collapsed}
     >
-      <SiderMenu />
+      <SiderMenu isMobile={mobile} />
     </Drawer>
   );
 };

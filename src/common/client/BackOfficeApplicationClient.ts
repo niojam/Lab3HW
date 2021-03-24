@@ -62,6 +62,10 @@ export const magicLogin = async (): Promise<AxiosResponse> => {
   return await axios.get(`/api/magic-login`);
 };
 
+export const login = async (): Promise<AxiosResponse> => {
+  return await axios.get(`/oauth2/authorization/azure`);
+};
+
 export const getPlayedQuizzes = async (): Promise<
   AxiosResponse<PlayedQuizzesData[]>
 > => {
@@ -96,3 +100,5 @@ export const deleteRoom = async (
 };
 export const IMAGE_UPLOAD_URL = "/api/image";
 export const GET_IMAGE_BY_ID_URL = "/api/image?id=";
+export const AUTHORIZATION_URL =
+  "http://localhost:8090/oauth2/authorization/azure";
