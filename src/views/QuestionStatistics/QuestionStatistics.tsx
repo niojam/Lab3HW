@@ -46,9 +46,9 @@ const QuestionStatistics = () => {
       setQuestionData(data.data);
     }
   }, []);
-  const handleViewAnswers = () => {
+  const handleViewAnswers = (id: number) => {
     history.push(
-      `${STATISTICS_PAGE_PATH}/${dataFromHistory.roomId}${ANSWER_STATISTICS_PAGE_PATH}`
+      `${STATISTICS_PAGE_PATH}/room/${dataFromHistory.roomId}/question/${id}${ANSWER_STATISTICS_PAGE_PATH}`
     );
   };
   const columns = [
@@ -65,11 +65,11 @@ const QuestionStatistics = () => {
     {
       title: "View Answers",
       key: "view",
-      render: function renderCell() {
+      render: function renderCell(record: QuestionStatisticsData) {
         return (
-          <div onClick={() => handleViewAnswers()}>
+          <div onClick={() => handleViewAnswers(record.id)}>
             <Space>
-              <Icon src={Show} size={"small"} />
+              <Icon src={Show} size={"smaller"} />
             </Space>
           </div>
         );
@@ -77,27 +77,19 @@ const QuestionStatistics = () => {
     },
   ];
   return (
-    <Row justify={"center"} align={"middle"}>
-      <Col md={24} lg={18} className={"m-3 col-container"}>
-        <Row className={"p-3"}>
-          <Col
-            span={12}
-            style={{ display: "flex", justifyContent: "flex-start" }}
-            className={"col-text p-2"}
-          >
-            {dataFromHistory.quizName}
-          </Col>
-          <Col
-            span={12}
-            style={{ display: "flex", justifyContent: "flex-end" }}
-            className={"col-text p-2"}
-          >
-            {dataFromHistory.roomName}
-          </Col>
-        </Row>
-        <QuestionStatisticsTable data={questions} columns={columns} />
-      </Col>
-    </Row>
+    <div className={"div-container"}>
+      <Row justify={"center"} align={"middle"}>
+        <Col span={24} className={"m-3 col-container"}>
+          <Row>
+            <Col className={"col-text"}>
+              <div className={"div__quiz-name"}>{dataFromHistory.quizName}</div>
+              <div className={"div__room-name"}>{dataFromHistory.roomName}</div>
+            </Col>
+          </Row>
+          <QuestionStatisticsTable data={questions} columns={columns} />
+        </Col>
+      </Row>
+    </div>
   );
 };
 

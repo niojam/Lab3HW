@@ -1,10 +1,22 @@
-.col-text {
-  font-size: 1.25rem;
-  color: #342B60;
+@import "../../styles/_variables.scss";
+
+hr {
+  width: 100%;
+  border-bottom: 1px solid $base-color-dark-blue;
 }
 
-.col-container {
-  background: white;
+.div-container {
+  background-color: $base-color-white;
+  max-width: 1200px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 764px) {
+  .div-container {
+    margin-top: 5%;
+  }
 }
 
 .ant-table-cell:nth-child(2) {
@@ -13,4 +25,20 @@
 }
 .ant-table-cell:nth-child(3) {
   text-align: center;
+}
+.div__question-title {
+  font-size: 2rem;
+}
+.div__question-text {
+  font-size: 1.5rem;
+}
+
+.col-text {
+  font-family: "Times New Roman", Times, serif;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  color: $base-color-dark-blue;
 }

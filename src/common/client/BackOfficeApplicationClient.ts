@@ -85,9 +85,12 @@ export const getQuestionStatistics = async (
 };
 
 export const getAnswerStatistics = async (
-  roomId: string
+  roomId: string,
+  questionId: string
 ): Promise<AxiosResponse<AnswerStatisticsData[]>> => {
-  return await axios.get(`/api/statistics/answer?roomId=${roomId}`);
+  return await axios.get(
+    `/api/statistics/answer?roomId=${roomId}&&questionId=${questionId}`
+  );
 };
 
 export const deleteRoom = async (

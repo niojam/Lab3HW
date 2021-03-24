@@ -1,6 +1,5 @@
 import React from "react";
 import { GenericTable } from "components";
-import "./common.scss";
 import { PlayerStatisticsData } from "../../common/type/Types";
 
 interface PlayerStatisticsTableProps {
@@ -12,13 +11,7 @@ const PlayerStatisticsTable = ({
   data,
   columns,
 }: PlayerStatisticsTableProps) => {
-  return (
-    <GenericTable
-      tableData={data}
-      columns={columns}
-      className={"table-style"}
-    />
-  );
+  return <GenericTable tableData={data} columns={columns} />;
 };
 
 export default PlayerStatisticsTable;

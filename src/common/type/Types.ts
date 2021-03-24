@@ -63,6 +63,7 @@ export interface PlayerStatisticsData {
 
 export interface QuestionStatisticsData {
   key: number;
+  id: number;
   title: string;
   type: string;
 }
@@ -73,5 +74,5 @@ export interface AnswerStatisticsData {
   questionText: string;
   answerText: string;
   frequency: number;
-  isCorrect: boolean;
+  correct: boolean;
 }

@@ -1,12 +1,27 @@
-hr {
-  color: #D4DEEC;
-  background-color: #D4DEEC;
+@import "../../styles/_variables.scss";
+.div-container {
+  background-color: $base-color-white;
+  max-width: 1200px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.col-container {
-  background: white;
+@media screen and (min-width: 764px) {
+  .div-container {
+    margin-top: 5%;
+  }
 }
 .col-text {
-  font-size: 1.25rem;
-  color: #342B60;
+  font-family: "Times New Roman", Times, serif;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  color: $base-color-dark-blue;
+}
+
+.div__quiz-name {
+  font-size: 3rem;
 }
