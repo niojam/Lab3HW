@@ -60,9 +60,13 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
       key: "isCorrect",
       render: function renderIcon(text: string, record: AnswerStatisticsData) {
         return record.correct ? (
-          <Icon src={Check} size={"extra-small"} />
+          <div>
+            <Icon src={Check} size={"small"} />
+          </div>
         ) : (
-          <Icon src={Close} size={"extra-small"} />
+          <div>
+            <Icon src={Close} size={"extra-small"} />
+          </div>
         );
       },
     },

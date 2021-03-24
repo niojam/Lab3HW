@@ -10,3 +10,16 @@
   color:  #342b60;
   background-color: #E7E7F1;
 }
+.ant-table-thead tr {
+  display: flex;
+}
+.ant-table-thead th {
+  flex: 1;
+}
+.ant-table-row {
+  display: flex;
+}
+.ant-table-row td {
+  flex: 1;
+}
+
