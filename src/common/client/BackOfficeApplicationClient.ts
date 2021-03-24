@@ -98,6 +98,13 @@ export const deleteRoom = async (
 ): Promise<AxiosResponse<void>> => {
   return await axios.delete(`/api/room?roomId=${roomId}`);
 };
+
+export const startRoom = async (
+  roomId: number
+): Promise<AxiosResponse<void>> => {
+  return await axios.post(`/api/author/register-room=${roomId}`);
+};
+
 export const IMAGE_UPLOAD_URL = "/api/image";
 export const GET_IMAGE_BY_ID_URL = "/api/image?id=";
 export const AUTHORIZATION_URL =

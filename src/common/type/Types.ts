@@ -76,3 +76,8 @@ export interface AnswerStatisticsData {
   frequency: number;
   correct: boolean;
 }
+
+export interface RegisterRoomRequest {
+  quizId: number;
+  roomName: string;
+}
