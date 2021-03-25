@@ -7,6 +7,8 @@ import {
   Quiz,
   QuizDetails,
   QuizQuestion,
+  RegisterRoomRequest,
+  RoomStatusResponseWithRelocation,
 } from "../type/Types";
 
 export const getQuizzesDetails = async (): Promise<
@@ -100,9 +102,12 @@ export const deleteRoom = async (
 };
 
 export const startRoom = async (
-  roomId: number
-): Promise<AxiosResponse<void>> => {
-  return await axios.post(`/api/author/register-room=${roomId}`);
+  registerRoomRequest: RegisterRoomRequest
+): Promise<AxiosResponse<RoomStatusResponseWithRelocation>> => {
+  return await axios.post(
+    `/public-api/author/register-room`,
+    registerRoomRequest
+  );
 };
 
 export const IMAGE_UPLOAD_URL = "/api/image";

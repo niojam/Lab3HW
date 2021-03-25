@@ -84,7 +84,6 @@ const EditQuizQuestion = ({
 
   const handleOnUploadChange = (info: any) => {
     const { status, response } = info.file;
-    console.log(info);
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
       setCurrentQuestion(

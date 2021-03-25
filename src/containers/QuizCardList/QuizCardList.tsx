@@ -12,12 +12,14 @@ interface QuizCardListProps {
   quizzes: QuizDetails[];
   handleModifyQuiz: (quizId: number) => void;
   handleDeleteQuiz: (quizId: number) => void;
+  handleRegisterRoom: (quizId: number) => void;
 }
 
 const QuizCardList = ({
   quizzes,
   handleModifyQuiz,
   handleDeleteQuiz,
+  handleRegisterRoom,
 }: QuizCardListProps) => {
   return (
     <>
@@ -43,6 +45,7 @@ const QuizCardList = ({
                 actions={[
                   <Tooltip key={"playQuiz"} title="Play quiz">
                     <CaretRightOutlined
+                      onClick={() => handleRegisterRoom(quiz.quizId)}
                       className={"quiz-card--button"}
                       key="playQuiz"
                     />

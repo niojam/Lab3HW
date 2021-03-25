@@ -81,3 +81,7 @@ export interface RegisterRoomRequest {
   quizId: number;
   roomName: string;
 }
+
+export interface RoomStatusResponseWithRelocation {
+  relocationUrl: string;
+}
