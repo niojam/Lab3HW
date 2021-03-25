@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 import { AnswerStatisticsTable } from "containers";
 import { Icon } from "components";
-import { Check, Close } from "assets/images";
+import { Check, Close } from "assets/images/index";
 import "./AnswerStatistics.scss";
 import { RouteComponentProps } from "react-router-dom";
 import { AnswerStatisticsData } from "../../common/type/Types";
@@ -61,7 +61,7 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
       render: function renderIcon(text: string, record: AnswerStatisticsData) {
         return record.correct ? (
           <div>
-            <Icon src={Check} size={"small"} />
+            <Icon src={Check} size={"extra-small"} />
           </div>
         ) : (
           <div>

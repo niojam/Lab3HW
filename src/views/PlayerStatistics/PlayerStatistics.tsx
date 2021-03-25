@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 import { PlayerStatisticsTable } from "containers";
 import { Icon } from "components";
-import { Check, Close } from "assets/images";
+import { Check, Close } from "assets/images/index";
 import "./PlayerStatistics.scss";
 import { RouteComponentProps, useHistory } from "react-router-dom";
 import { PlayerStatisticsData } from "../../common/type/Types";
