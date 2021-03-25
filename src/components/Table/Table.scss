@@ -1,3 +1,6 @@
+table {
+  display: grid;
+}
 .ant-table-tbody > tr > td {
   font-size: 1.5rem;
   font-family: "Times New Roman", Times, serif;
@@ -12,7 +15,9 @@
 }
 .ant-table-thead tr {
   display: flex;
+  padding-right: 0;
 }
+
 .ant-table-thead th {
   flex: 1;
 }
@@ -21,5 +26,11 @@
 }
 .ant-table-row td {
   flex: 1;
+  overflow: auto;
+}
+.columns {
+  display: flex;
+  align-items: center;
+  width: 0;
 }
 
