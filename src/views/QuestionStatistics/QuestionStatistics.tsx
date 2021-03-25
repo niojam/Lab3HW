@@ -69,7 +69,7 @@ const QuestionStatistics = () => {
         return (
           <div onClick={() => handleViewAnswers(record.id)}>
             <Space>
-              <Icon src={Show} size={"smaller"} />
+              <Icon src={Show} size={"smaller"} style={"icon__clickable"} />
             </Space>
           </div>
         );
@@ -82,8 +82,12 @@ const QuestionStatistics = () => {
         <Col span={24} className={"m-3 col-container"}>
           <Row>
             <Col className={"col-text"}>
-              <div className={"div__quiz-name"}>{dataFromHistory.quizName}</div>
-              <div className={"div__room-name"}>{dataFromHistory.roomName}</div>
+              <div className={"div__quiz-name"}>
+                <h1>{dataFromHistory.quizName}</h1>
+              </div>
+              <div className={"div__room-name"}>
+                <h2>{dataFromHistory.roomName}</h2>
+              </div>
             </Col>
           </Row>
           <QuestionStatisticsTable data={questions} columns={columns} />
