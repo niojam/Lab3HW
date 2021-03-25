@@ -29,8 +29,12 @@ hr {
 .div__question-title {
   font-size: 2rem;
 }
+.div__question-title h1{
+  color: $base-color-dark-blue;
+}
 .div__question-text {
-  font-size: 1.5rem;
+  font-size: 1rem;
+  border-top: 2px solid $base-color-dark-blue;
 }
 
 .col-text {

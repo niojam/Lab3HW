@@ -82,9 +82,12 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
         <Col span={24} className={"m-3"}>
           <Row className={"p-3"}>
             <Col className={"col-text"}>
-              <div className={"div__question-title"}>{questionTitle}</div>
-              <hr />
-              <div className={"div__question-text"}>{questionText}</div>
+              <div className={"div__question-title"}>
+                <h1>{questionTitle}</h1>
+              </div>
+              <div className={"div__question-text"}>
+                <p>{questionText}</p>
+              </div>
             </Col>
           </Row>
           <AnswerStatisticsTable data={answers} columns={columns} />
