@@ -79,7 +79,7 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
         <Col md={24} lg={18} className={"m-3 col-container"}>
           <Row className={"p-3"}>
             <Col className={"col-text"}>
-              <div className={"div__quiz-name"}>{quizName}</div>
+              <h1>{quizName}</h1>
             </Col>
           </Row>
           <PlayerStatisticsTable data={playerData} columns={columns} />
