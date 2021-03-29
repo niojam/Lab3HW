@@ -120,7 +120,7 @@ const PlayedQuizzes = () => {
       key: "action",
       render: function renderIcons(record: PlayedQuizzesData) {
         return (
-          <Space size="middle">
+          <Space size="middle" className={"space__icons"}>
             <div onClick={() => handleShowQuizStatistics(record)}>
               <Icon src={Chart} size={"smaller"} style={"icon__clickable"} />
             </div>
@@ -138,16 +138,18 @@ const PlayedQuizzes = () => {
   ];
 
   return (
-    <div className={"div-container"}>
-      <Col className={"mt-5"} span={18} offset={3}>
-        <div className="search-bar-wrapper">
-          <Affix>
-            <SearchBar onSearchClick={filterAndSortRooms} />
-          </Affix>
-        </div>
-      </Col>
+    <div>
+      <Row>
+        <Col className={"mt-5"} span={18} offset={3}>
+          <div className="search-bar-wrapper">
+            <Affix>
+              <SearchBar onSearchClick={filterAndSortRooms} />
+            </Affix>
+          </div>
+        </Col>
+      </Row>
       <Row justify={"center"} align={"middle"}>
-        <Col md={24} lg={18} className={"m-3"}>
+        <Col span={18} className={"mt-3"}>
           <PlayedQuizzesTable data={rooms} columns={columns} />
         </Col>
       </Row>

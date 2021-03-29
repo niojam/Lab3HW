@@ -77,9 +77,9 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
     },
   ];
   return (
-    <div className={"div-container"}>
+    <div>
       <Row justify={"center"} align={"middle"}>
-        <Col span={24} className={"m-3"}>
+        <Col span={18} className={"m-3"}>
           <Row className={"p-3"}>
             <Col className={"col-text"}>
               <div className={"div__question-title"}>

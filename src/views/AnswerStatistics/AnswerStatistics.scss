@@ -1,24 +1,5 @@
 @import "../../styles/_variables.scss";
 
-hr {
-  width: 100%;
-  border-bottom: 1px solid $base-color-dark-blue;
-}
-
-.div-container {
-  background-color: $base-color-white;
-  max-width: 1200px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media screen and (min-width: 764px) {
-  .div-container {
-    margin-top: 5%;
-  }
-}
-
 .ant-table-cell:nth-child(2) {
   display: flex;
   justify-content: center;
@@ -29,11 +10,8 @@ hr {
 .div__question-title {
   font-size: 2rem;
 }
-.div__question-title h1{
-  color: $base-color-dark-blue;
-}
 .div__question-text {
-  font-size: 1rem;
+  font-size: 1.25rem;
   border-top: 2px solid $base-color-dark-blue;
 }
 
@@ -43,6 +21,4 @@ hr {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-weight: bold;
-  color: $base-color-dark-blue;
 }

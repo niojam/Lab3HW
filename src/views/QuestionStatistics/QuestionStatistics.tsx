@@ -77,9 +77,9 @@ const QuestionStatistics = () => {
     },
   ];
   return (
-    <div className={"div-container"}>
+    <div>
       <Row justify={"center"} align={"middle"}>
-        <Col span={24} className={"m-3 col-container"}>
+        <Col span={18} className={"m-3 col-container"}>
           <Row>
             <Col className={"col-text"}>
               <div className={"div__quiz-name"}>

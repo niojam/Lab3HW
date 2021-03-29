@@ -54,14 +54,14 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
     },
     {
       title: function renderIcon() {
-        return <Icon src={Check} size={"extra-small"} />;
+        return <Icon src={Check} size={"extra-small"} style={"icon__table"} />;
       },
       dataIndex: "correctAnswers",
       key: "correctAnswers",
     },
     {
       title: function renderIcon() {
-        return <Icon src={Close} size={"extra-small"} />;
+        return <Icon src={Close} size={"extra-small"} style={"icon__table"} />;
       },
       dataIndex: "wrongAnswers",
       key: "wrongAnswers",
@@ -74,9 +74,9 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
   ];
 
   return (
-    <div className={"div-container"}>
+    <div>
       <Row justify={"center"} align={"middle"}>
-        <Col md={24} lg={18} className={"m-3 col-container"}>
+        <Col lg={18} className={"m-3 col-container"}>
           <Row className={"p-3"}>
             <Col className={"col-text"}>
               <h1>{quizName}</h1>

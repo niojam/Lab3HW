@@ -1,17 +1,19 @@
+@import "src/styles/_variables.scss";
+
 table {
   display: grid;
 }
 .ant-table-tbody > tr > td {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-family: "Times New Roman", Times, serif;
 }
 
 .ant-table-thead > tr > th {
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;
-  color:  #342b60;
-  background-color: #E7E7F1;
+  color:  white;
+  background-color: $base-color-blue;
 }
 .ant-table-thead tr {
   display: flex;

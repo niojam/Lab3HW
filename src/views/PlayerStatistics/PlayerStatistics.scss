@@ -1,17 +1,7 @@
 @import "../../styles/_variables.scss";
-.div-container {
-  background-color: $base-color-white;
-  max-width: 1200px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-@media screen and (min-width: 764px) {
-  .div-container {
-    margin-top: 5%;
-  }
-}
+
+
 .col-text {
   font-family: "Times New Roman", Times, serif;
   width: 100%;
@@ -19,9 +9,7 @@
   flex-direction: column;
   align-items: center;
   font-weight: bold;
-  color: $base-color-dark-blue;
 }
 h1 {
   font-size: 2rem;
-  color: $base-color-dark-blue;
 }

@@ -1,16 +1,9 @@
 @import "../../styles/_variables.scss";
 
 
-.div-container {
-  background-color: $base-color-white;
-  max-width: 1200px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-@media screen and (min-width: 764px) {
-  .div-container {
-    margin-top: 5%;
-  }
+.space__icons {
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
 }
