@@ -39,7 +39,7 @@ const KahootSider: FunctionComponent<SiderProps> = ({
       }}
       collapsed={collapsed}
     >
-      <div className="logo">
+      <div className="logo m-2">
         <Icon src={TalTechLogo} size="medium" />
       </div>
       <SiderMenu isMobile={mobile} />
