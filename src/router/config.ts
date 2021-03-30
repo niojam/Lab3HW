@@ -28,7 +28,7 @@ export const routes: RouteType[] = [
   },
   {
     path: HOME_PAGE_PATH,
-    component: lazy(() => import("containers/Home/Home")),
+    component: lazy(() => import("views/Home/Home")),
     exact: true,
     private: true,
   },
