@@ -3,11 +3,12 @@ import "antd/dist/antd.css";
 import "./MyQuizzes.scss";
 import { SearchBar } from "../../components";
 import { Affix, Button, Col, Row, Spin, Tooltip } from "antd";
-import { QuizCardList } from "../../containers";
+import { QuizCardList, StartQuizModal } from "../../containers";
 import { useMutation, useQuery } from "react-query";
 import {
   deleteQuiz,
   getQuizzesDetails,
+  startRoom,
 } from "../../common/client/BackOfficeApplicationClient";
 import { QuizDetails } from "../../common/type/Types";
 import { useHistory } from "react-router-dom";
@@ -17,6 +18,9 @@ import { PlusOutlined } from "@ant-design/icons";
 const MyQuizzes = () => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [quizzes, setQuizzes] = useState<QuizDetails[]>([]);
+  const [quizIdToStart, setQuizIdToStart] = useState<number | undefined>(
+    undefined
+  );
   const history = useHistory();
 
   const deleteQuizMutation = useMutation(deleteQuiz);
@@ -82,6 +86,22 @@ const MyQuizzes = () => {
     });
   };
 
+  const handleRegisterRoom = (quizId: number) => {
+    setQuizIdToStart(quizId);
+  };
+
+  const handlePlayQuiz = (roomName: string) => {
+    if (quizIdToStart) {
+      startRoom({ quizId: quizIdToStart, roomName: roomName }).then((res) => {
+        const win = window.open(res.data.relocationUrl, "_blank");
+        if (win != null) {
+          win.focus();
+        }
+        setQuizIdToStart(undefined);
+      });
+    }
+  };
+
   return (
     <div className={"scrollY"} ref={setContainer}>
       <Row className={"my-5"} justify="center">
@@ -110,6 +130,7 @@ const MyQuizzes = () => {
             </Row>
           ) : (
             <QuizCardList
+              handleRegisterRoom={handleRegisterRoom}
               handleModifyQuiz={handleModifyQuiz}
               handleDeleteQuiz={handleDeleteQuiz}
               quizzes={quizzes}
@@ -117,6 +138,11 @@ const MyQuizzes = () => {
           )}
         </Col>
       </Row>
+      <StartQuizModal
+        quizIdToStart={quizIdToStart}
+        onModalOk={handlePlayQuiz}
+        onModalCancel={() => setQuizIdToStart(undefined)}
+      />
     </div>
   );
 };

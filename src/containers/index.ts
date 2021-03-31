@@ -13,3 +13,4 @@ export { default as QuestionStatisticsTable } from "./Statistics/QuestionStatist
 export { default as AnswerStatisticsTable } from "./Statistics/AnswerStatisticsTable";
 export { default as PlayedQuizzesTable } from "./Statistics/PlayedQuizzesTable";
 export { default as EditQuizQuestion } from "./EditQuizQuestion/EditQuizQuestion";
+export { default as StartQuizModal } from "./Modal/StartQuizModal";
