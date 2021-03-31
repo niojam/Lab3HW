@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PlayedQuizzesTable } from "containers";
-import { Affix, Col, Row, Space, Spin } from "antd";
+import { Affix, Col, Row, Space, Spin, Tooltip } from "antd";
 import { Icon, SearchBar } from "components";
 import { Chart, Download, Remove, Users } from "assets/images";
 import { PlayedQuizzesData } from "../../common/type/Types";
@@ -131,16 +131,33 @@ const PlayedQuizzes = () => {
       render: function renderIcons(record: PlayedQuizzesData) {
         return (
           <Space size="middle">
-            <div onClick={() => handleShowQuizStatistics(record)}>
-              <Icon src={Chart} size={"smaller"} style={"icon__clickable"} />
-            </div>
-            <div onClick={() => handleShowPlayerStatistics(record)}>
-              <Icon src={Users} size={"smaller"} style={"icon__clickable"} />
-            </div>
-            <Icon src={Download} size={"smaller"} style={"icon__clickable"} />
-            <div onClick={() => handleDeleteRoom(record)}>
-              <Icon src={Remove} size={"smaller"} style={"icon__clickable"} />
-            </div>
+            <Tooltip
+              key={"questionStatistics"}
+              title="Show question statistics"
+            >
+              <div onClick={() => handleShowQuizStatistics(record)}>
+                <Icon src={Chart} size={"smaller"} style={"icon__clickable"} />
+              </div>
+            </Tooltip>
+            <Tooltip key={"playerStatistics"} title="Show player statistics">
+              <div onClick={() => handleShowPlayerStatistics(record)}>
+                <Icon src={Users} size={"smaller"} style={"icon__clickable"} />
+              </div>
+            </Tooltip>
+            <Tooltip key={"downloadStatistics"} title="Download statistics">
+              <div>
+                <Icon
+                  src={Download}
+                  size={"smaller"}
+                  style={"icon__clickable"}
+                />
+              </div>
+            </Tooltip>
+            <Tooltip key={"deleteRoom"} title="Delete room">
+              <div onClick={() => handleDeleteRoom(record)}>
+                <Icon src={Remove} size={"smaller"} style={"icon__clickable"} />
+              </div>
+            </Tooltip>
           </Space>
         );
       },
