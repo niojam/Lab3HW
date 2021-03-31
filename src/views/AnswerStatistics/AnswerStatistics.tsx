@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Spin } from "antd";
 import { AnswerStatisticsTable } from "containers";
 import { Icon } from "components";
 import { Check, Close } from "assets/images/index";
@@ -23,7 +23,7 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
   const [questionTitle, setQuestionTitle] = useState("");
   const [questionText, setQuestionText] = useState("");
 
-  const { data } = useQuery(
+  const { isLoading, data } = useQuery(
     "getAnswerStatistics",
     () => getAnswerStatistics(roomId, questionId),
     {
@@ -92,11 +92,19 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
               </div>
             </Col>
           </Row>
-          <AnswerStatisticsTable
-            data={answers}
-            columns={columns}
-            style={"answer-statistics-table"}
-          />
+          <Col>
+            {isLoading ? (
+              <Row justify={"center"}>
+                <Spin size="large" />
+              </Row>
+            ) : (
+              <AnswerStatisticsTable
+                data={answers}
+                columns={columns}
+                style={"answer-statistics-table"}
+              />
+            )}
+          </Col>
         </Col>
       </Row>
     </div>
