@@ -1,4 +1,5 @@
 @import "../../styles/_functions.scss";
+@import "../../styles/_variables.scss";
 
 .login__illustration {
   height: 350px;
@@ -8,7 +9,13 @@
   }
 }
 
-// bug with href property
-.login__microsoft-button {
-  padding-top: 0.1px !important;
+
+.login-page {
+  .login__microsoft-button {
+    padding-top: 2px;
+    background: $base-color-dark-blue;
+    color: $base-color-white;
+    height: 50px;
+    border-radius: 12px;
+  }
 }

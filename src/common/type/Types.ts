@@ -76,3 +76,12 @@ export interface AnswerStatisticsData {
   frequency: number;
   correct: boolean;
 }
+
+export interface RegisterRoomRequest {
+  quizId: number;
+  roomName: string;
+}
+
+export interface RoomStatusResponseWithRelocation {
+  relocationUrl: string;
+}

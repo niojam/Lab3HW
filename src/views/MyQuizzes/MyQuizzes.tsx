@@ -3,23 +3,29 @@ import "antd/dist/antd.css";
 import "./MyQuizzes.scss";
 import { SearchBar } from "../../components";
 import { Affix, Button, Col, Row, Spin, Tooltip } from "antd";
-import { QuizCardList } from "../../containers";
+import { QuizCardList, StartQuizModal } from "../../containers";
 import { useMutation, useQuery } from "react-query";
 import {
+  createQuiz,
   deleteQuiz,
   getQuizzesDetails,
+  startRoom,
 } from "../../common/client/BackOfficeApplicationClient";
-import { QuizDetails } from "../../common/type/Types";
+import { Quiz, QuizDetails, QuizQuestion } from "../../common/type/Types";
 import { useHistory } from "react-router-dom";
-import { CREATE_NEW_QUIZ_PATH, EDIT_QUIZ_PAGE_PATH } from "../../router/config";
+import { EDIT_QUIZ_PAGE_PATH } from "../../router/config";
 import { PlusOutlined } from "@ant-design/icons";
 
 const MyQuizzes = () => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const [quizzes, setQuizzes] = useState<QuizDetails[]>([]);
+  const [quizIdToStart, setQuizIdToStart] = useState<number | undefined>(
+    undefined
+  );
   const history = useHistory();
 
   const deleteQuizMutation = useMutation(deleteQuiz);
+  const createQuizMutation = useMutation(createQuiz);
 
   const { isLoading, data } = useQuery("getAllQuizzes", getQuizzesDetails, {
     staleTime: 10000,
@@ -45,15 +51,15 @@ const MyQuizzes = () => {
       const keyWordLowerCase = keyWord.toLocaleLowerCase();
       const filteredData = data.data
         .filter((quiz) =>
-          quiz.quizName.toLocaleLowerCase().includes(keyWordLowerCase)
+          quiz.quizName?.toLocaleLowerCase()?.includes(keyWordLowerCase)
         )
         .sort((quiz1, quiz2) => {
           const quiz1NameStartsWithKeyWord: boolean = quiz1.quizName
-            .toLocaleLowerCase()
-            .startsWith(keyWordLowerCase);
+            ?.toLocaleLowerCase()
+            ?.startsWith(keyWordLowerCase);
           const quiz2NameStartsWithKeyWord: boolean = quiz2.quizName
-            .toLocaleLowerCase()
-            .startsWith(keyWordLowerCase);
+            ?.toLocaleLowerCase()
+            ?.startsWith(keyWordLowerCase);
           if (quiz1NameStartsWithKeyWord && !quiz2NameStartsWithKeyWord) {
             return -1;
           }
@@ -69,7 +75,12 @@ const MyQuizzes = () => {
   };
 
   const handleAddNewQuiz = () => {
-    history.push(CREATE_NEW_QUIZ_PATH);
+    createQuizMutation.mutate({ questions: [] as QuizQuestion[] } as Quiz, {
+      onSuccess: (result) => {
+        console.log(result);
+        handleModifyQuiz(result.data.id);
+      },
+    });
   };
 
   const handleDeleteQuiz = (quizId: number) => {
@@ -80,6 +91,22 @@ const MyQuizzes = () => {
         );
       },
     });
+  };
+
+  const handleRegisterRoom = (quizId: number) => {
+    setQuizIdToStart(quizId);
+  };
+
+  const handlePlayQuiz = (roomName: string) => {
+    if (quizIdToStart) {
+      startRoom({ quizId: quizIdToStart, roomName: roomName }).then((res) => {
+        const win = window.open(res.data.relocationUrl, "_blank");
+        if (win != null) {
+          win.focus();
+        }
+        setQuizIdToStart(undefined);
+      });
+    }
   };
 
   return (
@@ -110,6 +137,7 @@ const MyQuizzes = () => {
             </Row>
           ) : (
             <QuizCardList
+              handleRegisterRoom={handleRegisterRoom}
               handleModifyQuiz={handleModifyQuiz}
               handleDeleteQuiz={handleDeleteQuiz}
               quizzes={quizzes}
@@ -117,6 +145,11 @@ const MyQuizzes = () => {
           )}
         </Col>
       </Row>
+      <StartQuizModal
+        quizIdToStart={quizIdToStart}
+        onModalOk={handlePlayQuiz}
+        onModalCancel={() => setQuizIdToStart(undefined)}
+      />
     </div>
   );
 };
