@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Space, Spin } from "antd";
+import { Affix, Col, Row, Space, Spin } from "antd";
 import { QuestionStatisticsTable } from "containers";
-import { Icon } from "components";
+import { Icon, SearchBar } from "components";
 import { Show } from "assets/images";
 import "./QuestionStatistics.scss";
 import { QuestionStatisticsData } from "../../common/type/Types";
@@ -51,6 +51,32 @@ const QuestionStatistics = () => {
       `${STATISTICS_PAGE_PATH}/room/${dataFromHistory.roomId}/question/${id}${ANSWER_STATISTICS_PAGE_PATH}`
     );
   };
+  const filterAndSortQuestions = (keyword: string) => {
+    if (data?.data && keyword && keyword.trim()) {
+      const keywordLower = keyword.toLowerCase();
+      const filteredData = data.data
+        .filter((question) =>
+          question.type.toLowerCase().includes(keywordLower)
+        )
+        .sort((q1, q2) => {
+          const q1Lower: boolean = q1.type
+            .toLowerCase()
+            .startsWith(keywordLower);
+          const q2Lower: boolean = q2.type
+            .toLowerCase()
+            .startsWith(keywordLower);
+          if (q1Lower && !q2Lower) {
+            return -1;
+          } else if (!q1Lower && q2Lower) {
+            return 1;
+          }
+          return 0;
+        });
+      setQuestionData(filteredData);
+    } else {
+      setQuestionData(data?.data ?? []);
+    }
+  };
   const columns = [
     {
       title: "Title",
@@ -94,6 +120,18 @@ const QuestionStatistics = () => {
               </div>
               <div className={"room-name"}>
                 <h2>{dataFromHistory.roomName}</h2>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col className={"mt-2"} span={24}>
+              <div className="search-bar-wrapper">
+                <Affix>
+                  <SearchBar
+                    onSearchClick={filterAndSortQuestions}
+                    placeholder={"Filter by question type..."}
+                  />
+                </Affix>
               </div>
             </Col>
           </Row>

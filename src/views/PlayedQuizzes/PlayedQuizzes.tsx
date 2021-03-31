@@ -153,7 +153,10 @@ const PlayedQuizzes = () => {
         <Col className={"mt-5"} span={18} offset={3}>
           <div className="search-bar-wrapper">
             <Affix>
-              <SearchBar onSearchClick={filterAndSortRooms} />
+              <SearchBar
+                onSearchClick={filterAndSortRooms}
+                placeholder={"Filter by Room name..."}
+              />
             </Affix>
           </div>
         </Col>

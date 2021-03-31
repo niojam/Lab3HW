@@ -5,9 +5,10 @@ import { SearchOutlined } from "@ant-design/icons";
 
 interface SearchBarProps {
   onSearchClick: (keyWord: string) => void;
+  placeholder?: string;
 }
 
-const SearchBar = ({ onSearchClick }: SearchBarProps) => {
+const SearchBar = ({ onSearchClick, placeholder }: SearchBarProps) => {
   const [input, setInput] = useState<string>("");
 
   const handleInput = (e: FormEvent<HTMLInputElement>) => {
@@ -29,7 +30,7 @@ const SearchBar = ({ onSearchClick }: SearchBarProps) => {
       onChange={handleInput}
       size={"large"}
       className={"search-input"}
-      placeholder="Search..."
+      placeholder={placeholder ? placeholder : "Search..."}
     />
   );
 };
