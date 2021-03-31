@@ -28,7 +28,7 @@ export const routes: RouteType[] = [
   },
   {
     path: HOME_PAGE_PATH,
-    component: lazy(() => import("containers/Home/Home")),
+    component: lazy(() => import("views/Home/Home")),
     exact: true,
     private: true,
   },
@@ -42,13 +42,13 @@ export const routes: RouteType[] = [
     path: STATISTICS_PAGE_PATH,
     component: lazy(() => import("views/PlayedQuizzes/PlayedQuizzes")),
     exact: true,
-    private: false,
+    private: true,
   },
   {
     path: EDIT_QUIZ_PAGE_PATH + "/:quizId",
     component: lazy(() => import("views/EditQuiz/EditQuiz")),
     exact: true,
-    private: false,
+    private: true,
   },
   {
     path: CREATE_NEW_QUIZ_PATH,

@@ -12,7 +12,6 @@ const CustomRouter = ({ routes, isAuthenticated }: RouterProps) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Switch>
-        <Route path="/" exact={true} render={() => <Redirect to="/home" />} />
         <Route
           path="/login"
           render={() =>

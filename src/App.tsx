@@ -22,7 +22,12 @@ const App = () => {
     }
   }, [cookies]);
 
-  return <CustomRouter routes={routes} isAuthenticated={authenticated} />;
+  return (
+    <CustomRouter
+      routes={routes}
+      isAuthenticated={authenticated || cookies[KAHOOT_TOKEN_COOKIE]}
+    />
+  );
 };
 
 export default App;
