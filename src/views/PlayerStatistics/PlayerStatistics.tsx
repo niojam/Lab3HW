@@ -51,6 +51,9 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
       title: "Player",
       dataIndex: "username",
       key: "username",
+      sorter: (a: PlayerStatisticsData, b: PlayerStatisticsData) =>
+        a.username.localeCompare(b.username),
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: function renderIcon() {
@@ -58,6 +61,9 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
       },
       dataIndex: "correctAnswers",
       key: "correctAnswers",
+      sorter: (a: PlayerStatisticsData, b: PlayerStatisticsData) =>
+        a.correctAnswers - b.correctAnswers,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: function renderIcon() {
@@ -65,11 +71,17 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
       },
       dataIndex: "wrongAnswers",
       key: "wrongAnswers",
+      sorter: (a: PlayerStatisticsData, b: PlayerStatisticsData) =>
+        a.wrongAnswers - b.wrongAnswers,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Score",
       dataIndex: "score",
       key: "score",
+      sorter: (a: PlayerStatisticsData, b: PlayerStatisticsData) =>
+        a.score - b.score,
+      sortDirections: ["descend", "ascend"],
     },
   ];
 
