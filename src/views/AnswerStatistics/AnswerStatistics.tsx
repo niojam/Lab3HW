@@ -79,35 +79,37 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
     },
   ];
   return (
-    <div>
-      <Row justify={"center"} align={"middle"}>
-        <Col span={18} className={"m-3"}>
-          <Row>
-            <Col className={"col-text"}>
-              <div>
-                <h2>{questionTitle}</h2>
-              </div>
-              <div className={"answer-statistics-question-text"}>
-                <p>{questionText}</p>
-              </div>
+      <div>
+        <Row justify={"center"} align={"middle"}>
+          <Col span={18} className={"m-3"}>
+            <Col className={"p-3"}>
+              <Col>
+                <div>
+                  <h2>{questionTitle}</h2>
+                </div>
+                <div className={"question-text"}>
+                  <p>{questionText}</p>
+                </div>
+              </Col>
             </Col>
-          </Row>
-          <Col>
+          </Col>
+        </Row>
+        <Row justify={"center"}>
+          <Col span={18}>
             {isLoading ? (
-              <Row justify={"center"}>
-                <Spin size="large" />
-              </Row>
+                <Row justify={"center"}>
+                  <Spin size="large" />
+                </Row>
             ) : (
-              <AnswerStatisticsTable
-                data={answers}
-                columns={columns}
-                className={"answer-statistics-table"}
-              />
+                <AnswerStatisticsTable
+                    data={answers}
+                    columns={columns}
+                    className={"answer-statistics-table"}
+                />
             )}
           </Col>
-        </Col>
-      </Row>
-    </div>
+        </Row>
+      </div>
   );
 };
 
