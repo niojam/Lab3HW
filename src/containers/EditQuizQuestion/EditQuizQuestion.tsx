@@ -59,10 +59,7 @@ const EditQuizQuestion = ({
 
   const handleCorrectAnswerSelect = (name: string) => {
     const { current } = selectedAnsweringMode;
-    if (
-      current === QUESTION_TYPE.SINGLE_MATCH.value ||
-      current === QUESTION_TYPE.SINGLE_ANY.value
-    ) {
+    if (current === QUESTION_TYPE.SINGLE_MATCH.value) {
       setCorrectAnswers((prevState) =>
         prevState?.length && prevState[0] === name ? [] : [name]
       );
@@ -84,7 +81,6 @@ const EditQuizQuestion = ({
 
   const handleOnUploadChange = (info: any) => {
     const { status, response } = info.file;
-    console.log(info);
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
       setCurrentQuestion(
@@ -272,9 +268,6 @@ const EditQuizQuestion = ({
             <Select placeholder="Type">
               <Select.Option value={QUESTION_TYPE.SINGLE_MATCH.value}>
                 {QUESTION_TYPE.SINGLE_MATCH.text}
-              </Select.Option>
-              <Select.Option value={QUESTION_TYPE.SINGLE_ANY.value}>
-                {QUESTION_TYPE.SINGLE_ANY.text}
               </Select.Option>
               <Select.Option value={QUESTION_TYPE.MULTIPLE_MATCH.value}>
                 {QUESTION_TYPE.MULTIPLE_MATCH.text}

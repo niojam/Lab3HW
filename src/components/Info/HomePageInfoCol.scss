@@ -1,0 +1,21 @@
+@import "src/styles/variables";
+
+.page-info__wrapper {
+
+
+  animation-name: page-info__wrapper--animation;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  transition-property: transform;
+
+  .anticon {
+    font-size: 45px;
+    color: $base-color-black;
+  }
+}
+
+
+@keyframes page-info__wrapper--animation {
+  0%{opacity: 0}
+  100%{opacity: 1}
+}
