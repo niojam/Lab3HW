@@ -82,7 +82,7 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
     <div>
       <Row justify={"center"} align={"middle"}>
         <Col span={18} className={"m-3"}>
-          <Row className={"p-3"}>
+          <Col className={"p-3"}>
             <Col>
               <div className={"question-title"}>
                 <h1>{questionTitle}</h1>
@@ -91,20 +91,22 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
                 <p>{questionText}</p>
               </div>
             </Col>
-          </Row>
-          <Col>
-            {isLoading ? (
-              <Row justify={"center"}>
-                <Spin size="large" />
-              </Row>
-            ) : (
-              <AnswerStatisticsTable
-                data={answers}
-                columns={columns}
-                style={"answer-statistics-table"}
-              />
-            )}
           </Col>
+        </Col>
+      </Row>
+      <Row justify={"center"}>
+        <Col span={18}>
+          {isLoading ? (
+            <Row justify={"center"}>
+              <Spin size="large" />
+            </Row>
+          ) : (
+            <AnswerStatisticsTable
+              data={answers}
+              columns={columns}
+              style={"answer-statistics-table"}
+            />
+          )}
         </Col>
       </Row>
     </div>
