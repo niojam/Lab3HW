@@ -6,13 +6,14 @@ import { Affix, Button, Col, Row, Spin, Tooltip } from "antd";
 import { QuizCardList, StartQuizModal } from "../../containers";
 import { useMutation, useQuery } from "react-query";
 import {
+  createQuiz,
   deleteQuiz,
   getQuizzesDetails,
   startRoom,
 } from "../../common/client/BackOfficeApplicationClient";
-import { QuizDetails } from "../../common/type/Types";
+import { Quiz, QuizDetails, QuizQuestion } from "../../common/type/Types";
 import { useHistory } from "react-router-dom";
-import { CREATE_NEW_QUIZ_PATH, EDIT_QUIZ_PAGE_PATH } from "../../router/config";
+import { EDIT_QUIZ_PAGE_PATH } from "../../router/config";
 import { PlusOutlined } from "@ant-design/icons";
 
 const MyQuizzes = () => {
@@ -24,6 +25,7 @@ const MyQuizzes = () => {
   const history = useHistory();
 
   const deleteQuizMutation = useMutation(deleteQuiz);
+  const createQuizMutation = useMutation(createQuiz);
 
   const { isLoading, data } = useQuery("getAllQuizzes", getQuizzesDetails, {
     staleTime: 10000,
@@ -49,15 +51,15 @@ const MyQuizzes = () => {
       const keyWordLowerCase = keyWord.toLocaleLowerCase();
       const filteredData = data.data
         .filter((quiz) =>
-          quiz.quizName.toLocaleLowerCase().includes(keyWordLowerCase)
+          quiz.quizName?.toLocaleLowerCase()?.includes(keyWordLowerCase)
         )
         .sort((quiz1, quiz2) => {
           const quiz1NameStartsWithKeyWord: boolean = quiz1.quizName
-            .toLocaleLowerCase()
-            .startsWith(keyWordLowerCase);
+            ?.toLocaleLowerCase()
+            ?.startsWith(keyWordLowerCase);
           const quiz2NameStartsWithKeyWord: boolean = quiz2.quizName
-            .toLocaleLowerCase()
-            .startsWith(keyWordLowerCase);
+            ?.toLocaleLowerCase()
+            ?.startsWith(keyWordLowerCase);
           if (quiz1NameStartsWithKeyWord && !quiz2NameStartsWithKeyWord) {
             return -1;
           }
@@ -73,7 +75,12 @@ const MyQuizzes = () => {
   };
 
   const handleAddNewQuiz = () => {
-    history.push(CREATE_NEW_QUIZ_PATH);
+    createQuizMutation.mutate({ questions: [] as QuizQuestion[] } as Quiz, {
+      onSuccess: (result) => {
+        console.log(result);
+        handleModifyQuiz(result.data.id);
+      },
+    });
   };
 
   const handleDeleteQuiz = (quizId: number) => {

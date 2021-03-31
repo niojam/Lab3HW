@@ -2,6 +2,10 @@
 
 .quiz-card {
 
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+
   .ant-card-actions > li > span > .anticon {
     font-size: 35px;
     color: $base-color-black;

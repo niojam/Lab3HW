@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
-import { Button, Col, message, Modal, Row, Spin } from "antd";
+import { Button, Col, Form, message, Modal, Row, Spin } from "antd";
 import { GeneralHeader, ImageUploader } from "../../components";
 import GeneralInput from "../../components/Input/GeneralInput";
 import "./EditQuiz.scss";
@@ -41,13 +41,6 @@ const EditQuiz = (props: EditQuizProps) => {
       // Get existing by id
       getQuiz(quizId).then((result) => {
         setQuiz(result.data);
-      });
-    } else {
-      // new Quiz
-      createQuizMutation.mutate({ questions: [] as QuizQuestion[] } as Quiz, {
-        onSuccess: (result) => {
-          setQuiz(result.data);
-        },
       });
     }
   }, []);
@@ -194,16 +187,26 @@ const EditQuiz = (props: EditQuizProps) => {
   return (
     <div className={"scrollY"}>
       {quiz ? (
-        <>
+        <Form onFinish={handleQuizUpdate}>
           <Row className={"my-5"} justify="space-around">
             <Col className={"mt-5"} xxl={12} xs={16}>
               <GeneralHeader title={"NAME"} />
               <div className="general-input-wrapper">
-                <GeneralInput
-                  value={quiz.name}
-                  onChange={handleNameChange}
-                  placeholder={"Name Your Quiz"}
-                />
+                <Form.Item
+                  name={"quizName"}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Quiz name is required",
+                    },
+                  ]}
+                >
+                  <GeneralInput
+                    value={quiz.name}
+                    onChange={handleNameChange}
+                    placeholder={"Name Your Quiz"}
+                  />
+                </Form.Item>
               </div>
             </Col>
           </Row>
@@ -242,7 +245,7 @@ const EditQuiz = (props: EditQuizProps) => {
                 Add question
               </Button>
               <Button
-                onClick={() => handleQuizUpdate()}
+                htmlType={"submit"}
                 className={"edit-quiz--button mb-4"}
                 icon={<CheckOutlined />}
               >
@@ -269,7 +272,7 @@ const EditQuiz = (props: EditQuizProps) => {
               handleSaveQuestion={handleSaveQuestion}
             />
           </Modal>
-        </>
+        </Form>
       ) : (
         <Row className={"h-100vh"} justify={"center"} align={"middle"}>
           <Col>

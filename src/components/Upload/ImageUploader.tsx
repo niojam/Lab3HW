@@ -1,4 +1,5 @@
 import React from "react";
+import "./ImageUploader.scss";
 import { Upload } from "antd";
 import "antd/dist/antd.css";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
@@ -37,7 +38,7 @@ const ImageUploader = ({
       style={{ height: "250px" }}
     >
       {imageUrl ? (
-        <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+        <img className={"avatar-uploader__img"} src={imageUrl} alt="avatar" />
       ) : (
         uploadButton
       )}

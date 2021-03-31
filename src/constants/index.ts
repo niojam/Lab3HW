@@ -4,19 +4,15 @@ interface ObjectLiteral {
 
 export const QUESTION_TYPE: ObjectLiteral = {
   SINGLE_MATCH: {
-    text: "SINGLE_MATCH",
+    text: "Single Correct Answer",
     value: "SINGLE_MATCH",
   },
-  SINGLE_ANY: {
-    text: "SINGLE_ANY",
-    value: "SINGLE_ANY",
-  },
   MULTIPLE_MATCH: {
-    text: "MULTIPLE_MATCH",
+    text: "Multiple Match all ",
     value: "MULTIPLE_MATCH",
   },
   MULTIPLE_ANY: {
-    text: "MULTIPLE_ANY",
+    text: "Multiple any",
     value: "MULTIPLE_ANY",
   },
 };
