@@ -27,6 +27,8 @@ const PlayedQuizzes = () => {
     onSuccess: (result) => {
       const data: PlayedQuizzesData[] = result.data.map((quiz, index) => {
         quiz.key = index++;
+        quiz.startDateTime = Date.parse(quiz.startedAt);
+        console.log(quiz.startDateTime);
         const [date, time] = quiz.startedAt.split("T");
         const [year, month, day] = date.split("-");
         const [hour, minute] = time.split(":");
@@ -103,16 +105,25 @@ const PlayedQuizzes = () => {
       title: "Quiz Name",
       dataIndex: "quizName",
       key: "quizName",
+      sorter: (a: PlayedQuizzesData, b: PlayedQuizzesData) =>
+        a.quizName.localeCompare(b.quizName),
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Room Name",
       dataIndex: "roomName",
       key: "roomName",
+      sorter: (a: PlayedQuizzesData, b: PlayedQuizzesData) =>
+        a.roomName.localeCompare(b.roomName),
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Time",
       dataIndex: "startedAt",
       key: "startedAt",
+      sorter: (a: PlayedQuizzesData, b: PlayedQuizzesData) =>
+        a.startDateTime - b.startDateTime,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "",
