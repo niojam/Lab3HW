@@ -1,24 +1,11 @@
 @import "../../styles/_variables.scss";
 
-.ant-table-cell:nth-child(2) {
-  display: flex;
-  justify-content: center;
-}
-.ant-table-cell:nth-child(3) {
-  text-align: center;
-}
-.div__question-title {
+.question-title {
   font-size: 2rem;
 }
-.div__question-text {
+.question-text {
   font-size: 1.25rem;
   border-top: 2px solid $base-color-dark-blue;
 }
 
-.col-text {
-  font-family: "Times New Roman", Times, serif;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+

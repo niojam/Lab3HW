@@ -69,11 +69,13 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
           </div>
         );
       },
+      className: "icon__correct-wrong",
     },
     {
       title: "Frequency",
       dataIndex: "frequency",
       key: "frequency",
+      className: "frequency",
     },
   ];
   return (
@@ -81,16 +83,20 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
       <Row justify={"center"} align={"middle"}>
         <Col span={18} className={"m-3"}>
           <Row className={"p-3"}>
-            <Col className={"col-text"}>
-              <div className={"div__question-title"}>
+            <Col>
+              <div className={"question-title"}>
                 <h1>{questionTitle}</h1>
               </div>
-              <div className={"div__question-text"}>
+              <div className={"question-text"}>
                 <p>{questionText}</p>
               </div>
             </Col>
           </Row>
-          <AnswerStatisticsTable data={answers} columns={columns} />
+          <AnswerStatisticsTable
+            data={answers}
+            columns={columns}
+            style={"answer-statistics-table"}
+          />
         </Col>
       </Row>
     </div>

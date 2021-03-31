@@ -3,11 +3,11 @@ import { Col, Row } from "antd";
 import { PlayerStatisticsTable } from "containers";
 import { Icon } from "components";
 import { Check, Close } from "assets/images/index";
-import "./PlayerStatistics.scss";
 import { RouteComponentProps, useHistory } from "react-router-dom";
 import { PlayerStatisticsData } from "../../common/type/Types";
 import { useQuery } from "react-query";
 import { getPlayersStatistics } from "../../common/client/BackOfficeApplicationClient";
+import "./PlayerStatistics.scss";
 
 interface PlayerStatisticsRouterProps {
   roomId: string;

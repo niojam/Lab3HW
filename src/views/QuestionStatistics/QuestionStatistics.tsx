@@ -74,6 +74,7 @@ const QuestionStatistics = () => {
           </div>
         );
       },
+      className: "icon__view-answers",
     },
   ];
   return (
@@ -82,15 +83,19 @@ const QuestionStatistics = () => {
         <Col span={18} className={"m-3 col-container"}>
           <Row>
             <Col className={"col-text"}>
-              <div className={"div__quiz-name"}>
+              <div className={"quiz-name"}>
                 <h1>{dataFromHistory.quizName}</h1>
               </div>
-              <div className={"div__room-name"}>
+              <div className={"room-name"}>
                 <h2>{dataFromHistory.roomName}</h2>
               </div>
             </Col>
           </Row>
-          <QuestionStatisticsTable data={questions} columns={columns} />
+          <QuestionStatisticsTable
+            data={questions}
+            columns={columns}
+            style={"question-statistics-table"}
+          />
         </Col>
       </Row>
     </div>

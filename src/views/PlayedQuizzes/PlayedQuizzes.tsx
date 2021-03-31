@@ -3,7 +3,6 @@ import { PlayedQuizzesTable } from "containers";
 import { Affix, Col, Row, Space } from "antd";
 import { Icon, SearchBar } from "components";
 import { Chart, Download, Remove, Users } from "assets/images";
-import "./PlayedQuizzes.scss";
 import { PlayedQuizzesData } from "../../common/type/Types";
 import { useMutation, useQuery } from "react-query";
 import {
@@ -120,7 +119,7 @@ const PlayedQuizzes = () => {
       key: "action",
       render: function renderIcons(record: PlayedQuizzesData) {
         return (
-          <Space size="middle" className={"space__icons"}>
+          <Space size="middle">
             <div onClick={() => handleShowQuizStatistics(record)}>
               <Icon src={Chart} size={"smaller"} style={"icon__clickable"} />
             </div>
