@@ -3,6 +3,14 @@
   height: 50px;
 }
 
+.general-input-wrapper {
+  .edit-quiz--name-input {
+    border: transparent;
+    height: 50px;
+    font-size: 17px;
+  }
+}
+
 @media all and (max-width: 875px) {
 
   .edit-quiz--button-wrapper {

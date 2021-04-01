@@ -6,7 +6,6 @@ export { default as KahootSider } from "./Sider/KahootSider";
 export { default as GenericTable } from "./Table/Table";
 export { default as SearchBar } from "./SearchBar/SearchBar";
 export { default as QuizCard } from "./Card/QuizCard/QuizCard";
-export { default as GeneralInput } from "./Input/GeneralInput";
 export { default as GeneralHeader } from "./Header/GeneralHeader";
 export { default as ImageUploader } from "./Upload/ImageUploader";
 export { default as HomePageInfoCol } from "./Info/HomePageInfoCol";
