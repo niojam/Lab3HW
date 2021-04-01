@@ -69,7 +69,11 @@ const QuestionStatistics = () => {
         return (
           <div onClick={() => handleViewAnswers(record.id)}>
             <Space>
-              <Icon src={Show} size={"smaller"} style={"icon__clickable"} />
+              <Icon
+                src={Show}
+                size={"smaller"}
+                style={"general-table-icon__clickable"}
+              />
             </Space>
           </div>
         );
