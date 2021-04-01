@@ -82,12 +82,12 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
     <div>
       <Row justify={"center"} align={"middle"}>
         <Col span={18} className={"m-3"}>
-          <Row className={"p-3"}>
-            <Col>
-              <div className={"question-title"}>
-                <h1>{questionTitle}</h1>
+          <Row>
+            <Col className={"col-text"}>
+              <div>
+                <h2>{questionTitle}</h2>
               </div>
-              <div className={"question-text"}>
+              <div className={"answer-statistics-question-text"}>
                 <p>{questionText}</p>
               </div>
             </Col>
@@ -95,7 +95,7 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
           <AnswerStatisticsTable
             data={answers}
             columns={columns}
-            style={"answer-statistics-table"}
+            className={"answer-statistics-table"}
           />
         </Col>
       </Row>

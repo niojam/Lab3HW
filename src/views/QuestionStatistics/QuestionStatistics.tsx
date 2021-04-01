@@ -80,21 +80,21 @@ const QuestionStatistics = () => {
   return (
     <div>
       <Row justify={"center"} align={"middle"}>
-        <Col span={18} className={"m-3 col-container"}>
+        <Col span={18} className={"m-3"}>
           <Row>
             <Col className={"col-text"}>
-              <div className={"quiz-name"}>
-                <h1>{dataFromHistory.quizName}</h1>
+              <div>
+                <h2>{dataFromHistory.quizName}</h2>
               </div>
-              <div className={"room-name"}>
-                <h2>{dataFromHistory.roomName}</h2>
+              <div className={"question-statistics-room-name"}>
+                <h3>{dataFromHistory.roomName}</h3>
               </div>
             </Col>
           </Row>
           <QuestionStatisticsTable
             data={questions}
             columns={columns}
-            style={"question-statistics-table"}
+            className={"question-statistics-table"}
           />
         </Col>
       </Row>

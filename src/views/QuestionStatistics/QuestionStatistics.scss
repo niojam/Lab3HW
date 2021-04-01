@@ -5,16 +5,9 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-.quiz-name {
-  font-size: 2rem;
-}
-
-.room-name {
-  padding: 1rem;
-  font-size: 1rem;
+.question-statistics-room-name {
   border-top: 2px solid $base-color-dark-blue;
 }
 

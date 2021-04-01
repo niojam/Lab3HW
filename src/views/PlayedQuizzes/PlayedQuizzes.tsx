@@ -121,14 +121,30 @@ const PlayedQuizzes = () => {
         return (
           <Space size="middle">
             <div onClick={() => handleShowQuizStatistics(record)}>
-              <Icon src={Chart} size={"smaller"} style={"icon__clickable"} />
+              <Icon
+                src={Chart}
+                size={"smaller"}
+                style={"played-quizzes-icon__clickable"}
+              />
             </div>
             <div onClick={() => handleShowPlayerStatistics(record)}>
-              <Icon src={Users} size={"smaller"} style={"icon__clickable"} />
+              <Icon
+                src={Users}
+                size={"smaller"}
+                style={"played-quizzes-icon__clickable"}
+              />
             </div>
-            <Icon src={Download} size={"smaller"} style={"icon__clickable"} />
+            <Icon
+              src={Download}
+              size={"smaller"}
+              style={"played-quizzes-icon__clickable"}
+            />
             <div onClick={() => handleDeleteRoom(record)}>
-              <Icon src={Remove} size={"smaller"} style={"icon__clickable"} />
+              <Icon
+                src={Remove}
+                size={"smaller"}
+                style={"played-quizzes-icon__clickable"}
+              />
             </div>
           </Space>
         );
