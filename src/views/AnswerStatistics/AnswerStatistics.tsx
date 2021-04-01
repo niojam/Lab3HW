@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Row } from "antd";
 import { AnswerStatisticsTable } from "containers";
 import { Icon } from "components";
-import { Check, Close } from "assets/images";
+import { Check, Close } from "assets/images/index";
 import "./AnswerStatistics.scss";
 import { RouteComponentProps } from "react-router-dom";
 import { AnswerStatisticsData } from "../../common/type/Types";
@@ -60,30 +60,43 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
       key: "isCorrect",
       render: function renderIcon(text: string, record: AnswerStatisticsData) {
         return record.correct ? (
-          <Icon src={Check} size={"extra-small"} />
+          <div>
+            <Icon src={Check} size={"extra-small"} />
+          </div>
         ) : (
-          <Icon src={Close} size={"extra-small"} />
+          <div>
+            <Icon src={Close} size={"extra-small"} />
+          </div>
         );
       },
+      className: "icon__correct-wrong",
     },
     {
       title: "Frequency",
       dataIndex: "frequency",
       key: "frequency",
+      className: "frequency",
     },
   ];
   return (
-    <div className={"div-container"}>
+    <div>
       <Row justify={"center"} align={"middle"}>
-        <Col span={24} className={"m-3"}>
-          <Row className={"p-3"}>
+        <Col span={18} className={"m-3"}>
+          <Row>
             <Col className={"col-text"}>
-              <div className={"div__question-title"}>{questionTitle}</div>
-              <hr />
-              <div className={"div__question-text"}>{questionText}</div>
+              <div>
+                <h2>{questionTitle}</h2>
+              </div>
+              <div className={"answer-statistics-question-text"}>
+                <p>{questionText}</p>
+              </div>
             </Col>
           </Row>
-          <AnswerStatisticsTable data={answers} columns={columns} />
+          <AnswerStatisticsTable
+            data={answers}
+            columns={columns}
+            className={"answer-statistics-table"}
+          />
         </Col>
       </Row>
     </div>

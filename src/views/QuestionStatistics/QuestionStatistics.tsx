@@ -69,24 +69,33 @@ const QuestionStatistics = () => {
         return (
           <div onClick={() => handleViewAnswers(record.id)}>
             <Space>
-              <Icon src={Show} size={"smaller"} />
+              <Icon src={Show} size={"smaller"} style={"icon__clickable"} />
             </Space>
           </div>
         );
       },
+      className: "icon__view-answers",
     },
   ];
   return (
-    <div className={"div-container"}>
+    <div>
       <Row justify={"center"} align={"middle"}>
-        <Col span={24} className={"m-3 col-container"}>
+        <Col span={18} className={"m-3"}>
           <Row>
             <Col className={"col-text"}>
-              <div className={"div__quiz-name"}>{dataFromHistory.quizName}</div>
-              <div className={"div__room-name"}>{dataFromHistory.roomName}</div>
+              <div>
+                <h2>{dataFromHistory.quizName}</h2>
+              </div>
+              <div className={"question-statistics-room-name"}>
+                <h3>{dataFromHistory.roomName}</h3>
+              </div>
             </Col>
           </Row>
-          <QuestionStatisticsTable data={questions} columns={columns} />
+          <QuestionStatisticsTable
+            data={questions}
+            columns={columns}
+            className={"question-statistics-table"}
+          />
         </Col>
       </Row>
     </div>
