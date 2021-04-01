@@ -77,9 +77,9 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
     <div>
       <Row justify={"center"} align={"middle"}>
         <Col span={18} className={"m-3 col-container"}>
-          <Row className={"p-3"}>
+          <Row>
             <Col className={"col-text"} span={24}>
-              <h1>{quizName}</h1>
+              <h2>{quizName}</h2>
             </Col>
           </Row>
         </Col>

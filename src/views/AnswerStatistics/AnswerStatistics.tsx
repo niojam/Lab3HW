@@ -79,37 +79,37 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
     },
   ];
   return (
-      <div>
-        <Row justify={"center"} align={"middle"}>
-          <Col span={18} className={"m-3"}>
-            <Col className={"p-3"}>
-              <Col>
-                <div>
-                  <h2>{questionTitle}</h2>
-                </div>
-                <div className={"question-text"}>
-                  <p>{questionText}</p>
-                </div>
-              </Col>
+    <div>
+      <Row justify={"center"} align={"middle"}>
+        <Col span={18} className={"m-3"}>
+          <Col>
+            <Col>
+              <div>
+                <h2>{questionTitle}</h2>
+              </div>
+              <div className={"answer-statistics-question-text"}>
+                <p>{questionText}</p>
+              </div>
             </Col>
           </Col>
-        </Row>
-        <Row justify={"center"}>
-          <Col span={18}>
-            {isLoading ? (
-                <Row justify={"center"}>
-                  <Spin size="large" />
-                </Row>
-            ) : (
-                <AnswerStatisticsTable
-                    data={answers}
-                    columns={columns}
-                    className={"answer-statistics-table"}
-                />
-            )}
-          </Col>
-        </Row>
-      </div>
+        </Col>
+      </Row>
+      <Row justify={"center"}>
+        <Col span={18}>
+          {isLoading ? (
+            <Row justify={"center"}>
+              <Spin size="large" />
+            </Row>
+          ) : (
+            <AnswerStatisticsTable
+              data={answers}
+              columns={columns}
+              className={"answer-statistics-table"}
+            />
+          )}
+        </Col>
+      </Row>
+    </div>
   );
 };
 
