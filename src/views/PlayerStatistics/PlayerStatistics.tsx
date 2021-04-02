@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Spin } from "antd";
 import { PlayerStatisticsTable } from "containers";
 import { Icon } from "components";
 import { Check, Close } from "assets/images/index";
@@ -24,7 +24,7 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
   const roomId = props.match.params.roomId;
   const quizName = history.location.state.quizName;
   const [playerData, setPlayerData] = useState<PlayerStatisticsData[]>([]);
-  const { data } = useQuery(
+  const { isLoading, data } = useQuery(
     ["getPlayersStatisticsData", roomId],
     () => getPlayersStatistics(String(roomId)),
     {
@@ -77,12 +77,22 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
     <div>
       <Row justify={"center"} align={"middle"}>
         <Col span={18} className={"m-3 col-container"}>
-          <Row className={"p-3"}>
-            <Col className={"col-text"}>
-              <h1>{quizName}</h1>
+          <Row>
+            <Col className={"col-text"} span={24}>
+              <h2>{quizName}</h2>
             </Col>
           </Row>
-          <PlayerStatisticsTable data={playerData} columns={columns} />
+        </Col>
+      </Row>
+      <Row justify={"center"}>
+        <Col span={18}>
+          {isLoading ? (
+            <Row justify={"center"}>
+              <Spin size="large" />
+            </Row>
+          ) : (
+            <PlayerStatisticsTable data={playerData} columns={columns} />
+          )}
         </Col>
       </Row>
     </div>

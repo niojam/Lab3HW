@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Space } from "antd";
+import { Col, Row, Space, Spin } from "antd";
 import { QuestionStatisticsTable } from "containers";
 import { Icon } from "components";
 import { Show } from "assets/images";
@@ -24,7 +24,7 @@ const QuestionStatistics = () => {
   const history = useHistory<QuestionStatisticsHistoryProps>();
   const dataFromHistory = history.location.state;
   const [questions, setQuestionData] = useState<QuestionStatisticsData[]>([]);
-  const { data } = useQuery(
+  const { isLoading, data } = useQuery(
     "getQuestionStatistics",
     () => getQuestionStatistics(dataFromHistory.quizId),
     {
@@ -69,7 +69,11 @@ const QuestionStatistics = () => {
         return (
           <div onClick={() => handleViewAnswers(record.id)}>
             <Space>
-              <Icon src={Show} size={"smaller"} style={"icon__clickable"} />
+              <Icon
+                src={Show}
+                size={"smaller"}
+                style={"general-table-icon__clickable"}
+              />
             </Space>
           </div>
         );
@@ -91,11 +95,21 @@ const QuestionStatistics = () => {
               </div>
             </Col>
           </Row>
-          <QuestionStatisticsTable
-            data={questions}
-            columns={columns}
-            className={"question-statistics-table"}
-          />
+        </Col>
+      </Row>
+      <Row justify={"center"}>
+        <Col span={18}>
+          {isLoading ? (
+            <Row justify={"center"}>
+              <Spin size="large" />
+            </Row>
+          ) : (
+            <QuestionStatisticsTable
+              data={questions}
+              columns={columns}
+              className={"question-statistics-table"}
+            />
+          )}
         </Col>
       </Row>
     </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PlayedQuizzesTable } from "containers";
-import { Affix, Col, Row, Space } from "antd";
+import { Affix, Col, Row, Space, Spin } from "antd";
 import { Icon, SearchBar } from "components";
 import { Chart, Download, Remove, Users } from "assets/images";
 import { PlayedQuizzesData } from "../../common/type/Types";
@@ -20,7 +20,7 @@ const PlayedQuizzes = () => {
   const history = useHistory();
   const [rooms, setRoomStatistics] = useState<PlayedQuizzesData[]>([]);
   const deleteRoomMutation = useMutation(deleteRoom);
-  const { data } = useQuery("getAuthorQuizzes", getPlayedQuizzes, {
+  const { isLoading, data } = useQuery("getAuthorQuizzes", getPlayedQuizzes, {
     staleTime: 10000,
     refetchOnWindowFocus: false,
     retry: false,
@@ -124,26 +124,26 @@ const PlayedQuizzes = () => {
               <Icon
                 src={Chart}
                 size={"smaller"}
-                style={"played-quizzes-icon__clickable"}
+                style={"general-table-icon__clickable"}
               />
             </div>
             <div onClick={() => handleShowPlayerStatistics(record)}>
               <Icon
                 src={Users}
                 size={"smaller"}
-                style={"played-quizzes-icon__clickable"}
+                style={"general-table-icon__clickable"}
               />
             </div>
             <Icon
               src={Download}
               size={"smaller"}
-              style={"played-quizzes-icon__clickable"}
+              style={"general-table-icon__clickable"}
             />
             <div onClick={() => handleDeleteRoom(record)}>
               <Icon
                 src={Remove}
                 size={"smaller"}
-                style={"played-quizzes-icon__clickable"}
+                style={"general-table-icon__clickable"}
               />
             </div>
           </Space>
@@ -165,7 +165,13 @@ const PlayedQuizzes = () => {
       </Row>
       <Row justify={"center"} align={"middle"}>
         <Col span={18} className={"mt-3"}>
-          <PlayedQuizzesTable data={rooms} columns={columns} />
+          {isLoading ? (
+            <Row justify={"center"}>
+              <Spin size="large" />
+            </Row>
+          ) : (
+            <PlayedQuizzesTable data={rooms} columns={columns} />
+          )}
         </Col>
       </Row>
     </div>
