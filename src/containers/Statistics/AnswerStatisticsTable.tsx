@@ -4,15 +4,17 @@ import { AnswerStatisticsData } from "../../common/type/Types";
 interface AnswerStatisticsTableProps {
   data: AnswerStatisticsData[];
   columns: Array<any>;
-  style?: string;
+  className?: string;
 }
 
 const AnswerStatisticsTable = ({
   data,
   columns,
-  style,
+  className,
 }: AnswerStatisticsTableProps) => {
-  return <GenericTable tableData={data} columns={columns} className={style} />;
+  return (
+    <GenericTable tableData={data} columns={columns} className={className} />
+  );
 };
 
 export default AnswerStatisticsTable;

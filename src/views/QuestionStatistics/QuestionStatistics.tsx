@@ -56,13 +56,13 @@ const QuestionStatistics = () => {
       const keywordLower = keyword.toLowerCase();
       const filteredData = data.data
         .filter((question) =>
-          question.type.toLowerCase().includes(keywordLower)
+          question.questionType.toLowerCase().includes(keywordLower)
         )
         .sort((q1, q2) => {
-          const q1Lower: boolean = q1.type
+          const q1Lower: boolean = q1.questionType
             .toLowerCase()
             .startsWith(keywordLower);
-          const q2Lower: boolean = q2.type
+          const q2Lower: boolean = q2.questionType
             .toLowerCase()
             .startsWith(keywordLower);
           if (q1Lower && !q2Lower) {
@@ -91,7 +91,7 @@ const QuestionStatistics = () => {
       dataIndex: "questionType",
       key: "questionType",
       sorter: (a: QuestionStatisticsData, b: QuestionStatisticsData) =>
-        a.type.localeCompare(b.type),
+        a.questionType.localeCompare(b.questionType),
       sortDirections: ["descend", "ascend"],
     },
     {
@@ -101,7 +101,11 @@ const QuestionStatistics = () => {
         return (
           <div onClick={() => handleViewAnswers(record.id)}>
             <Space>
-              <Icon src={Show} size={"smaller"} style={"icon__clickable"} />
+              <Icon
+                src={Show}
+                size={"smaller"}
+                style={"general-table-icon__clickable"}
+              />
             </Space>
           </div>
         );
@@ -112,14 +116,14 @@ const QuestionStatistics = () => {
   return (
     <div>
       <Row justify={"center"} align={"middle"}>
-        <Col span={18} className={"m-3 col-container"}>
+        <Col span={18} className={"m-3"}>
           <Row>
             <Col className={"col-text"}>
-              <div className={"quiz-name"}>
-                <h1>{dataFromHistory.quizName}</h1>
+              <div>
+                <h2>{dataFromHistory.quizName}</h2>
               </div>
-              <div className={"room-name"}>
-                <h2>{dataFromHistory.roomName}</h2>
+              <div className={"question-statistics-room-name"}>
+                <h3>{dataFromHistory.roomName}</h3>
               </div>
             </Col>
           </Row>
@@ -147,7 +151,7 @@ const QuestionStatistics = () => {
             <QuestionStatisticsTable
               data={questions}
               columns={columns}
-              style={"question-statistics-table"}
+              className={"question-statistics-table"}
             />
           )}
         </Col>

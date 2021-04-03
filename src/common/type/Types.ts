@@ -66,7 +66,7 @@ export interface QuestionStatisticsData {
   key: number;
   id: number;
   title: string;
-  type: string;
+  questionType: string;
 }
 
 export interface AnswerStatisticsData {

@@ -28,7 +28,6 @@ const PlayedQuizzes = () => {
       const data: PlayedQuizzesData[] = result.data.map((quiz, index) => {
         quiz.key = index++;
         quiz.startDateTime = Date.parse(quiz.startedAt);
-        console.log(quiz.startDateTime);
         const [date, time] = quiz.startedAt.split("T");
         const [year, month, day] = date.split("-");
         const [hour, minute] = time.split(":");
@@ -136,12 +135,20 @@ const PlayedQuizzes = () => {
               title="Show question statistics"
             >
               <div onClick={() => handleShowQuizStatistics(record)}>
-                <Icon src={Chart} size={"smaller"} style={"icon__clickable"} />
+                <Icon
+                  src={Chart}
+                  size={"smaller"}
+                  style={"general-table-icon__clickable"}
+                />
               </div>
             </Tooltip>
             <Tooltip key={"playerStatistics"} title="Show player statistics">
               <div onClick={() => handleShowPlayerStatistics(record)}>
-                <Icon src={Users} size={"smaller"} style={"icon__clickable"} />
+                <Icon
+                  src={Users}
+                  size={"smaller"}
+                  style={"general-table-icon__clickable"}
+                />
               </div>
             </Tooltip>
             <Tooltip key={"downloadStatistics"} title="Download statistics">
@@ -149,13 +156,17 @@ const PlayedQuizzes = () => {
                 <Icon
                   src={Download}
                   size={"smaller"}
-                  style={"icon__clickable"}
+                  style={"general-table-icon__clickable"}
                 />
               </div>
             </Tooltip>
             <Tooltip key={"deleteRoom"} title="Delete room">
               <div onClick={() => handleDeleteRoom(record)}>
-                <Icon src={Remove} size={"smaller"} style={"icon__clickable"} />
+                <Icon
+                  src={Remove}
+                  size={"smaller"}
+                  style={"general-table-icon__clickable"}
+                />
               </div>
             </Tooltip>
           </Space>
