@@ -28,7 +28,6 @@ const PlayedQuizzes = () => {
       const data: PlayedQuizzesData[] = result.data.map((quiz, index) => {
         quiz.key = index++;
         quiz.startDateTime = Date.parse(quiz.startedAt);
-        console.log(quiz.startDateTime);
         const [date, time] = quiz.startedAt.split("T");
         const [year, month, day] = date.split("-");
         const [hour, minute] = time.split(":");
