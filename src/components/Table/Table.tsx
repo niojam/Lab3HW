@@ -14,7 +14,7 @@ const GenericTable = ({ tableData, columns, className }: TableProps) => {
       dataSource={tableData}
       columns={columns}
       pagination={false}
-      scroll={{ x: 800 }}
+      scroll={{ x: 800, y: 400 }}
       className={className}
     />
   ) : (

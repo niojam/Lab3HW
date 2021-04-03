@@ -53,6 +53,9 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
       title: "Answer",
       dataIndex: "answerText",
       key: "answerText",
+      sorter: (a: AnswerStatisticsData, b: AnswerStatisticsData) =>
+        a.answerText.localeCompare(b.answerText),
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Correct",
@@ -76,6 +79,9 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
       dataIndex: "frequency",
       key: "frequency",
       className: "frequency",
+      sorter: (a: AnswerStatisticsData, b: AnswerStatisticsData) =>
+        a.frequency - b.frequency,
+      sortDirections: ["descend", "ascend"],
     },
   ];
   return (
