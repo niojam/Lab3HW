@@ -65,7 +65,7 @@ const QuestionStatistics = () => {
       dataIndex: "questionType",
       key: "questionType",
       sorter: (a: QuestionStatisticsData, b: QuestionStatisticsData) =>
-        a.type.localeCompare(b.type),
+        a.questionType.localeCompare(b.questionType),
       sortDirections: ["descend", "ascend"],
     },
     {
