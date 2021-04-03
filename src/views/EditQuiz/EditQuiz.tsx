@@ -1,9 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 
-import { Button, Col, Form, message, Modal, Row, Spin } from "antd";
+import { Button, Col, Form, Input, message, Modal, Row, Spin } from "antd";
 import { GeneralHeader, ImageUploader } from "../../components";
-import GeneralInput from "../../components/Input/GeneralInput";
 import "./EditQuiz.scss";
 import { useMutation } from "react-query";
 import {
@@ -200,11 +199,11 @@ const EditQuiz = (props: EditQuizProps) => {
                       message: "Quiz name is required",
                     },
                   ]}
+                  initialValue={quiz.name}
                 >
-                  <GeneralInput
-                    value={quiz.name}
+                  <Input
                     onChange={handleNameChange}
-                    placeholder={"Name Your Quiz"}
+                    className={"edit-quiz--name-input"}
                   />
                 </Form.Item>
               </div>

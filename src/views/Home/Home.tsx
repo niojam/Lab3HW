@@ -22,8 +22,8 @@ const Home = () => {
           </Row>
         </Col>
       </Row>
-      <Row className={"mt-5"}>
-        <Col sm={24} lg={8}>
+      <Row justify={"space-between"} className={"mt-5"}>
+        <Col xs={24} lg={8}>
           <HomePageInfoCol
             header={"Create Quizzes"}
             text={
@@ -32,7 +32,7 @@ const Home = () => {
             icon={<EditFilled />}
           />
         </Col>
-        <Col sm={24} lg={8}>
+        <Col xs={24} lg={8}>
           <HomePageInfoCol
             header={"Play Quizzes"}
             text={
@@ -41,7 +41,7 @@ const Home = () => {
             icon={<CaretRightFilled />}
           />
         </Col>
-        <Col sm={24} lg={8}>
+        <Col xs={24} lg={8}>
           <HomePageInfoCol
             header={"Watch Reports"}
             text={
