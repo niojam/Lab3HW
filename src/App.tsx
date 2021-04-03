@@ -10,6 +10,7 @@ import {
 } from "./store/AuthenticationSlice";
 import { useCookies } from "react-cookie";
 import { KAHOOT_TOKEN_COOKIE } from "./common/constants/Constants";
+import { isTokenExpired } from "./common/util/TokenUtil";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,10 @@ const App = () => {
   const authenticated = useSelector(isUserAuthenticated);
 
   useEffect(() => {
-    if (cookies[KAHOOT_TOKEN_COOKIE]) {
+    if (
+      cookies[KAHOOT_TOKEN_COOKIE] &&
+      !isTokenExpired(cookies[KAHOOT_TOKEN_COOKIE])
+    ) {
       dispatch(setIsUserAuthenticated(true));
     }
   }, [cookies]);
@@ -25,7 +29,11 @@ const App = () => {
   return (
     <CustomRouter
       routes={routes}
-      isAuthenticated={authenticated || cookies[KAHOOT_TOKEN_COOKIE]}
+      isAuthenticated={
+        authenticated ||
+        (cookies[KAHOOT_TOKEN_COOKIE] &&
+          !isTokenExpired(cookies[KAHOOT_TOKEN_COOKIE]))
+      }
     />
   );
 };
