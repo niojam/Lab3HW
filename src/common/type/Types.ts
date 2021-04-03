@@ -50,6 +50,7 @@ export interface PlayedQuizzesData {
   quizId: number;
   authorId: number;
   startedAt: string;
+  startDateTime: number;
 }
 
 export interface PlayerStatisticsData {
@@ -65,7 +66,7 @@ export interface QuestionStatisticsData {
   key: number;
   id: number;
   title: string;
-  type: string;
+  questionType: string;
 }
 
 export interface AnswerStatisticsData {

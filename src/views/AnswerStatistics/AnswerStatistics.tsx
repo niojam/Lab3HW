@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row } from "antd";
+import { Col, Row, Spin } from "antd";
 import { AnswerStatisticsTable } from "containers";
 import { Icon } from "components";
-import { Check, Close } from "assets/images";
+import { Check, Close } from "assets/images/index";
 import "./AnswerStatistics.scss";
 import { RouteComponentProps } from "react-router-dom";
 import { AnswerStatisticsData } from "../../common/type/Types";
@@ -23,7 +23,7 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
   const [questionTitle, setQuestionTitle] = useState("");
   const [questionText, setQuestionText] = useState("");
 
-  const { data } = useQuery(
+  const { isLoading, data } = useQuery(
     "getAnswerStatistics",
     () => getAnswerStatistics(roomId, questionId),
     {
@@ -53,6 +53,9 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
       title: "Answer",
       dataIndex: "answerText",
       key: "answerText",
+      sorter: (a: AnswerStatisticsData, b: AnswerStatisticsData) =>
+        a.answerText.localeCompare(b.answerText),
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Correct",
@@ -60,30 +63,56 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
       key: "isCorrect",
       render: function renderIcon(text: string, record: AnswerStatisticsData) {
         return record.correct ? (
-          <Icon src={Check} size={"extra-small"} />
+          <div>
+            <Icon src={Check} size={"extra-small"} />
+          </div>
         ) : (
-          <Icon src={Close} size={"extra-small"} />
+          <div>
+            <Icon src={Close} size={"extra-small"} />
+          </div>
         );
       },
+      className: "icon__correct-wrong",
     },
     {
       title: "Frequency",
       dataIndex: "frequency",
       key: "frequency",
+      className: "frequency",
+      sorter: (a: AnswerStatisticsData, b: AnswerStatisticsData) =>
+        a.frequency - b.frequency,
+      sortDirections: ["descend", "ascend"],
     },
   ];
   return (
-    <div className={"div-container"}>
+    <div>
       <Row justify={"center"} align={"middle"}>
-        <Col span={24} className={"m-3"}>
-          <Row className={"p-3"}>
-            <Col className={"col-text"}>
-              <div className={"div__question-title"}>{questionTitle}</div>
-              <hr />
-              <div className={"div__question-text"}>{questionText}</div>
+        <Col span={18} className={"m-3"}>
+          <Col>
+            <Col>
+              <div>
+                <h2>{questionTitle}</h2>
+              </div>
+              <div className={"answer-statistics-question-text"}>
+                <p>{questionText}</p>
+              </div>
             </Col>
-          </Row>
-          <AnswerStatisticsTable data={answers} columns={columns} />
+          </Col>
+        </Col>
+      </Row>
+      <Row justify={"center"}>
+        <Col span={18}>
+          {isLoading ? (
+            <Row justify={"center"}>
+              <Spin size="large" />
+            </Row>
+          ) : (
+            <AnswerStatisticsTable
+              data={answers}
+              columns={columns}
+              className={"answer-statistics-table"}
+            />
+          )}
         </Col>
       </Row>
     </div>

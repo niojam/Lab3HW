@@ -1,27 +1,5 @@
-@import "../../styles/_variables.scss";
-.div-container {
-  background-color: $base-color-white;
-  max-width: 1200px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+
+.icon__table {
+  filter: invert(86%) sepia(47%) saturate(0%) hue-rotate(47deg) brightness(112%) contrast(100%);
 }
 
-@media screen and (min-width: 764px) {
-  .div-container {
-    margin-top: 5%;
-  }
-}
-.col-text {
-  font-family: "Times New Roman", Times, serif;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-weight: bold;
-  color: $base-color-dark-blue;
-}
-
-.div__quiz-name {
-  font-size: 3rem;
-}

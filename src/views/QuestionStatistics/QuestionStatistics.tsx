@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Row, Space } from "antd";
+import { Col, Row, Space, Spin } from "antd";
 import { QuestionStatisticsTable } from "containers";
 import { Icon } from "components";
 import { Show } from "assets/images";
@@ -24,7 +24,7 @@ const QuestionStatistics = () => {
   const history = useHistory<QuestionStatisticsHistoryProps>();
   const dataFromHistory = history.location.state;
   const [questions, setQuestionData] = useState<QuestionStatisticsData[]>([]);
-  const { data } = useQuery(
+  const { isLoading, data } = useQuery(
     "getQuestionStatistics",
     () => getQuestionStatistics(dataFromHistory.quizId),
     {
@@ -56,11 +56,17 @@ const QuestionStatistics = () => {
       title: "Title",
       dataIndex: "title",
       key: "title",
+      sorter: (a: QuestionStatisticsData, b: QuestionStatisticsData) =>
+        a.title.localeCompare(b.title),
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Type",
       dataIndex: "questionType",
       key: "questionType",
+      sorter: (a: QuestionStatisticsData, b: QuestionStatisticsData) =>
+        a.questionType.localeCompare(b.questionType),
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "View Answers",
@@ -69,24 +75,47 @@ const QuestionStatistics = () => {
         return (
           <div onClick={() => handleViewAnswers(record.id)}>
             <Space>
-              <Icon src={Show} size={"smaller"} />
+              <Icon
+                src={Show}
+                size={"smaller"}
+                style={"general-table-icon__clickable"}
+              />
             </Space>
           </div>
         );
       },
+      className: "icon__view-answers",
     },
   ];
   return (
-    <div className={"div-container"}>
+    <div>
       <Row justify={"center"} align={"middle"}>
-        <Col span={24} className={"m-3 col-container"}>
+        <Col span={18} className={"m-3"}>
           <Row>
             <Col className={"col-text"}>
-              <div className={"div__quiz-name"}>{dataFromHistory.quizName}</div>
-              <div className={"div__room-name"}>{dataFromHistory.roomName}</div>
+              <div>
+                <h2>{dataFromHistory.quizName}</h2>
+              </div>
+              <div className={"question-statistics-room-name"}>
+                <h3>{dataFromHistory.roomName}</h3>
+              </div>
             </Col>
           </Row>
-          <QuestionStatisticsTable data={questions} columns={columns} />
+        </Col>
+      </Row>
+      <Row justify={"center"}>
+        <Col span={18}>
+          {isLoading ? (
+            <Row justify={"center"}>
+              <Spin size="large" />
+            </Row>
+          ) : (
+            <QuestionStatisticsTable
+              data={questions}
+              columns={columns}
+              className={"question-statistics-table"}
+            />
+          )}
         </Col>
       </Row>
     </div>

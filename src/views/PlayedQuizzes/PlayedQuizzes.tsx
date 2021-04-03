@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { PlayedQuizzesTable } from "containers";
-import { Col, Row, Space } from "antd";
+import { Affix, Col, Row, Space, Spin } from "antd";
 import { Icon, SearchBar } from "components";
 import { Chart, Download, Remove, Users } from "assets/images";
-import "./PlayedQuizzes.scss";
 import { PlayedQuizzesData } from "../../common/type/Types";
 import { useMutation, useQuery } from "react-query";
 import {
@@ -21,13 +20,14 @@ const PlayedQuizzes = () => {
   const history = useHistory();
   const [rooms, setRoomStatistics] = useState<PlayedQuizzesData[]>([]);
   const deleteRoomMutation = useMutation(deleteRoom);
-  const { data } = useQuery("getAuthorQuizzes", getPlayedQuizzes, {
+  const { isLoading, data } = useQuery("getAuthorQuizzes", getPlayedQuizzes, {
     staleTime: 10000,
     refetchOnWindowFocus: false,
     retry: false,
     onSuccess: (result) => {
       const data: PlayedQuizzesData[] = result.data.map((quiz, index) => {
         quiz.key = index++;
+        quiz.startDateTime = Date.parse(quiz.startedAt);
         const [date, time] = quiz.startedAt.split("T");
         const [year, month, day] = date.split("-");
         const [hour, minute] = time.split(":");
@@ -104,16 +104,25 @@ const PlayedQuizzes = () => {
       title: "Quiz Name",
       dataIndex: "quizName",
       key: "quizName",
+      sorter: (a: PlayedQuizzesData, b: PlayedQuizzesData) =>
+        a.quizName.localeCompare(b.quizName),
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Room Name",
       dataIndex: "roomName",
       key: "roomName",
+      sorter: (a: PlayedQuizzesData, b: PlayedQuizzesData) =>
+        a.roomName.localeCompare(b.roomName),
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "Time",
       dataIndex: "startedAt",
       key: "startedAt",
+      sorter: (a: PlayedQuizzesData, b: PlayedQuizzesData) =>
+        a.startDateTime - b.startDateTime,
+      sortDirections: ["descend", "ascend"],
     },
     {
       title: "",
@@ -122,14 +131,30 @@ const PlayedQuizzes = () => {
         return (
           <Space size="middle">
             <div onClick={() => handleShowQuizStatistics(record)}>
-              <Icon src={Chart} size={"smaller"} />
+              <Icon
+                src={Chart}
+                size={"smaller"}
+                style={"general-table-icon__clickable"}
+              />
             </div>
             <div onClick={() => handleShowPlayerStatistics(record)}>
-              <Icon src={Users} size={"smaller"} />
+              <Icon
+                src={Users}
+                size={"smaller"}
+                style={"general-table-icon__clickable"}
+              />
             </div>
-            <Icon src={Download} size={"smaller"} />
+            <Icon
+              src={Download}
+              size={"smaller"}
+              style={"general-table-icon__clickable"}
+            />
             <div onClick={() => handleDeleteRoom(record)}>
-              <Icon src={Remove} size={"smaller"} />
+              <Icon
+                src={Remove}
+                size={"smaller"}
+                style={"general-table-icon__clickable"}
+              />
             </div>
           </Space>
         );
@@ -138,19 +163,25 @@ const PlayedQuizzes = () => {
   ];
 
   return (
-    <div className={"div-container"}>
+    <div>
       <Row>
-        <Col
-          xs={{ span: 20, offset: 2 }}
-          md={{ span: 12, offset: 6 }}
-          className={"mt-3"}
-        >
-          <SearchBar onSearchClick={filterAndSortRooms} />
+        <Col className={"mt-5"} span={18} offset={3}>
+          <div className="search-bar-wrapper">
+            <Affix>
+              <SearchBar onSearchClick={filterAndSortRooms} />
+            </Affix>
+          </div>
         </Col>
       </Row>
       <Row justify={"center"} align={"middle"}>
-        <Col md={24} lg={18} className={"m-3"}>
-          <PlayedQuizzesTable data={rooms} columns={columns} />
+        <Col span={18} className={"mt-3"}>
+          {isLoading ? (
+            <Row justify={"center"}>
+              <Spin size="large" />
+            </Row>
+          ) : (
+            <PlayedQuizzesTable data={rooms} columns={columns} />
+          )}
         </Col>
       </Row>
     </div>

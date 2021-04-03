@@ -1,12 +1,33 @@
+@import "src/styles/_variables.scss";
+
 .ant-table-tbody > tr > td {
-  font-size: 1.5rem;
-  font-family: "Times New Roman", Times, serif;
+  font-size: 1.1rem;
 }
 
 .ant-table-thead > tr > th {
-  font-size: 1.7rem;
-  font-family: "Times New Roman", Times, serif;
+  font-size: 1.3rem;
   font-weight: bold;
-  color:  #342b60;
-  background-color: #E7E7F1;
+  color: white;
+  background-color: $base-color-blue;
 }
+
+.ant-table-column-sorters-with-tooltip {
+  background-color: $base-color-blue;
+}
+
+.answer-statistics-table {
+  .icon__correct-wrong {
+    text-align: center;
+  }
+
+  .frequency {
+    text-align: center;
+  }
+}
+
+.question-statistics-table {
+  .icon__view-answers {
+    text-align: center;
+  }
+}
+
