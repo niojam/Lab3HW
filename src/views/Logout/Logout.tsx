@@ -12,7 +12,10 @@ const Logout = () => {
 
   useEffect(() => {
     dispatch(setIsUserAuthenticated(false));
-    removeCookie(KAHOOT_TOKEN_COOKIE, { path: "/", domain: "cs.taltech.ee" });
+    removeCookie(KAHOOT_TOKEN_COOKIE, {
+      path: "/",
+      domain: process.env.REACT_APP_COOKIE_DOMAIN,
+    });
     history.push("/login");
   }, []);
 
