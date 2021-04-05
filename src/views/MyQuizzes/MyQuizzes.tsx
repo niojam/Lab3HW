@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "antd/dist/antd.css";
 import "./MyQuizzes.scss";
 import { SearchBar } from "../../components";
@@ -17,7 +17,7 @@ import { EDIT_QUIZ_PAGE_PATH } from "../../router/config";
 import { PlusOutlined } from "@ant-design/icons";
 
 const MyQuizzes = () => {
-  const [container, setContainer] = useState<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLElement | null>(null);
   const [quizzes, setQuizzes] = useState<QuizDetails[]>([]);
   const [quizIdToStart, setQuizIdToStart] = useState<number | undefined>(
     undefined
@@ -41,6 +41,10 @@ const MyQuizzes = () => {
   };
 
   useEffect(() => {
+    const container = document.getElementById("container");
+    if (container) {
+      containerRef.current = container;
+    }
     if (data?.data) {
       setQuizzes(data.data);
     }
@@ -110,7 +114,7 @@ const MyQuizzes = () => {
   };
 
   return (
-    <div className={"scrollY"} ref={setContainer}>
+    <div className={"main-container"}>
       <Row className={"my-5"} justify="center">
         <Col span={3} style={{ textAlign: "right" }} className={"mt-5 mr-2"}>
           <Tooltip title="Add new Quiz">
@@ -121,9 +125,9 @@ const MyQuizzes = () => {
             />
           </Tooltip>
         </Col>
-        <Col className={"mt-5"} span={18}>
+        <Col className={"mt-5"} span={15}>
           <div className="search-bar-wrapper">
-            <Affix offsetTop={-40} target={() => container}>
+            <Affix offsetTop={-40} target={() => containerRef.current}>
               <SearchBar onSearchClick={filterAndSortQuizzes} />
             </Affix>
           </div>

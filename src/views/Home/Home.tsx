@@ -7,7 +7,7 @@ import { CaretRightFilled, EditFilled, SignalFilled } from "@ant-design/icons";
 
 const Home = () => {
   return (
-    <div className={"scrollY"}>
+    <div className={"main-container"}>
       <Row className={"mb-4"}>
         <Col className={"main-page__img-container"} span={24} />
         <Col span={24}>
