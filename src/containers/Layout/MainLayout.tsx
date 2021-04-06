@@ -26,7 +26,9 @@ const MainLayout = (props: React.PropsWithChildren<MyProps>) => {
           collapsed={collapsed}
           setCollapsed={setCollapsed}
         />
-        {props.children}
+        <Layout.Content id={"container"} className={"scrollY"}>
+          {props.children}
+        </Layout.Content>
       </Layout>
     </Layout>
   );

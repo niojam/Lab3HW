@@ -184,7 +184,7 @@ const EditQuiz = (props: EditQuizProps) => {
   };
 
   return (
-    <div className={"scrollY"}>
+    <div className={"main-container"}>
       {quiz ? (
         <Form onFinish={handleQuizUpdate}>
           <Row className={"my-5"} justify="space-around">

@@ -2,6 +2,7 @@ import React from "react";
 import "antd/dist/antd.css";
 import { Menu } from "antd";
 import {
+  LogoutOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
@@ -31,7 +32,7 @@ const SiderMenu = ({ isMobile }: SiderMenuProps) => {
         <Link to={STATISTICS_PAGE_PATH}>Statistics</Link>
       </Menu.Item>
       {isMobile && (
-        <Menu.Item key="4" icon={<UploadOutlined />}>
+        <Menu.Item key="4" icon={<LogoutOutlined />}>
           <Link to={LOGOUT_PATH}>Sign Out</Link>
         </Menu.Item>
       )}
