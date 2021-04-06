@@ -7,7 +7,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   HOME_PAGE_PATH,
   LOGOUT_PATH,
@@ -20,15 +20,20 @@ interface SiderMenuProps {
 }
 
 const SiderMenu = ({ isMobile }: SiderMenuProps) => {
+  const history = useHistory();
   return (
-    <Menu theme={"dark"} mode={"inline"} defaultSelectedKeys={["1"]}>
-      <Menu.Item key="1" icon={<UserOutlined />}>
+    <Menu
+      theme={"dark"}
+      mode={"inline"}
+      defaultSelectedKeys={[history.location.pathname]}
+    >
+      <Menu.Item key={HOME_PAGE_PATH} icon={<UserOutlined />}>
         <Link to={HOME_PAGE_PATH}>Home</Link>
       </Menu.Item>
-      <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+      <Menu.Item key={MY_QUIZZES_PAGE_PATH} icon={<VideoCameraOutlined />}>
         <Link to={MY_QUIZZES_PAGE_PATH}>My quizzes</Link>
       </Menu.Item>
-      <Menu.Item key="3" icon={<UploadOutlined />}>
+      <Menu.Item key={STATISTICS_PAGE_PATH} icon={<UploadOutlined />}>
         <Link to={STATISTICS_PAGE_PATH}>Statistics</Link>
       </Menu.Item>
       {isMobile && (
