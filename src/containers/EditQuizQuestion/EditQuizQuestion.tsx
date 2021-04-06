@@ -53,7 +53,7 @@ const EditQuizQuestion = ({
   );
   const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
   const selectedAnsweringMode = useRef<string>(
-    QUESTION_TYPE.SINGLE_MATCH.value
+    question.questionType ?? QUESTION_TYPE.SINGLE_MATCH.value
   );
   const [form] = Form.useForm();
 
@@ -64,11 +64,15 @@ const EditQuizQuestion = ({
         prevState?.length && prevState[0] === name ? [] : [name]
       );
     } else {
-      setCorrectAnswers((prevState) =>
-        prevState.includes(name)
+      setCorrectAnswers((prevState) => {
+        // MULTIPLE_MATCH OR MULTIPLE_ANY
+        if (prevState.includes(name) && prevState.length > 1) {
+          return prevState; // AVOID NO CORRECT ANSWER
+        }
+        return prevState.includes(name) // REMOVE ON DOUBLE CLICK
           ? [...prevState].filter((value) => value !== name)
-          : [...prevState, name]
-      );
+          : [...prevState, name];
+      });
     }
   };
 
@@ -141,6 +145,7 @@ const EditQuizQuestion = ({
     }
   }, [currentQuestion]);
 
+  console.log(question);
   return (
     <Form
       onFinish={onFinish}
@@ -159,7 +164,7 @@ const EditQuizQuestion = ({
             rules={[
               {
                 required: true,
-                message: "VALIDATION.REQUIRED",
+                message: "Quiz name is required",
               },
             ]}
             initialValue={question.title}
@@ -177,7 +182,7 @@ const EditQuizQuestion = ({
             rules={[
               {
                 required: true,
-                message: "VALIDATION.REQUIRED",
+                message: "Question text is required",
               },
             ]}
             initialValue={question.text}
@@ -198,7 +203,7 @@ const EditQuizQuestion = ({
             rules={[
               {
                 required: true,
-                message: "VALIDATION.REQUIRED",
+                message: "Question time is required",
               },
             ]}
             initialValue={
@@ -228,7 +233,7 @@ const EditQuizQuestion = ({
             rules={[
               {
                 required: true,
-                message: "VALIDATION.REQUIRED",
+                message: "Question reward is required",
               },
             ]}
             initialValue={
@@ -258,12 +263,10 @@ const EditQuizQuestion = ({
             rules={[
               {
                 required: true,
-                message: "VALIDATION.REQUIRED",
+                message: "Question type is required",
               },
             ]}
-            initialValue={
-              question.questionType ?? QUESTION_TYPE.SINGLE_MATCH.value
-            }
+            initialValue={selectedAnsweringMode.current}
           >
             <Select placeholder="Type">
               <Select.Option value={QUESTION_TYPE.SINGLE_MATCH.value}>
