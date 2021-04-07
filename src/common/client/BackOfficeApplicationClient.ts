@@ -102,6 +102,14 @@ export const startRoom = async (
   );
 };
 
+export const downloadStatistics = async (
+  roomId: number
+): Promise<AxiosResponse<Blob>> => {
+  return await axios.get(`/api/statistics/pdf?roomId=${roomId}`, {
+    responseType: "blob",
+  });
+};
+
 export const IMAGE_UPLOAD_URL = "/api/image";
 export const GET_IMAGE_BY_ID_URL = "/api/image?id=";
 export const AUTHORIZATION_URL = "/oauth2/authorization/azure";
