@@ -66,7 +66,6 @@ const PlayedQuizzes = () => {
 
   const handleDownloadStatistics = (record: PlayedQuizzesData) => {
     downloadStatistics(record.id).then((response) => {
-      console.log(response.data);
       fileDownload(response.data, `${record.roomName} statistics report.pdf`);
     });
   };
