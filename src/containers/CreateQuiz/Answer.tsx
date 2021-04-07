@@ -62,7 +62,7 @@ const Answer: FunctionComponent<AnswerProps> = ({
               : [
                   {
                     required: true,
-                    message: "Must be at least 2 valid answers",
+                    message: "Must be at least 2 not empty answers",
                   },
                 ]
           }

@@ -202,6 +202,7 @@ const EditQuiz = (props: EditQuizProps) => {
                   initialValue={quiz.name}
                 >
                   <Input
+                    placeholder={"Quiz name here"}
                     onChange={handleNameChange}
                     className={"edit-quiz--name-input"}
                   />
