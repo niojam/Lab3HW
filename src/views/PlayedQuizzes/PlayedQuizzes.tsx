@@ -5,8 +5,10 @@ import { Icon, SearchBar } from "components";
 import { Chart, Download, Remove, Users } from "assets/images";
 import { PlayedQuizzesData } from "../../common/type/Types";
 import { useMutation, useQuery } from "react-query";
+import fileDownload from "js-file-download";
 import {
   deleteRoom,
+  downloadStatistics,
   getPlayedQuizzes,
 } from "../../common/client/BackOfficeApplicationClient";
 import { useHistory } from "react-router-dom";
@@ -60,6 +62,12 @@ const PlayedQuizzes = () => {
       `${STATISTICS_PAGE_PATH}/${record.id}${PLAYERS_STATISTICS_PAGE_PATH}`,
       { quizName: record.quizName }
     );
+  };
+
+  const handleDownloadStatistics = (record: PlayedQuizzesData) => {
+    downloadStatistics(record.id).then((response) => {
+      fileDownload(response.data, `${record.roomName} statistics report.pdf`);
+    });
   };
 
   const handleDeleteRoom = (record: PlayedQuizzesData) => {
@@ -152,7 +160,7 @@ const PlayedQuizzes = () => {
               </div>
             </Tooltip>
             <Tooltip key={"downloadStatistics"} title="Download statistics">
-              <div>
+              <div onClick={() => handleDownloadStatistics(record)}>
                 <Icon
                   src={Download}
                   size={"smaller"}
