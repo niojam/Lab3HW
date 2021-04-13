@@ -10,8 +10,18 @@ import {
   RegisterRoomRequest,
   RoomStatusResponseWithRelocation,
 } from "../type/Types";
+import ErrorHandler from "../errorHandler/ErrorHandler";
 
 export const axiosInstance = axios.create();
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const errorHandler = new ErrorHandler();
+    errorHandler.handleError(error.code, error.message);
+    return Promise.reject(error);
+  }
+);
 
 export const getQuizzesDetails = async (): Promise<
   AxiosResponse<QuizDetails[]>
