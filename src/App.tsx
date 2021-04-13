@@ -26,7 +26,7 @@ const App = () => {
       (response) => response,
       (error) => {
         api.error({
-          message: `Ups Something went wrong`,
+          message: `Ups Something went wrong...`,
           description: error.message,
           placement: "bottomRight",
         });
