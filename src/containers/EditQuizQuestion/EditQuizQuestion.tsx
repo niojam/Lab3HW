@@ -1,7 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "antd/dist/antd.css";
 import { Button, Col, Form, Input, message, Row, Select } from "antd";
-import { QUESTION_SCORE, QUESTION_TIMER, QUESTION_TYPE } from "../../constants";
+import {
+  QUESTION_SCORE,
+  QUESTION_TIMER,
+  QUESTION_TYPE,
+  TIME_ALGORITHM,
+} from "../../constants";
 import { Answer } from "containers";
 import { ImageDragger } from "components";
 import { Coin, Heart, Lego, Star } from "assets/images/index";
@@ -103,6 +108,7 @@ const EditQuizQuestion = ({
     const questionText = fieldsValue["questionText"];
     const questionTime = fieldsValue["time"];
     const questionPoints = fieldsValue["points"];
+    const timeAlgorithm = fieldsValue["timeAlgorithm"];
     const answers: QuizAnswer[] = [];
 
     for (let i = 0; i < maxAnswerCount; i++) {
@@ -132,6 +138,7 @@ const EditQuizQuestion = ({
       answers: answers,
       questionType: selectedAnsweringMode.current,
       reward: Number(questionPoints),
+      timeAlgorithm: timeAlgorithm,
     } as QuizQuestion);
   };
 
@@ -198,7 +205,7 @@ const EditQuizQuestion = ({
       </Row>
 
       <Row gutter={24}>
-        <Col xs={24} md={8}>
+        <Col xs={24} md={5}>
           <Form.Item
             {...fullWidthCol}
             name="time"
@@ -208,9 +215,7 @@ const EditQuizQuestion = ({
                 message: "Question time is required",
               },
             ]}
-            initialValue={
-              question?.timer?.toString() ?? QUESTION_TIMER.T_15.value
-            }
+            initialValue={question?.timer?.toString()}
           >
             <Select placeholder="Time limit">
               <Select.Option value={QUESTION_TIMER.T_15.value}>
@@ -228,7 +233,7 @@ const EditQuizQuestion = ({
             </Select>
           </Form.Item>
         </Col>
-        <Col xs={24} md={8}>
+        <Col xs={24} md={5}>
           <Form.Item
             {...fullWidthCol}
             name="points"
@@ -238,9 +243,7 @@ const EditQuizQuestion = ({
                 message: "Question reward is required",
               },
             ]}
-            initialValue={
-              question.reward?.toString() ?? QUESTION_SCORE.P_100.value
-            }
+            initialValue={question.reward?.toString()}
           >
             <Select placeholder="Points">
               <Select.Option value={QUESTION_SCORE.P_100.value}>
@@ -258,7 +261,29 @@ const EditQuizQuestion = ({
             </Select>
           </Form.Item>
         </Col>
-        <Col xs={24} md={8}>
+        <Col xs={24} md={7}>
+          <Form.Item
+            {...fullWidthCol}
+            name="timeAlgorithm"
+            rules={[
+              {
+                required: true,
+                message: "Reward algorithm is required",
+              },
+            ]}
+            initialValue={question.timeAlgorithm}
+          >
+            <Select placeholder="Reward algorithm">
+              <Select.Option value={TIME_ALGORITHM.CONSTANT.value}>
+                {TIME_ALGORITHM.CONSTANT.text}
+              </Select.Option>
+              <Select.Option value={TIME_ALGORITHM.FASTEST_ANSWER.value}>
+                {TIME_ALGORITHM.FASTEST_ANSWER.text}
+              </Select.Option>
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col xs={24} md={7}>
           <Form.Item
             {...fullWidthCol}
             name="questionType"

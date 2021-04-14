@@ -54,3 +54,10 @@ export const QUESTION_SCORE: ObjectLiteral = {
     value: "250",
   },
 };
+
+export const TIME_ALGORITHM: ObjectLiteral = {
+  CONSTANT: { text: "Constant", value: "CONSTANT" },
+  FASTEST_ANSWER: { text: "Descending with time", value: "FASTEST_ANSWER" },
+};
+
+export const KAHOOT_TOKEN_COOKIE = "kahoot-back-office_refresh-token";

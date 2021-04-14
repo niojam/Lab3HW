@@ -9,8 +9,8 @@ import {
   setIsUserAuthenticated,
 } from "./store/AuthenticationSlice";
 import { useCookies } from "react-cookie";
-import { KAHOOT_TOKEN_COOKIE } from "./common/constants/Constants";
 import { isTokenExpired } from "./common/util/TokenUtil";
+import { KAHOOT_TOKEN_COOKIE } from "./constants";
 
 const App = () => {
   const dispatch = useDispatch();

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { KAHOOT_TOKEN_COOKIE } from "../../common/constants/Constants";
 import { useDispatch } from "react-redux";
 import { setIsUserAuthenticated } from "../../store/AuthenticationSlice";
+import { KAHOOT_TOKEN_COOKIE } from "../../constants";
 
 const Logout = () => {
   const dispatch = useDispatch();

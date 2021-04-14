@@ -18,6 +18,7 @@ export interface QuizQuestion {
   timer: number;
   reward: number;
   questionType: string;
+  timeAlgorithm: string;
 }
 
 export interface QuizAnswer {
