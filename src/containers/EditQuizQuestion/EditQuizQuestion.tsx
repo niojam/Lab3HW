@@ -60,13 +60,16 @@ const EditQuizQuestion = ({
   const handleCorrectAnswerSelect = (name: string) => {
     const { current } = selectedAnsweringMode;
     if (current === QUESTION_TYPE.SINGLE_MATCH.value) {
-      setCorrectAnswers((prevState) =>
-        prevState?.length && prevState[0] === name ? [] : [name]
-      );
+      setCorrectAnswers((prevState) => {
+        if (prevState.includes(name) && prevState.length <= 1) {
+          return prevState; // AVOID NO CORRECT ANSWER
+        }
+        return prevState?.length && prevState[0] === name ? [] : [name];
+      });
     } else {
       setCorrectAnswers((prevState) => {
         // MULTIPLE_MATCH OR MULTIPLE_ANY
-        if (prevState.includes(name) && prevState.length > 1) {
+        if (prevState.includes(name) && prevState.length <= 1) {
           return prevState; // AVOID NO CORRECT ANSWER
         }
         return prevState.includes(name) // REMOVE ON DOUBLE CLICK
@@ -145,7 +148,6 @@ const EditQuizQuestion = ({
     }
   }, [currentQuestion]);
 
-  console.log(question);
   return (
     <Form
       onFinish={onFinish}
