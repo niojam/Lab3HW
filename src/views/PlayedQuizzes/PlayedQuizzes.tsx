@@ -184,7 +184,7 @@ const PlayedQuizzes = () => {
   ];
 
   return (
-    <div className={"main-container"}>
+    <div>
       <Row>
         <Col className={"mt-5"} span={18} offset={3}>
           <div className="search-bar-wrapper">
@@ -198,7 +198,7 @@ const PlayedQuizzes = () => {
         </Col>
       </Row>
       <Row justify={"center"} align={"middle"}>
-        <Col span={18} className={"mt-3"}>
+        <Col span={18} className={"mt-3 col-max-width"}>
           {isLoading ? (
             <Row justify={"center"}>
               <Spin size="large" />

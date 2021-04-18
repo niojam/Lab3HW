@@ -85,7 +85,7 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
     },
   ];
   return (
-    <div className={"main-container"}>
+    <div>
       <Row justify={"center"} align={"middle"}>
         <Col span={18} className={"m-3"}>
           <Col>
@@ -101,7 +101,7 @@ const AnswerStatistics = (props: AnswerStatisticsProps) => {
         </Col>
       </Row>
       <Row justify={"center"}>
-        <Col span={18}>
+        <Col span={18} className={"col-max-width"}>
           {isLoading ? (
             <Row justify={"center"}>
               <Spin size="large" />
