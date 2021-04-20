@@ -184,7 +184,7 @@ const PlayedQuizzes = () => {
   ];
 
   return (
-    <div>
+    <div className={"main-container"}>
       <Row>
         <Col className={"mt-5"} span={18} offset={3}>
           <div className="search-bar-wrapper">

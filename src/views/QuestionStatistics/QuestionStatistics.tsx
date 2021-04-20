@@ -114,7 +114,7 @@ const QuestionStatistics = () => {
     },
   ];
   return (
-    <div>
+    <div className={"main-container"}>
       <Row justify={"center"} align={"middle"}>
         <Col span={18} className={"m-3"}>
           <Row>
