@@ -198,7 +198,7 @@ const PlayedQuizzes = () => {
         </Col>
       </Row>
       <Row justify={"center"} align={"middle"}>
-        <Col span={18} className={"mt-3"}>
+        <Col span={18} className={"mt-3 col-max-width"}>
           {isLoading ? (
             <Row justify={"center"}>
               <Spin size="large" />

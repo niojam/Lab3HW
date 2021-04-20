@@ -97,7 +97,7 @@ const PlayerStatistics = (props: PlayerStatisticsProps) => {
         </Col>
       </Row>
       <Row justify={"center"}>
-        <Col span={18}>
+        <Col span={18} className={"col-max-width"}>
           {isLoading ? (
             <Row justify={"center"}>
               <Spin size="large" />
