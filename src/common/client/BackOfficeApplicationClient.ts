@@ -85,9 +85,11 @@ export const getPlayersStatistics = async (
 };
 
 export const getQuestionStatistics = async (
-  quizId: string
+  playedQuizId: string
 ): Promise<AxiosResponse<QuestionStatisticsData[]>> => {
-  return await axiosInstance.get(`/api/question/details?quizId=${quizId}`);
+  return await axiosInstance.get(
+    `/api/statistics/questions?quizId=${playedQuizId}`
+  );
 };
 
 export const getAnswerStatistics = async (
