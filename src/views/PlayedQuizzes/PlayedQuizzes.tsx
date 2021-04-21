@@ -49,7 +49,7 @@ const PlayedQuizzes = () => {
     history.push(
       `${STATISTICS_PAGE_PATH}/${record.roomName}${QUIZ_STATISTICS_PAGE_PATH}`,
       {
-        quizId: record.quizId,
+        playedQuizId: record.playedQuizId,
         quizName: record.quizName,
         roomId: record.id,
         roomName: record.roomName,

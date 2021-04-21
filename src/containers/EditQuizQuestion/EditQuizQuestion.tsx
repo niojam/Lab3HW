@@ -178,7 +178,7 @@ const EditQuizQuestion = ({
             ]}
             initialValue={question.title}
           >
-            <Input autoComplete={"off"} placeholder="Name your quiz" />
+            <Input autoComplete={"off"} placeholder="Name your question" />
           </Form.Item>
         </Col>
       </Row>

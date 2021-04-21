@@ -48,7 +48,7 @@ export interface PlayedQuizzesData {
   id: number;
   roomName: string;
   quizName: string;
-  quizId: number;
+  playedQuizId: number;
   authorId: number;
   startedAt: string;
   startDateTime: number;

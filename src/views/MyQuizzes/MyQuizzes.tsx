@@ -81,7 +81,6 @@ const MyQuizzes = () => {
   const handleAddNewQuiz = () => {
     createQuizMutation.mutate({ questions: [] as QuizQuestion[] } as Quiz, {
       onSuccess: (result) => {
-        console.log(result);
         handleModifyQuiz(result.data.id);
       },
     });

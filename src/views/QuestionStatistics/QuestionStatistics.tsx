@@ -14,7 +14,7 @@ import {
 } from "../../router/config";
 
 interface QuestionStatisticsHistoryProps {
-  quizId: string;
+  playedQuizId: string;
   quizName: string;
   roomId: string;
   roomName: string;
@@ -26,7 +26,7 @@ const QuestionStatistics = () => {
   const [questions, setQuestionData] = useState<QuestionStatisticsData[]>([]);
   const { isLoading, data } = useQuery(
     "getQuestionStatistics",
-    () => getQuestionStatistics(dataFromHistory.quizId),
+    () => getQuestionStatistics(dataFromHistory.playedQuizId),
     {
       refetchOnWindowFocus: false,
       retry: false,
