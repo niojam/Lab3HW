@@ -60,6 +60,7 @@ const EditQuizQuestion = ({
     question
   );
   const [correctAnswers, setCorrectAnswers] = useState<string[]>([]);
+  const [answersFilled, setAnswersFilled] = useState<string[]>([]);
   const selectedAnsweringMode = useRef<string>(
     question.questionType ?? QUESTION_TYPE.SINGLE_MATCH.value
   );
@@ -92,6 +93,27 @@ const EditQuizQuestion = ({
       selectedAnsweringMode.current = changedValues.questionType;
       setCorrectAnswers([defaultCorrectAnswerName]);
     }
+
+    for (let i = 0; i < 4; i++) {
+      if (changedValues[`answer${i}`] !== undefined) {
+        setAnswersFilled((prevState) => {
+          if (
+            changedValues[`answer${i}`] !== "" &&
+            !prevState.includes(`answer${i}`)
+          )
+            return [...prevState, `answer${i}`];
+          else if (
+            changedValues[`answer${i}`] === "" &&
+            prevState.includes(`answer${i}`)
+          ) {
+            return prevState.filter((value) => value !== `answer${i}`);
+          }
+          return prevState;
+        });
+      }
+      form.validateFields([`answer${i}`]);
+    }
+    console.log(changedValues);
   };
 
   const handleOnUploadChange = (info: any) => {
@@ -155,6 +177,12 @@ const EditQuizQuestion = ({
     }
     if (!answerFound) {
       setCorrectAnswers([defaultCorrectAnswerName]);
+    }
+
+    for (let i = 0; i < currentQuestion.answers.length; i++) {
+      if (currentQuestion.answers[i].text) {
+        setAnswersFilled((prevState) => [...prevState, `answer${i}`]);
+      }
     }
   }, [currentQuestion]);
 
@@ -348,6 +376,7 @@ const EditQuizQuestion = ({
             name="answer0"
             exitingAnswer={question.answers ? question.answers[0] : undefined}
             iconSrc={Lego}
+            isOptional={answersFilled.length > 1}
             placeholder="Add answer 1"
             color="blue"
             selectedAnswers={correctAnswers}
@@ -358,6 +387,7 @@ const EditQuizQuestion = ({
             exitingAnswer={question.answers ? question.answers[1] : undefined}
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             name="answer1"
+            isOptional={answersFilled.length > 1}
             iconSrc={Heart}
             placeholder="Add answer 2"
             color="red"
@@ -371,7 +401,7 @@ const EditQuizQuestion = ({
             exitingAnswer={question.answers ? question.answers[2] : undefined}
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             name="answer2"
-            isOptional
+            isOptional={answersFilled.length > 1}
             iconSrc={Coin}
             placeholder="Add answer 3"
             color="green"
@@ -383,7 +413,7 @@ const EditQuizQuestion = ({
             exitingAnswer={question.answers ? question.answers[3] : undefined}
             handleCorrectAnswerSelect={handleCorrectAnswerSelect}
             name="answer3"
-            isOptional
+            isOptional={answersFilled.length > 1}
             iconSrc={Star}
             placeholder="Add answer 4"
             color="violet"
