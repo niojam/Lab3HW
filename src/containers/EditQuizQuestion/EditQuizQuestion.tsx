@@ -8,11 +8,14 @@ import {
   TIME_ALGORITHM,
 } from "../../constants";
 import { Answer } from "containers";
-import { ImageDragger } from "components";
+import { ImageDragger, ImageUploader } from "components";
 import { Coin, Heart, Lego, Star } from "assets/images/index";
 import "./EditQuizQuestion.scss";
 import { QuizAnswer, QuizQuestion } from "../../common/type/Types";
-import { IMAGE_UPLOAD_URL } from "../../common/client/BackOfficeApplicationClient";
+import {
+  GET_IMAGE_BY_ID_URL,
+  IMAGE_UPLOAD_URL,
+} from "../../common/client/BackOfficeApplicationClient";
 
 const formItemLayout = {
   labelCol: {
@@ -204,118 +207,135 @@ const EditQuizQuestion = ({
         </Col>
       </Row>
 
-      <Row gutter={24}>
-        <Col xs={24} md={5}>
-          <Form.Item
-            {...fullWidthCol}
-            name="time"
-            rules={[
-              {
-                required: true,
-                message: "Question time is required",
-              },
-            ]}
-            initialValue={question?.timer?.toString()}
-          >
-            <Select placeholder="Time limit">
-              <Select.Option value={QUESTION_TIMER.T_15.value}>
-                {QUESTION_TIMER.T_15.text}
-              </Select.Option>
-              <Select.Option value={QUESTION_TIMER.T_30.value}>
-                {QUESTION_TIMER.T_30.text}
-              </Select.Option>
-              <Select.Option value={QUESTION_TIMER.T_45.value}>
-                {QUESTION_TIMER.T_45.text}
-              </Select.Option>
-              <Select.Option value={QUESTION_TIMER.T_60.value}>
-                {QUESTION_TIMER.T_60.text}
-              </Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={5}>
-          <Form.Item
-            {...fullWidthCol}
-            name="points"
-            rules={[
-              {
-                required: true,
-                message: "Question reward is required",
-              },
-            ]}
-            initialValue={question.reward?.toString()}
-          >
-            <Select placeholder="Points">
-              <Select.Option value={QUESTION_SCORE.P_100.value}>
-                {QUESTION_SCORE.P_100.text}
-              </Select.Option>
-              <Select.Option value={QUESTION_SCORE.P_150.value}>
-                {QUESTION_SCORE.P_150.text}
-              </Select.Option>
-              <Select.Option value={QUESTION_SCORE.P_200.value}>
-                {QUESTION_SCORE.P_200.text}
-              </Select.Option>
-              <Select.Option value={QUESTION_SCORE.P_250.value}>
-                {QUESTION_SCORE.P_250.text}
-              </Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={7}>
-          <Form.Item
-            {...fullWidthCol}
-            name="timeAlgorithm"
-            rules={[
-              {
-                required: true,
-                message: "Reward algorithm is required",
-              },
-            ]}
-            initialValue={question.timeAlgorithm}
-          >
-            <Select placeholder="Reward algorithm">
-              <Select.Option value={TIME_ALGORITHM.CONSTANT.value}>
-                {TIME_ALGORITHM.CONSTANT.text}
-              </Select.Option>
-              <Select.Option value={TIME_ALGORITHM.FASTEST_ANSWER.value}>
-                {TIME_ALGORITHM.FASTEST_ANSWER.text}
-              </Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-        <Col xs={24} md={7}>
-          <Form.Item
-            {...fullWidthCol}
-            name="questionType"
-            rules={[
-              {
-                required: true,
-                message: "Question type is required",
-              },
-            ]}
-            initialValue={selectedAnsweringMode.current}
-          >
-            <Select placeholder="Type">
-              <Select.Option value={QUESTION_TYPE.SINGLE_MATCH.value}>
-                {QUESTION_TYPE.SINGLE_MATCH.text}
-              </Select.Option>
-              <Select.Option value={QUESTION_TYPE.MULTIPLE_MATCH.value}>
-                {QUESTION_TYPE.MULTIPLE_MATCH.text}
-              </Select.Option>
-              <Select.Option value={QUESTION_TYPE.MULTIPLE_ANY.value}>
-                {QUESTION_TYPE.MULTIPLE_ANY.text}
-              </Select.Option>
-            </Select>
-          </Form.Item>
-        </Col>
-      </Row>
-
       <Row>
-        <Col xs={24} md={24}>
+        <Col xs={24} md={12}>
+          <Row>
+            <Col xs={24} md={20}>
+              <Form.Item
+                {...fullWidthCol}
+                name="time"
+                rules={[
+                  {
+                    required: true,
+                    message: "Question time is required",
+                  },
+                ]}
+                initialValue={question?.timer?.toString()}
+              >
+                <Select placeholder="Time limit">
+                  <Select.Option value={QUESTION_TIMER.T_15.value}>
+                    {QUESTION_TIMER.T_15.text}
+                  </Select.Option>
+                  <Select.Option value={QUESTION_TIMER.T_30.value}>
+                    {QUESTION_TIMER.T_30.text}
+                  </Select.Option>
+                  <Select.Option value={QUESTION_TIMER.T_45.value}>
+                    {QUESTION_TIMER.T_45.text}
+                  </Select.Option>
+                  <Select.Option value={QUESTION_TIMER.T_60.value}>
+                    {QUESTION_TIMER.T_60.text}
+                  </Select.Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs={24} md={20}>
+              <Form.Item
+                {...fullWidthCol}
+                name="points"
+                rules={[
+                  {
+                    required: true,
+                    message: "Question reward is required",
+                  },
+                ]}
+                initialValue={question.reward?.toString()}
+              >
+                <Select placeholder="Points">
+                  <Select.Option value={QUESTION_SCORE.P_100.value}>
+                    {QUESTION_SCORE.P_100.text}
+                  </Select.Option>
+                  <Select.Option value={QUESTION_SCORE.P_150.value}>
+                    {QUESTION_SCORE.P_150.text}
+                  </Select.Option>
+                  <Select.Option value={QUESTION_SCORE.P_200.value}>
+                    {QUESTION_SCORE.P_200.text}
+                  </Select.Option>
+                  <Select.Option value={QUESTION_SCORE.P_250.value}>
+                    {QUESTION_SCORE.P_250.text}
+                  </Select.Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs={24} md={20}>
+              <Form.Item
+                {...fullWidthCol}
+                name="timeAlgorithm"
+                rules={[
+                  {
+                    required: true,
+                    message: "Reward algorithm is required",
+                  },
+                ]}
+                initialValue={question.timeAlgorithm}
+              >
+                <Select placeholder="Reward algorithm">
+                  <Select.Option value={TIME_ALGORITHM.CONSTANT.value}>
+                    {TIME_ALGORITHM.CONSTANT.text}
+                  </Select.Option>
+                  <Select.Option value={TIME_ALGORITHM.FASTEST_ANSWER.value}>
+                    {TIME_ALGORITHM.FASTEST_ANSWER.text}
+                  </Select.Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col xs={24} md={20}>
+              <Form.Item
+                {...fullWidthCol}
+                name="questionType"
+                rules={[
+                  {
+                    required: true,
+                    message: "Question type is required",
+                  },
+                ]}
+                initialValue={selectedAnsweringMode.current}
+              >
+                <Select placeholder="Type">
+                  <Select.Option value={QUESTION_TYPE.SINGLE_MATCH.value}>
+                    {QUESTION_TYPE.SINGLE_MATCH.text}
+                  </Select.Option>
+                  <Select.Option value={QUESTION_TYPE.MULTIPLE_MATCH.value}>
+                    {QUESTION_TYPE.MULTIPLE_MATCH.text}
+                  </Select.Option>
+                  <Select.Option value={QUESTION_TYPE.MULTIPLE_ANY.value}>
+                    {QUESTION_TYPE.MULTIPLE_ANY.text}
+                  </Select.Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Col>
+        <Col xs={24} md={12}>
           <Form.Item {...fullWidthCol} name="image">
-            <ImageDragger
-              onUpload={handleOnUploadChange}
+            <ImageUploader
+              className={"edit-quiz--image-uploader"}
+              imageUrl={
+                currentQuestion?.imageId
+                  ? GET_IMAGE_BY_ID_URL + currentQuestion.imageId
+                  : undefined
+              }
+              onChange={handleOnUploadChange}
               action={IMAGE_UPLOAD_URL}
+              isLoading={false}
             />
           </Form.Item>
         </Col>
