@@ -56,16 +56,12 @@ const Answer: FunctionComponent<AnswerProps> = ({
           {...fullWidthCol}
           className={`answer-icon__color-${color}`}
           name={name}
-          rules={
-            isOptional
-              ? []
-              : [
-                  {
-                    required: true,
-                    message: "Must be at least 2 not empty answers",
-                  },
-                ]
-          }
+          rules={[
+            {
+              required: !isOptional,
+              message: "Must be at least 2 not empty answers",
+            },
+          ]}
           initialValue={exitingAnswer?.text}
         >
           <Input
