@@ -37,6 +37,10 @@ export const QUESTION_TIMER: ObjectLiteral = {
 };
 
 export const QUESTION_SCORE: ObjectLiteral = {
+  P_0: {
+    text: "0 points",
+    value: "0",
+  },
   P_100: {
     text: "100 points",
     value: "100",
