@@ -8,7 +8,7 @@ import {
   TIME_ALGORITHM,
 } from "../../constants";
 import { Answer } from "containers";
-import { ImageDragger, ImageUploader } from "components";
+import { ImageUploader } from "components";
 import { Coin, Heart, Lego, Star } from "assets/images/index";
 import "./EditQuizQuestion.scss";
 import { QuizAnswer, QuizQuestion } from "../../common/type/Types";
@@ -248,7 +248,9 @@ const EditQuizQuestion = ({
                     message: "Question time is required",
                   },
                 ]}
-                initialValue={question?.timer?.toString()}
+                initialValue={
+                  question?.timer?.toString() ?? QUESTION_TIMER.T_15.value
+                }
               >
                 <Select placeholder="Time limit">
                   <Select.Option value={QUESTION_TIMER.T_15.value}>
@@ -279,9 +281,14 @@ const EditQuizQuestion = ({
                     message: "Question reward is required",
                   },
                 ]}
-                initialValue={question.reward?.toString()}
+                initialValue={
+                  question.reward?.toString() ?? QUESTION_SCORE.P_100.value
+                }
               >
                 <Select placeholder="Points">
+                  <Select.Option value={QUESTION_SCORE.P_0.value}>
+                    {QUESTION_SCORE.P_0.text}
+                  </Select.Option>
                   <Select.Option value={QUESTION_SCORE.P_100.value}>
                     {QUESTION_SCORE.P_100.text}
                   </Select.Option>
@@ -310,7 +317,9 @@ const EditQuizQuestion = ({
                     message: "Reward algorithm is required",
                   },
                 ]}
-                initialValue={question.timeAlgorithm}
+                initialValue={
+                  question.timeAlgorithm ?? TIME_ALGORITHM.FASTEST_ANSWER.value
+                }
               >
                 <Select placeholder="Reward algorithm">
                   <Select.Option value={TIME_ALGORITHM.CONSTANT.value}>
